@@ -1,15 +1,10 @@
 /*header*/
 .pageheader{
-	border-bottom:3px solid #ddd;
-	background:#FCFCFC url(../img/pic/header_bg.png) repeat-x scroll 0 100%;
 	min-width:75em;
 	position: relative;
 
 }
-.topSearch{
-	/*background:transparent url(../img/pic/ez-header.png) no-repeat scroll 0 0;*/
-	/*height: 55px;	*/
-}
+
 .contentWrapper{
 	padding-bottom:1em;
 	position:relative;
@@ -25,17 +20,7 @@
 	text-decoration:none;
 	border-bottom:1px dashed;
 }
-.cardEditor{
-	/*-moz-border-radius:10px 10px 10px 10px;
-	-webkit-border-radius:10px;
-	-moz-box-shadow:0 0 15px;*/
-	background-color:white;/*HoneyDew;*/
-	left:12em;
-	padding:1em;
-	position:absolute;
-	top:8em;	
-	border:1px solid gray;
-}
+
 
 /*footer*/
 .pagefooter {
@@ -50,6 +35,44 @@
 .footerNote a{
 	color:inherit;
 }
+
+
+
+
+
+
+#cardEditor{
+	border:1px dashed;
+	float:left;
+	left:150px;
+	padding:3em;
+	position:absolute;
+	top:150px;
+}
+
+.cardPad{
+	background: url("../img/pic/card-pad.png") repeat-x scroll 0 0 #FFFFFF;
+	float:left;
+	height:194px;
+	width:320px;
+	position:relative;
+}
+.inlineMiddle{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	text-align:center;
+}
+
+
+
+/*---end----*/
+
+
+
+
+
 
 .ctrlPanel{
 	display:none;
