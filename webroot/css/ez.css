@@ -42,31 +42,133 @@
 
 
 #cardEditor{
-	border:1px dashed;
-	float:left;
-	left:150px;
-	padding:3em;
+	left:100px;
 	position:absolute;
-	top:150px;
+	top:90px;
+}
+.cardEditor{
+	border:1px dashed #fff;
+	padding:25px;
+}
+div.cardEditorActive {
+	border-color:#ddd;
 }
 
+#inputBlock{
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:#FF9900;
+	background:-moz-linear-gradient(center top , #FF9900, white 140%) repeat scroll 0 0 #FF9900;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border:1px solid #DDDDDD;
+	padding:3px 15px;
+}
+.inputString {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding:3px;
+	width:350px;
+}
+.currentLine{
+	background-color:#eee;
+	color:black;
+}
+.currentLineActive{
+	background-color:#eee;
+}
+
+
 .cardPad{
-	background: url("../img/pic/card-pad.png") repeat-x scroll 0 0 #FFFFFF;
+	background: url("../img/pic/card-pad.png") no-repeat scroll 0 0 #FFFFFF;
 	float:left;
 	height:194px;
 	width:320px;
 	position:relative;
 }
-.inlineMiddle{
+.cardLogo{
+	bottom:23px;
+	height:12px;
 	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
+	right:20px;
+	width:104px;
+	background: url("../img/pic/ez-logo-gray.png") no-repeat scroll 0 0 #FFFFFF;
+}
+/* 
+	sets max-height for IE http://perishablepress.com/press/2007/01/16/maximum-and-minimum-height-and-width-in-internet-explorer/
+*/
+/*
+ * html div#division { 
+   height: expression( this.scrollHeight > 332 ? "333px" : "auto" ); 
+}
+*/
+.inlineMiddle{
+	padding:0 20px;
 	text-align:center;
+	max-height:160px;
+	overflow:hidden;
+	padding:0 19px 0 22px;
+}
+
+
+.plusMenu{
+	position:absolute;
+	left:10px;
+	top:-10px;
+}
+.plusMenu span{
+	color:gray;
+	font-weight:bold;
+	margin-left:1em;
+}
+.plusMenu span.plusMenuActive{
+	color:#ff9900;
 }
 
 
 
+.activeCardSide .tableCard{
+	background-color: #C3D9FF;
+	color:black;
+}
+
+.tableCard{
+	margin:0;
+	height:100%;
+	table-layout:fixed;	
+	color:gray;
+}
+.tableCard td{
+	padding:0;
+}
+
+
+
+
+#mainWord{
+
+}
+.mainWord{
+	line-height:1.2em;	
+	text-align:center;
+	font-size:18pt;
+}
+
+.translWord {
+	/*border-bottom:1px dashed;*/
+	font-size:16pt;
+	line-height:1.1em;
+	margin-bottom:0.1em;
+}
+.exWord,.defWord,.synWord{
+  font-size:small;
+  font-style:italic;
+  text-align:left;
+  line-height:1.3em; 
+}
 /*---end----*/
 
 
@@ -91,26 +193,8 @@
 	position:relative;
 }
 
-.panelTopWrapper{
-  margin-bottom:1em;
-  padding-bottom:3px;
-  background-color:#C3D9FF;
-  position:relative;
-  
-  background:-moz-linear-gradient(center top , #C3D9FF, white 140%) repeat scroll 0 0 transparent; 
-	-moz-border-radius:10px;
-	border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-box-shadow:0 0 6px gray;
-}
-.panelTop{
-  border:1px solid white;
-  margin:3px 3px 0px 3px;
-  float:left;
-  padding:1em;
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px;
-}
+
+
 .panelBottomWrapper{
   margin-bottom: 1em;
   background-color: rgb(195, 217, 255);
@@ -132,41 +216,7 @@
 
 
 
-.activeCardSide .tableCard{
-	color:black;	
-}
-.activeCardSide .tableCard{
-	background-color: #C3D9FF;
-	background:-moz-linear-gradient(center top , #C3D9FF, white 140%) repeat scroll 0 0 transparent;
-}
 
-.tableCard{
-	border:1px dashed;
-	border-spacing: 7px;
-	*border-collapse: expression('separate', cellSpacing = '7px');
-	background-color: #eee;
-	table-layout:fixed;	
-	margin-bottom:1em;
-	color:gray;
-}
-.tableCard td.td{
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-box-shadow:1px 2px 2px gray;	
-	/*background-color:ghostWhite;*/
-	font-size:26px;
-	height:170px;
-	width: 33.3%;
-	/*
-	line-height:1.1em;
-	text-align:center;
-	*/
-	overflow:hidden;
-}
-.td{
-	border:1px solid #dcdcdc;	
-	background:ghostWhite url(../img/pic/ez-logo-gray.png) no-repeat scroll right bottom;
-}
 .tableTheme {
 	border-bottom:1px dashed;
 	font-size:12pt;
@@ -333,13 +383,7 @@ div.activeCardSide #backButton a:hover {
 	background-color:#e1ecff;
 }
 
-#mainWord{
 
-}
-.mainWord{
-	line-height:1.2em;	
-	text-align:center;
-}
 .wordTran{
 	text-align:center;
 }
@@ -372,12 +416,7 @@ div.activeCardSide #backButton a:hover {
   line-height:1.3em;  
 }
 
-#wordTran{
-	/*border-bottom:1px dashed;*/
-	font-size:16pt;
-	line-height:1.1em;
-	margin-bottom:0.1em;
-}
+
 .perfix{
 	font-size:7pt;
 	color:gray;
@@ -397,24 +436,7 @@ div.activeCardSide #backButton a:hover {
   margin:0 1em;
 }
 
-#plusMenuWrapper{
-	text-align:center;
-	padding-bottom:.5em;
-}
-#plusMenuWrapper div div{
-	color:#FF9900;/*lightSalmon;*/
-	font-weight:bold;
-  float:left;
-	margin:0 0.5em;
-	padding:0 0.5em;
-}
-#plusMenuWrapper div div:hover{
-	text-decoration:underline;
-}
-#plusMenuWrapper div div.plusMenuActive{
-	color:black;
-	/*background-color:red;*/
-}
+
 
 
 

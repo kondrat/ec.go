@@ -6,7 +6,16 @@
   			google.language.getBranding('branding');
   		}
 		</script>
-
+		
+								<div style="color:gray;margin:.1em;position:absolute;top:10px;left:-270px;background-color:lightgrey;padding:0 .5em;">
+										<?php echo $html->link(__('tempLogOut',true), array('controller'=>'users','action'=>'logout'),array('class'=>'tempLogOut','style'=>'background-color:#fff') );?>
+										&nbsp;
+										<?php echo $html->link('fill_1',array(),array('id'=>'fill_1','onclick'=>'return false','style'=>'background-color:#fff') );?>
+										<?php echo $html->link('fill_2',array(),array('id'=>'fill_2','onclick'=>'return false','style'=>'background-color:#fff') );?>
+										<?php echo $html->link('fill_3',array(),array('id'=>'fill_3','onclick'=>'return false','style'=>'background-color:#fff') );?>
+										<?php echo $html->link('clean',array(),array('id'=>'fill_clean','onclick'=>'return false','style'=>'background-color:#fff') );?>
+										<?php echo $html->link('cardEditor',array(),array('id'=>'show_card_table','onclick'=>'return false','style'=>'background-color:#fff') );?>
+									</div>
 
 	    
 		    

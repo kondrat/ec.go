@@ -39,13 +39,6 @@
 		
 
 
-    //drag the main card editor
-		$(function() {
-			$(".cardEditor").draggable( { handle:"div.moveCardTable",zIndex: 2700,addClasses: false } );
-		});
 
-	//vertical align
-	$(function() {
-		
-	})(jQuery);
+				
 
