@@ -58,14 +58,89 @@ div.cardEditorActive {
 	position:absolute;
 	top:0;
 	left:0;
+
+}
+#inputBlock div.inputBlockMain {
 	background-color:#FF9900;
 	background:-moz-linear-gradient(center top , #FF9900, white 140%) repeat scroll 0 0 #FF9900;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	border:1px solid #DDDDDD;
-	padding:3px 15px;
+	padding:3px 15px;	
 }
+#inputBlock div.inputBlockCtrl{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color:NavajoWhite;
+	border:1px solid #DDDDDD;
+	position:absolute;
+	right:0;
+	margin-top:2px;
+	padding:3px 7px;
+}
+
+/* http://davidwalsh.name/github-css */
+/* button basics */
+	
+	a.minibutton {
+		display:inline-block;
+		height:23px;
+		padding:0 0 0 3px;
+		font-size:11px;
+		font-weight:bold;
+		color:#333;
+		text-shadow:1px 1px 0 #fff; 
+		background:url(../img/icons/minibutton_matrix.png) 0 0 no-repeat;
+		white-space:nowrap;
+		border:none;
+		overflow:visible;
+		cursor:pointer;
+		text-decoration:none;
+	}
+	
+	a.minibutton>span {
+		display:block;
+		height:23px;
+		padding:0 10px 0 8px;
+		line-height:23px;
+		background:url(../img/icons/minibutton_matrix.png) 100% 0 no-repeat;
+	}
+	
+	a.minibutton:hover, a.minibutton:focus {
+		color:#fff;
+		text-decoration:none;
+		text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+		background-position:0 -30px;
+	}
+	a.minibutton:hover>span, a.minibutton:focus>span {background-position:100% -30px;}
+	
+	a.minibutton.mousedown{background-position:0 -60px; }
+	a.minibutton.mousedown>span{background-position:100% -60px; }
+	
+	/* with icon */
+	/*
+	a.btn-download .icon {
+		float:left;
+		margin-left:-4px;
+		width:18px;
+		height:22px;
+		background:url(http://github.com/images/modules/buttons/minibutton_icons.png?v20100306) 0 0 no-repeat;
+	}
+	a.btn-download .icon {background-position:-40px 0;}
+	a.btn-download:hover .icon, a.btn-download:focus .icon {background-position:-40px -25px;}
+	*/
+
+
+
+
+
+
+
+
+
+
 .inputString {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -74,7 +149,7 @@ div.cardEditorActive {
 	width:350px;
 }
 .currentLine{
-	background-color:#eee;
+	background-color:#ddd;
 	color:black;
 }
 .currentLineActive{
@@ -146,11 +221,6 @@ div.cardEditorActive {
 }
 
 
-
-
-#mainWord{
-
-}
 .mainWord{
 	line-height:1.2em;	
 	text-align:center;
@@ -163,12 +233,20 @@ div.cardEditorActive {
 	line-height:1.1em;
 	margin-bottom:0.1em;
 }
-.exWord,.defWord,.synWord{
+.exWord,.defWord,.synWord,.moreWord{
   font-size:small;
   font-style:italic;
   text-align:left;
   line-height:1.3em; 
 }
+
+.insStrPerf{
+	color:gray;
+	font-size:smaller;
+	font-style:normal;
+	margin:0 5px 0 3px;
+}
+
 /*---end----*/
 
 
@@ -176,42 +254,7 @@ div.cardEditorActive {
 
 
 
-.ctrlPanel{
-	display:none;
-	position:absolute;
-	right:0;
-	top:0;
-	font-size:12pt;
-	padding:4px 7px 2px;
-	background-color:lightGray;
-	line-height:1em;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-box-shadow:1px 2px 2px gray;	
-}
-.ctrlPanelWrapper{
-	position:relative;
-}
 
-
-
-.panelBottomWrapper{
-  margin-bottom: 1em;
-  background-color: rgb(195, 217, 255);
-  text-align:center;
-  position:relative;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-box-shadow:0 0 6px gray;
-	background:-moz-linear-gradient(center bottom , #C3D9FF, white 140%) repeat scroll 0 0 transparent;
-}
-.panelBottom{
-  border:1px solid white;
-  margin:3px;
-  padding:5px;
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px;
-}
 
 
 

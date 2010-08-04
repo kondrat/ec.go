@@ -10,7 +10,13 @@
 
 	
 		echo $html->meta('icon');
-		echo $html->css(array('ez','ez-u','screen'));
+		echo $html->css(array(
+													'ez',
+													'ez-u',
+													'screen',
+													//'jqcss/css/smoothness/jquery-ui-1.8.2.custom'
+													)
+										);
 
 		//echo $html->css('print');
 		echo '<!--[if IE]>';
