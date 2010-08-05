@@ -6,13 +6,13 @@
 		
 		<div class="cardPad">
 			<div class="plusMenu">
-				<span id="plus_1">Word</span><span id="plus_2">+More</span>
+				<span id="plus_ins_1">Word</span><span id="plus_ins_2">+More</span>
 			</div>
 			<table class="tableCard">
 				<tr><td>
 					<div class="inlineMiddle">
 						<div id="ins_1" class="mainWord"><span class="insStrTip">Word test</span><span class="insStrText"></span></div>
-						<div id="ins_2" class="moreWord hide"><span class="insStrPerf">[info]</span><span class="insStrTip">trans3 word word More test word More test word More test word More test word More test word</span><span class="insStrText"></span></div>
+						<div id="ins_2" class="moreWord hide"><span class="insStrPerf">[info]</span><span class="insStrTip">more test</span><span class="insStrText"></span></div>
 					</div>
 				</tr></td>
 			</table>
@@ -25,7 +25,7 @@
 		<div class="cardPad">
 			
 			<div class="plusMenu">
-				<span id="plus_3">Transl</span><span id="plus_4">+Example</span><span id="plus_5">+Definition</span><span id="plus_6">+Synonim</span>
+				<span id="plus_ins_3">Transl</span><span id="plus_ins_4">+Example</span><span id="plus_ins_5">+Definition</span><span id="plus_ins_6">+Synonim</span>
 			</div>
 			
 			<table class="tableCard">
