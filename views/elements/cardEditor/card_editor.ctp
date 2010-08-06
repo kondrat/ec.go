@@ -58,7 +58,14 @@
 			<?php //echo $form->button(__('Ok',true),array('id'=>'inpBlSave','class'=>''));?>
 			<?php echo $html->link(__('Clear',true),array("#"),array('id'=>'inpBlClear') );?>
 		</div>
-		
+		<div id="inBlTrWrap" class="inputBlockTransl hide">
+			<a id="inpBlTr" href="javascript:;" class="minibutton"><span>
+				<?php __('Translate');?>
+			</span></a>
+		</div>
+
+
+	
 	</div>	
 	
 </div>

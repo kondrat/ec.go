@@ -42,34 +42,7 @@ $(document).ready( function(){
 			
 			//alert($curLineId);
 
-/*			
-			$com1_inlineMiddleDiv.each(function(){
-			
-				var $thisEach = $(this);	
-				
-				$thisEach.removeClass("currentLine");
-				
-				//if ( $thisEach.attr("id") === $thisLineId ) alert($thisLineId);
-						
-				var $thisTextBlock = $thisEach.find("span.insStrText");
-				
-				var $thisText = $.trim($thisTextBlock.text());
-				
-				if( $thisText === '') {
-					
-						
-					
-						$thisTextBlock.prev().show();						
-					 	if(	$thisEach.children().hasClass("insStrPerf") ) {
-							$thisEach.hide();
-						}		
-						
-						
-									
-				}			
-								
-			});
-*/		
+	
 			//.css({"color":"red"};
 
 			var $prevLine = $("#"+$prevLineId);
@@ -100,11 +73,15 @@ $(document).ready( function(){
 			
 			if( $thisText === '') {										
 					$thisTipBlock.show();
+					$com1_inStr.addClass("inputTip");
 					var $thisTipText = $thisTipBlock.text();						
-					$com1_inStr.val($thisTipText);												
+					$com1_inStr.val($thisTipText);
+					$("#inBlTrWrap").hide();												
 			} else {
 				$thisTipBlock.hide();
-				$com1_inStr.val($thisText);
+				$com1_inStr.removeClass("inputTip");
+				$com1_inStr.val($thisText).focus();
+				$("#inBlTrWrap").slideDown();
 			}					
 
 			$thisLine.addClass("currentLine");
@@ -153,17 +130,21 @@ $(document).ready( function(){
 			
 		  			//getting string from input and putting it in corresopndent card line	
 		  			var $curLineId = $com1_cardEditor.data("curLineId");
-		  			var $curLineTextBlock = $("#"+$curLineId).find("span.insStrText");
+		  			var $curLine = $("#"+$curLineId);
+		  			var $curLineTextBlock = $curLine.find("span.insStrText");
 		  			
-		  			var $curLineTipBlock = $("#"+$curLineId).find("span.insStrTip");
+		  			var $curLineTipBlock = $curLine.find("span.insStrTip");
 		  			//??
 		  			var $curLineTipBlockText = $curLineTipBlock.text();
 		  			
 		  			var inStrText = $.trim($com1_inStr.val());
 			  		if( inStrText === '') {
 			  			$curLineTipBlock.show();
+			  			$com1_inStr.addClass("inputTip");
 			  		} else {
 			  			$curLineTipBlock.hide();
+			  			$com1_inStr.removeClass("inputTip");
+			  			$("#inBlTrWrap").slideDown();
 			  		}
 		  							
 						$curLineTextBlock.text( inStrText );	  
