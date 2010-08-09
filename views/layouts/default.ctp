@@ -12,6 +12,7 @@
 		echo $html->meta('icon');
 		echo $html->css(array(
 													'ez',
+													'lt',
 													'ez-u',
 													'screen',
 													//'jqcss/css/smoothness/jquery-ui-1.8.2.custom'
@@ -38,6 +39,7 @@
 															'jquery/jquery.ui.mouse.min.js',
 															'jquery/jquery.ui.draggable.min',
 															'dev/jquery.coloranim',
+															'dev/jquery.elastic',
 															'dev/func',
 															'dev/common1',
 															'dev/common2',
@@ -72,14 +74,14 @@
 							<div class="topSearch" style="margin-top:0px;">
 									<div class="signUpNow">
 										<?php if(!$this->Session->read('Auth.User.id')|| $this->Session->read('Auth.User.group_id') == 2 ): ?>
-											<?php echo $html->link(__('SignUp now',true), array('controller'=>'users','action'=>'reg') );?>
+											<?php echo $html->link(__('SignUp',true), array('controller'=>'users','action'=>'reg') );?>
 										<?php endif ?>
 									</div>
 									<div class="signUpNow">
 										<?php if(!$this->Session->read('Auth.User.id')|| $this->Session->read('Auth.User.group_id') == 2 ): ?>
-											<?php echo $html->link(__('LogIn now',true), array('controller'=>'users','action'=>'login') );?>
+											<?php echo $html->link(__('LogIn',true), array('controller'=>'users','action'=>'login') );?>
 										<?php else: ?>
-											<?php echo $html->link(__('LogOut now',true), array('controller'=>'users','action'=>'logout') );?>
+											<?php echo $html->link(__('LogOut',true), array('controller'=>'users','action'=>'logout') );?>
 										<?php endif ?>
 									</div>	
 							</div>

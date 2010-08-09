@@ -40,7 +40,7 @@ $(document).ready( function(){
 			var $prevLineId = $com1_cardEditor.data("curLineId");
 
 			
-			//alert($curLineId);
+			//$com1_inStr.css({"height":"20px"});
 
 	
 			//.css({"color":"red"};
@@ -68,7 +68,8 @@ $(document).ready( function(){
 			var $thisTextBlock = $thisLine.find("span.insStrText");
 			var $thisTipBlock = $thisTextBlock.prev();			
 			var $thisText = $.trim($thisTextBlock.text());
-
+			//var $thisLineHeight = $thisLine.height();
+			
 			$thisLine.show();
 			
 			if( $thisText === '') {										
@@ -92,9 +93,10 @@ $(document).ready( function(){
 			
 			//set input line next to current line;		
 			var setTop = (posMainWord.top - cardEditorPos.top) + $thisLine.height() + 2; 
-			var setLeft = (posMainWord.left - cardEditorPos.left) - 55; 
+			var setLeft = (posMainWord.left - cardEditorPos.left) - 25; 
 			
 			$com1_inputBlock.css({"top":setTop,"left":setLeft}).show();//.find("input").val(inputTip);	
+
 			
 			
 			$com1_plusMenu.removeClass("plusMenuActive");
@@ -125,8 +127,10 @@ $(document).ready( function(){
 		  	}	
 		});
 		
+
+		$com1_inStr.elastic();
 		
-		$com1_inStr.keyup( function(e) {									
+		$com1_inStr.keyup( function() {									
 			
 		  			//getting string from input and putting it in corresopndent card line	
 		  			var $curLineId = $com1_cardEditor.data("curLineId");

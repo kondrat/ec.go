@@ -1,0 +1,16 @@
+.lt-wrapper{
+	float:left;
+}
+.lt-lesson, .lt-theme{
+	font-family:Georgia, Times New Roman, serif;
+	font-size:14pt;
+	font-style:italic;
+	margin-right:.3em;
+	color:gray;
+}
+.lt-theme{
+	font-size:12pt;
+}
+.lt-edit a{
+	text-decoration:none;
+}

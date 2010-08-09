@@ -48,7 +48,7 @@
 
 	<div id="inputBlock" class="hide">
 		<div class="inputBlockMain">
-			<?php echo $form->input('inStr',array('label'=>false,'div'=>false,'class'=>'inputString'));?>
+			<?php echo $form->textarea('inStr',array('label'=>false,'div'=>false,'class'=>'inputString'));?>
 		</div>
 		<div class="inputBlockCtrl">
 			<a id="inpBlOk" href="javascript:;" class="minibutton"><span>

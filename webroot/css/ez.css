@@ -12,7 +12,6 @@
 }
 .threeWays{
 	font-size:larger;
-	margin-bottom:1em;
 	padding:1em 0 0;
 	text-align:center;
 }
@@ -44,7 +43,7 @@
 #cardEditor{
 	left:100px;
 	position:absolute;
-	top:90px;
+	top:75px;
 }
 .cardEditor{
 	border:1px dashed #fff;
@@ -161,7 +160,8 @@ div.cardEditorActive {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	padding:3px;
-	width:350px;
+	width:285px;
+	height:10px;
 }
 .currentLine{
 	background-color:#ddd;
@@ -217,7 +217,9 @@ div.cardEditorActive {
 .plusMenu span.plusMenuActive{
 	color:#ff9900;
 }
-
+.plusMenu span:hover{
+	color:#ff9900;
+}
 
 
 .activeCardSide .tableCard{
@@ -261,6 +263,23 @@ div.cardEditorActive {
 	font-style:normal;
 	margin:0 5px 0 3px;
 }
+
+
+
+/* 
+	Lesson - theme: lt- 
+	see lt.css
+*/
+
+
+
+
+
+
+
+
+
+
 
 /*---end----*/
 
