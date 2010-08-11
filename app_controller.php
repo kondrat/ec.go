@@ -8,7 +8,7 @@ class AppController extends Controller {
 //--------------------------------------------------------------------
 	function beforeFilter() {
 	
-
+		Configure::load('vars');
 		/*
 		
 		if ( !isset($this->params['lang']) && !$this->Session->check('langSes') ) {

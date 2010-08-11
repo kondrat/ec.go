@@ -1,0 +1,164 @@
+/*
+ * ce- card editor
+ */
+ #ce-cardEditor{
+	left:100px;
+	position:absolute;
+	top:75px;
+}
+.ce-cardEditor{
+	border:1px dashed #fff;
+	padding:25px;
+}
+div.ce-cardEditorActive {
+	border-color:#ddd;
+}
+.ce-cardPad{
+	background: url("../img/pic/card-pad.png") no-repeat scroll 0 0 #FFFFFF;
+	float:left;
+	height:194px;
+	width:320px;
+	position:relative;
+}
+
+/* plus menu on top of the cards*/
+.ce-plusMenu{
+	position:absolute;
+	left:10px;
+	top:-10px;
+}
+.ce-plusMenu span{
+	color:gray;
+	font-weight:bold;
+	margin-left:1em;
+}
+.ce-plusMenu span.ce-plusMenuActive{
+	color:#ff9900;
+}
+.ce-plusMenu span:hover{
+	color:#ff9900;
+}
+
+
+
+.ce-tableCard{
+	margin:0;
+	height:100%;
+	table-layout:fixed;	
+	color:gray;
+}
+/* 
+	sets max-height for IE http://perishablepress.com/press/2007/01/16/maximum-and-minimum-height-and-width-in-internet-explorer/
+*/
+/*
+ * html div#division { 
+   height: expression( this.scrollHeight > 332 ? "333px" : "auto" ); 
+}
+*/
+.ce-inlineMiddle{
+	padding:0 20px;
+	text-align:center;
+	max-height:160px;
+	overflow:hidden;
+	padding:0 19px 0 22px;
+}
+.ec-cardLogo{
+	bottom:23px;
+	height:12px;
+	position:absolute;
+	right:20px;
+	width:104px;
+	background: url("../img/pic/ez-logo-gray.png") no-repeat scroll 0 0 #FFFFFF;
+}
+
+.ce-mainWord{
+	line-height:1.2em;	
+	text-align:center;
+	font-size:18pt;
+}
+.ce-translWord {
+	/*border-bottom:1px dashed;*/
+	font-size:16pt;
+	line-height:1.1em;
+	margin-bottom:0.1em;
+}
+.ce-exWord,.ce-defWord,.ce-synWord,.ce-moreWord{
+  font-size:small;
+  font-style:italic;
+  text-align:left;
+  line-height:1.3em; 
+}
+
+.ce-insStrPerf{
+	color:gray;
+	font-size:smaller;
+	font-style:normal;
+	margin:0 5px 0 3px;
+}
+
+
+
+/*
+ * Input block: moving input field
+ */
+
+#ce-inputBlock{
+	position:absolute;
+	top:0;
+	left:0;
+
+}
+#ce-inputBlock div.ce-inputBlockMain {
+	background-color:#FF9900;
+	background:-moz-linear-gradient(center top , #FF9900, white 140%) repeat scroll 0 0 #FF9900;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border:1px solid #DDDDDD;
+	padding:3px 15px;	
+}
+#ce-inputBlock div.ce-inputBlockCtrl{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color:NavajoWhite;
+	border:1px solid #DDDDDD;
+	position:absolute;
+	right:0;
+	margin-top:2px;
+	padding:3px 7px;
+}
+#ce-inputBlock div.ce-inputBlockTransl{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color:NavajoWhite;
+	border:1px solid #DDDDDD;
+	position:absolute;
+	left:0;
+	margin-top:2px;
+	padding:3px 7px;
+}
+
+
+.ce-inputString {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding:3px;
+	width:285px;
+	height:10px;
+}
+/*
+ * decoration classes from JS only.
+ */
+.ce-inputTip{
+	color:gray;
+}
+.ce-currentLine{
+	background-color:#ddd;
+	color:black;
+}
+.ce-currentLineActive{
+	background-color:#eee;
+}

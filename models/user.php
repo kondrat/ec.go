@@ -5,7 +5,16 @@ class User extends AppModel {
 	var $actsAs = array('Containable');
 //--------------------------------------------------------------------
 	var $validate = array(
+							
 							'username' => array(
+							    			'login' => array(
+																	        'rule' => '/^[a-z0-9]+$/i',  
+																	        //'message' => 'Only latin letters and integers'
+																	   		 ),
+							    			'stopWords' => array(
+																	        'rule' => array('stopWords','$this->data'),  
+																	        //'message' => 'This username has already been taken'
+																	   		 ),
 												
 												'notEmpty' => array(
 																						'rule' => 'notEmpty',
@@ -15,48 +24,62 @@ class User extends AppModel {
 												'alphaNumeric' => array( 
 																							'rule' => 'alphaNumeric',
 																							'required' => true,
-																							'message' => 'Usernames must only contain letters and numbers.'
+																							//'message' => 'Usernames must only contain letters and numbers.'
 																							),
 												
 												'betweenRus' => array(
-																							'rule' => array( 'betweenRus', 2, 15, 'username'),
-																							'message' => 'Username must be between 2 and 15 characters long.',
+																							'rule' => array( 'betweenRus', 4, 15, 'username'),
+																							//'message' => 'Username must be between 2 and 15 characters. long.',
 																							'last' => true
 																							),
 												'checkUnique' => array( 
 																							'rule' =>  array('checkUnique', 'username'),
-																							'message' => 'This username has already been taken',
+																							//'message' => 'This username has already been taken',
 																							
 																							),
 															),
-																						
+																					
 							'password1' => array( 'betweenRus' => array(
 																													'rule' => array( 'betweenRus', 4, 10,'password1'),
-																													'message' => 'Username must be between 4 and 10 characters long'
-																													)
+																													//'message' => 'Username must be between 4 and 10 characters long'
+																													),
+																		'obvious' => array(
+																												'rule' => array('obvious','$this->data'),
+																												//'message' => 'Too obvious'
+																											),
 																	),
 							'password2' => array( 'passidentity' => array(
 																													'rule' => array( 'passidentity', '$this->data' ),
-																													'message' => 'Please verify your password again'
+																													//'message' => 'Please verify your password again'
 																													)
 																	),
 							
 																																							
-							'email' => array( 'email' => array( 
+							'email' => array(
+							
+							 																	
+												'notEmpty' => array(
+																						'rule' => 'notEmpty',
+																						//'message' => 'This field cannot be left blank!!!',
+																						'required' => true,
+																						'last' => true
+																						),
+																						
+												'email' => array( 
 																								'rule' => array( 'email', false), //check the validity of the host. to set true.
-																								'message' => 'Your email address does not appear to be valid',
+																								//'message' => 'Your email address does not appear to be valid!!!',
 																								),
-																								//Don't forget to switch on!!
-																								/*
-																								'checkUnique' => array(           
-																														'rule' =>  array('checkUnique', 'email'),
-																														'message' => 'This Email has already been taken'
-																														),
-																								*/
+																																															
+												'checkUnique' => array(           
+																								'rule' =>  array('checkUnique', 'email'),
+																								//'message' => 'This Email has already been taken!!!',
+																								
+																								),
+																								
 															),
 							'captcha' => array( 'notEmpty' => array(
 																										'rule' => 'notEmpty',
-																										'message' => 'This field cannot be left blank',
+																										//'message' => 'This field cannot be left blank',
 																										'last'=>true,
 																	),
 																	'alphaNumeric' => array(
@@ -65,7 +88,7 @@ class User extends AppModel {
 																	),
 																	'equalCaptcha' => array(
         																						'rule' => array('equalCaptcha','$this->data'),  
-        																						'message' => 'Please, type in correct the code'
+        																						//'message' => 'Please, correct the code'
     															),
 
 											),
@@ -82,21 +105,13 @@ class User extends AppModel {
   );
   
 	var $hasMany = array(
+	/*
 		'Theme' => array(
 			'className' => 'Theme',
 			'foreignKey' => 'user_id',
 			'dependent' => false
-		),
-		'Card' => array(
-			'className' => 'Card',
-			'foreignKey' => 'user_id',
-			'dependent' => false
-		),
-		'Text' => array(
-			'className' => 'Text',
-			'foreignKey' => 'user_id',
-			'dependent' => false
 		)
+		*/
 	);  
 
 /*
@@ -138,6 +153,25 @@ class User extends AppModel {
      	}
         return $valid;
    }
+//--------------------------------------------------------------------
+	function obvious($data){
+		if ( $this->data['User']['password1'] === $this->data['User']['username'] ) {
+			return false;
+		}
+		return true;
+	}
+//--------------------------------------------------------------------
+	function stopWords($data){
+		if ( $a = Configure::read('stopWords')  ) {
+
+			$toCheck = strtolower($this->data['User']['username']);
+			$res = str_replace($a, "", $toCheck );
+			if( $res !== $toCheck ) {			
+				return false;
+			}
+		}
+		return true;
+	}
 //--------------------------------------------------------------------														
 	function passidentity($data) {
  		if ( $this->data['User']['password1'] != $this->data['User']['password2'] ) {		

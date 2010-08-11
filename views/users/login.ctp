@@ -1,43 +1,61 @@
-<div class="inner_page">
-	
-		<h3 style="color:#db605d;"><?php __('Sign in to englishCARDS.ru');?></h3>
+<div class="ur-formPageLog">
+
+		<h3 style="color:#db605d;margin:0 0 1em 2.5em;"><span style="color:gray;font-size:small;"><?php __('Sign in to');?></span> workroll.ru</h3>	
+			
+		<?php echo $form->create('User', array(
+																						'action' => 'login',        
+																					 	'inputDefaults' => array(
+            																												'label' => false,
+            																												'div' => false
+        																														)		
+		) ); ?>
 		
-		<?php echo $form->create('User', array('action' => 'login' ) ); ?>
-		
-		<div class="formWrap span-14">
-			<?php echo $form->input('username', array('div'=>array("id"=>"usernameWrap"),
-																								'label'=>__('Username',true)	) 
-															); ?>	
+		<div class="inputFormWrap">
+			<div class="formWrapLabel">
+				<?php echo $form->label(__('Username or email',true));?>
+			</div>
+			<div class="formWrapIn">
+				<?php echo $form->input('username', array() ); ?>	
+			</div>
 		</div>	
-		<div class="formWrap span-10">
-			<?php echo $form->input('password' , array(	'type' => 'password',
-																									'div'=>array("id"=>"passWrap"), 
-																									'label'=>__('Password',true)	) 
-															); ?>
+		
+		<div class="inputFormWrap">
+			<div class="formWrapLabel">
+				<?php echo $form->label(__('Password',true));?>
+			</div>
+			<div class="formWrapIn">
+				<?php echo $form->input('password' , array(	'type' => 'password') ); ?>
+			</div>
+			<div class="formWrapTip">
+				<div style="margin-top: 5px;">
+					<?php echo $html->link(__('Forgot?',true), array('admin'=> false, 'action' => 'reset'), array('class' => '' ) ); ?>
+				</div>
+			</div>
 		</div>
-		<div class="span-4">
-			<?php echo $html->link(__('Forgot your password?',true), array('admin'=> false, 'action' => 'reset'), array('class' => '' ) ); ?>
-		</div>
-		<div class="autoLogin push-4 span-10">
-			<?php echo $form->input('auto_login', array('type' => 'checkbox', 
-																									'label' =>  __('Remember Me',true) ,
-																									'div'=>false ) 
-															); ?>
+
+		<div class="inputFormWrap">
+			<div class="autoLogin" style="float:left;margin:0 0 0 175px;">
+				<?php echo $form->input('auto_login', array('type' => 'checkbox', 
+																										'label' =>  __('Remember Me',true) ,
+																										'div'=>false ) 
+																); ?>
+			</div>
 		</div>
 		
 	
-		<div class="push-4 span-10">	
-				<span><?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'logSubmit') ); ?></span>
-		</div>
+					<div class="" style="float:left;margin:0 0 1.5em 175px;">			
+								<span><?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'logSubmit') ); ?></span>
+					</div>
 				
 		<?php echo $form->end(); ?>
 
 
 
 		
-		<div class="reg" style="position:absolute; left:400px;top:40px;">
+		<div class="reg">
 			<?php echo $html->link(__('SignUp now',true), array('controller'=>'users','action'=>'reg') );?>
 		</div>
+		
 </div>
 
 

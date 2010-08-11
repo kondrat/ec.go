@@ -12,6 +12,7 @@
 		echo $html->meta('icon');
 		echo $html->css(array(
 													'ez',
+													'ec-ce',
 													'lt',
 													'ez-u',
 													'screen',
@@ -57,7 +58,7 @@
 
 </head>
 <body>
-	<div class="pageheader">
+	<div class="ec-pageHeader">
 
 			<div class="container">
 				<div class="span-24">
@@ -71,13 +72,13 @@
 							</div>
 						</div>
 						<div class="span-8 last" style="position:relative;" >
-							<div class="topSearch" style="margin-top:0px;">
-									<div class="signUpNow">
+							<div style="margin-top:0px;">
+									<div class="ur-signUpNow">
 										<?php if(!$this->Session->read('Auth.User.id')|| $this->Session->read('Auth.User.group_id') == 2 ): ?>
 											<?php echo $html->link(__('SignUp',true), array('controller'=>'users','action'=>'reg') );?>
 										<?php endif ?>
 									</div>
-									<div class="signUpNow">
+									<div class="ur-signUpNow">
 										<?php if(!$this->Session->read('Auth.User.id')|| $this->Session->read('Auth.User.group_id') == 2 ): ?>
 											<?php echo $html->link(__('LogIn',true), array('controller'=>'users','action'=>'login') );?>
 										<?php else: ?>
@@ -97,22 +98,22 @@
 
 		
 	<div class="container showgrid.">    
-			  <div class="fl" style="">
+			  <div class="ur-fl">
 				  <?php echo $session->flash();?>
 			  </div>
 		
-		    <div class="span-24 contentWrapper" style="">
+		    <div class="span-24 ec-contentWrapper" style="">
 		    			<?php echo $this->element('noscript/noscript');?>	        
 							<?php echo $content_for_layout; ?>		        
 		    </div>
 	
 	</div>
-	<div class="pagefooter" style="">
+	<div class="ec-pageFooter" style="">
 			<div class="container">
 				<div class="span-24">
 					
 			    <div class="span-24">
-			    	<div class="footerNote">
+			    	<div class="ec-footerNote">
 		      	 <?php echo $html->link('www.englishCARDS.ru',array('controller'=>'cards','action'=>'index'));?> &copy;<?php echo date('Y');?>
 		      	</div>
 		   		</div>
