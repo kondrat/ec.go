@@ -13,6 +13,7 @@
 		echo $html->css(array(
 													'ez',
 													'ec-ce',
+													'ec-dic',
 													'lt',
 													'ez-u',
 													'screen',
@@ -102,7 +103,7 @@
 				  <?php echo $session->flash();?>
 			  </div>
 		
-		    <div class="span-24 ec-contentWrapper" style="">
+		    <div class="span-24 ec-contentWrapper" style="min-height:500px;">
 		    			<?php echo $this->element('noscript/noscript');?>	        
 							<?php echo $content_for_layout; ?>		        
 		    </div>

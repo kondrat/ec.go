@@ -1,0 +1,20 @@
+/*
+ * dic- dictionary editor
+ */
+#dic-dicWrapper{
+	background-color:#EEEEEE;
+	position:absolute;
+	top:340px;
+	left:180px;
+	width:500px;
+}
+#dic-branding{
+	position:absolute;
+	top:0;
+	right:0;
+}
+#dic-translFor{
+	background-color:Beige;
+}
+#dic-topResult{
+}

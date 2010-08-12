@@ -11,8 +11,9 @@ $(document).ready( function(){
 		var $com1_plusMenu =  $(".ce-plusMenu span", "#ce-cardEditor");
 		var $com1_inputBlock =  $("#ce-inputBlock");
 		var $com1_inlineMiddleDiv =  $("div[id^='ce-ins-']", "#ce-cardEditor");
+		//input line
 		var $com1_inStr = $("#ce-inStr");
-		//block which slides down with button "translate"
+		//this block slides down with button "translate"
 		var $com1_inBlTrWrap = $("#ce-inBlTrWrap");
 
 		
@@ -67,7 +68,7 @@ $(document).ready( function(){
 		//current line deal
 		
 			var $thisLine = $(this);
-			var $thisLineId = $thisLine.attr("id").replace("ce-ins-","");												
+			var $thisLineId = $thisLine.attr("id");												
 			var $thisTextBlock = $thisLine.find("span.ce-insStrText");
 			var $thisTipBlock = $thisTextBlock.prev();			
 			var $thisText = $.trim($thisTextBlock.text());
@@ -106,7 +107,7 @@ $(document).ready( function(){
 			
 			$com1_plusMenu.removeClass("ce-plusMenuActive");
 
-			$("#ce-plus-ins-"+$thisLineId ).addClass("ce-plusMenuActive");
+			$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuActive");
 			
 			
 
@@ -216,5 +217,183 @@ $(document).ready( function(){
 		$("#ce-inpBlClear").click(function(){
 			return false;
 		});
+
+
+
+
+
+
+
+
+
+	//word submiting for translation
+
+//CHEck if word is empty or not!!!!!!!!!
+
+						
+		$("#ce-inpBlTr").click( function() {
+			
+		
+			var $userWord = $.trim($com1_inStr.val()).toLowerCase();
+
+
+
+			
+			
+			$("#dic-translFor").text($userWord);
+			
+			
+			
+			//dictionary preparation
+			
+			$(".additionalRes").hide();
+			
+			$(".dicTerms ul").empty().addClass("hide");
+			
+			$("ul.rSugTabs li").removeClass("dicSwitcherM dicActive");
+
+
+
+
+
+			
+	//trimm and check uesr word;		
+			//com.songWord = userWordLower;
+			
+			
+			//com.song = "http://www.gstatic.com/dictionary/static/sounds/de/0/"+com.songWord+".mp3";
+			
+				
+						$.post(
+							path+"/cards/getTransl",
+							{"data[Card][ext]": $userWord, "data[Card][langFrom]" : "en", "data[Card][langTo]" : "ru" },
+							
+					    	function(data){
+									
+											if( data[0] ) {
+											  
+											  	alert(data[0]);
+										  
+												 if( data[1] ) {
+				
+												  var dic = data[1];
+												  var typeW = null;
+												  
+												  
+												  $.each(dic, function( keyD, valueD) {												  	
+												  	$.each(valueD, function(keyT, valueT) {												  		
+												  		if(keyT === 'pos') {
+												  			switch(valueT){
+													  			case('noun'):
+													  				typeW = 'noun';	
+													  				break;										  			
+													  			case('verb'):
+													  				typeW = 'verb';
+													  				break;										  			
+													  			case('adjective'):
+													  				typeW = 'adjective';
+													  				break;											  				
+													  			case('adverb'):
+													  				typeW = 'adverb';
+													  				break;
+													  			case('pronoun'):
+													  				typeW = 'pronoun';
+													  				break;
+													  			case('conjunction'):
+													  				typeW = 'conjunction';
+													  				break;
+													  			case('preposition'):
+													  				typeW = 'preposition';
+													  				break;
+													  			case('article'):
+													  				typeW = 'article';
+													  				break;
+													  			case('numeral'):
+													  				typeW = 'numeral';
+													  				break;
+													  			default:
+													  				break;											  				
+												  			}										  			
+												  		} 
+												  	
+												  		if( keyT === 'terms') {	
+												  				$.each( valueT, function(keyN, valueN) {											  					
+													  					$("ul."+typeW+"Terms").append('<li>'+ valueN+'</li>');
+													  			});
+													  			$("li."+typeW ).addClass("dicSwitcherM");											  			
+												  				typeW=null;
+												  		}											  											  		
+												  	});
+												  	
+												  });
+												  
+												  $(".dicSwitcherM:first").addClass("dicActive");
+												  $(".dicTerms ul:eq(0)").removeClass("hide");
+												  $(".additionalRes").show();
+												} else {
+													
+												}
+
+												
+												alert('ok');
+											  var $joinedSentence = data[0];
+											  alert($joinedSentence);
+											  var $translatedSentence = '';
+											  $.each($joinedSentence, function(key, value) { 
+														$.each(value, function(keyIn, valIn){
+															if( keyIn === 'trans' ) {
+																$translatedSentence += valIn; 																										
+															} 	
+  													});											
+												});	
+												alert($translatedSentence);											
+												$("#dic-topResult").text($translatedSentence);
+
+												
+												//check if word is translated or not. if not giving back not translated word
+												if($userWord != $translatedSentence) {
+		
+
+														
+													
+												} else {
+	
+	
+												}
+
+
+
+												
+											} else {
+											  
+											}					
+									
+					      },
+					      "json"
+          	);
+			
+			
+			//official google
+			//initialize(userWord);
+			
+			
+		
+			return false;
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				
 });

@@ -516,20 +516,8 @@ div.changeLangDirect{
 	top:5px;
 	cursor:move;
 }
-.hideArrow{
-	background:transparent url(../img/icons/l_r_hide.png) no-repeat scroll right 0;
-	height:16px;
-	width:8px;
-	position:absolute;
-	right:1px;
-	top:210px;
-}
-.hideArrowL {
-	background-position: 0 0;
-}
-.hideArrowR {
-	background-position: 0 -24px;
-}
+
+
 .sound{
   width:24px;
   height:24px;
@@ -556,15 +544,7 @@ div.changeLangDirect{
 	width:180px;
 	text-align:left;
 }
-.rightSug{
-	background-color:#eee;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px; 
-	-moz-box-shadow: 0 0 3px;
-	-webkit-box-shdow: 0 0 3px;
-	margin-top:2em;
-	padding-bottom:1.5em;
-}
+
 .rightHead{
   border-bottom:1px dotted;
   color:Brown;
@@ -579,24 +559,14 @@ div.changeLangDirect{
 .topSugWrapper div, .additionalRes{
 	color:gray;
 }
-.topSug{
-	margin:0 1em;
-	color:gray;
-	font-size:larger;
-	line-height:1.1em;
-}
+
 .dicTerms {
 	color:gray;
 }
 
 
 
-#transFor{
-	background-color:Beige;
-	color:black;
-	margin-left:5px;
-	padding:2px;
-}
+
 
 
 #rightSugTabs{
@@ -625,12 +595,8 @@ li.dicSwBase{
 	display:none;
 }
 
-.dicTerms li, .topSug li, .rSugTabs li {
-  cursor:pointer;
-}
-.dicTerms li, .topSug li {
-	color:black;
-}
+
+
 
 
 .noun{

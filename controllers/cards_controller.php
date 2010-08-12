@@ -133,7 +133,8 @@ class CardsController extends AppController {
 
 				}				
 	
-					$this->header('Content-Type: application/json');				
+					$this->header('Content-Type: application/json');	
+					//$contents = json_encode($contents);			
 					return ($contents);
 					
 								

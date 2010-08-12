@@ -1,4 +1,4 @@
-<div class="span-4" style="min-height:500px;">
+<div class="span-4">
 	<?php if ( isset($curTheme) && $curTheme != array() ): ?>			
 			<div class="leftSideTheme" style=""><?php echo $curTheme['0']['Theme']['theme'];?></div>
 			<ul class="newCards">
