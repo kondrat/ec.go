@@ -556,13 +556,7 @@ div.changeLangDirect{
 	margin: 1em;
 	color:blue;
 }
-.topSugWrapper div, .additionalRes{
-	color:gray;
-}
 
-.dicTerms {
-	color:gray;
-}
 
 
 
@@ -574,41 +568,17 @@ div.changeLangDirect{
 	height:280px;
 	overflow:auto;
 }
-.rSugTabs{
-	width:165px;
-	float:left;
-	margin: 0 0 .5em 0;
-}
-#rightSugTabs ul.rSugTabs li.dicSwitcherM {
-	color:black;
-	text-decoration:none;
-	display:block;
-}
-li.dicSwBase{
-	float:left;
-	list-style:none outside none;
-	margin-right: .5em;
-	line-height:1.4em;
-	border-bottom:1px dashed;	
-	text-decoration:line-through;
-	color:gray;
-	display:none;
-}
 
 
 
 
 
-.noun{
-}
-.verb{
-}
-.adjec{
-}
 
-#rightSugTabs ul.rSugTabs li.dicActive, #rightSugTabs ul.rSugTabs li.dicHover {
-	color:brown;
-}
+
+
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 
 $(document).ready( function(){
-
+		//test comment
 		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"ce-ins-1"});;
 		var $com1_mainWord =  $("#ce-ins-1");//.data({"tip":"Type main word in"});
 		var $com1_moreWord =  $("#ce-ins-2");//.data({"tip":"Type more info in"});
@@ -245,12 +245,15 @@ $(document).ready( function(){
 			
 			
 			//dictionary preparation
+			$(".dic-dicSwBase").addClass("newTEst").hide().css({"color":"red"});
+			$(".dic-dicSwBase ul li").remove();
+
 			
-			$(".additionalRes").hide();
 			
-			$(".dicTerms ul").empty().addClass("hide");
 			
-			$("ul.rSugTabs li").removeClass("dicSwitcherM dicActive");
+			
+			
+			
 
 
 
@@ -264,26 +267,30 @@ $(document).ready( function(){
 			//com.song = "http://www.gstatic.com/dictionary/static/sounds/de/0/"+com.songWord+".mp3";
 			
 				
-						$.post(
-							path+"/cards/getTransl",
-							{"data[Card][ext]": $userWord, "data[Card][langFrom]" : "en", "data[Card][langTo]" : "ru" },
-							
-					    	function(data){
-									
+						$.ajax({
+							type: "POST",
+							url: path+"/cards/getTransl",
+							data: {"data[Card][ext]": $userWord, "data[Card][langFrom]" : "en", "data[Card][langTo]" : "ru" },
+							dataType: "json",					
+					    success: function(data){
+											
 											if( data[0] ) {
 											  
-											  	alert(data[0]);
+											  	
 										  
-												 if( data[1] ) {
-				
+												if( data[1] ) {
+													
 												  var dic = data[1];
 												  var typeW = null;
 												  
 												  
-												  $.each(dic, function( keyD, valueD) {												  	
-												  	$.each(valueD, function(keyT, valueT) {												  		
-												  		if(keyT === 'pos') {
-												  			switch(valueT){
+												  $.each(dic, function( keyD, valD) {	
+												  	//alert(valD[0]+' | '+valD[1]);	
+												  	
+												  			switch(valD[0]){
+												  				case(''):
+												  					typeW = 'none';
+												  					break;
 													  			case('noun'):
 													  				typeW = 'noun';	
 													  				break;										  			
@@ -311,66 +318,68 @@ $(document).ready( function(){
 													  			case('numeral'):
 													  				typeW = 'numeral';
 													  				break;
+													  			case('suffix'):
+													  				typeW = 'suffix';
+													  				break;
 													  			default:
 													  				break;											  				
-												  			}										  			
-												  		} 
+																}												  	
 												  	
-												  		if( keyT === 'terms') {	
-												  				$.each( valueT, function(keyN, valueN) {											  					
-													  					$("ul."+typeW+"Terms").append('<li>'+ valueN+'</li>');
-													  			});
-													  			$("li."+typeW ).addClass("dicSwitcherM");											  			
-												  				typeW=null;
-												  		}											  											  		
-												  	});
+												  	
+												  	$("li."+typeW).show();
+												  											  	
+														$.each(valD[1], function(keyM, valM) {
+																
+																$("li."+typeW+" ul").append('<li>'+ valM+'</li>');
+																													
+														});
+
+												  	
+												  			
+
 												  	
 												  });
 												  
-												  $(".dicSwitcherM:first").addClass("dicActive");
-												  $(".dicTerms ul:eq(0)").removeClass("hide");
-												  $(".additionalRes").show();
+												  
+												  
+
 												} else {
 													
 												}
 
 												
-												alert('ok');
+									
 											  var $joinedSentence = data[0];
-											  alert($joinedSentence);
+											  
 											  var $translatedSentence = '';
-											  $.each($joinedSentence, function(key, value) { 
-														$.each(value, function(keyIn, valIn){
-															if( keyIn === 'trans' ) {
-																$translatedSentence += valIn; 																										
-															} 	
-  													});											
+											  
+											  $.each($joinedSentence, function(key, value) { 														
+														$translatedSentence += value[0];										
 												});	
-												alert($translatedSentence);											
+												
+												//alert($translatedSentence);											
 												$("#dic-topResult").text($translatedSentence);
 
 												
 												//check if word is translated or not. if not giving back not translated word
 												if($userWord != $translatedSentence) {
-		
-
-														
 													
 												} else {
-	
-	
+		
 												}
 
 
 
 												
 											} else {
-											  
+											  //alert('not');
 											}					
 									
 					      },
-					      "json"
-          	);
+					    error: function(e, xhr, settings, exception){
+					      alert('Problem with the server. Try again later.');
+					    }
+          	});
 			
 			
 			//official google

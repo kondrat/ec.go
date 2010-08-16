@@ -2,19 +2,30 @@
  * dic- dictionary editor
  */
 #dic-dicWrapper{
-	background-color:#EEEEEE;
+	background-color:#FFFFFF;
+	border-bottom:1px solid;
+	border-top:1px solid;
+	left:0;
 	position:absolute;
 	top:340px;
-	left:180px;
-	width:500px;
+	width:950px;
 }
 #dic-branding{
 	position:absolute;
-	top:0;
+	top:5px;
 	right:0;
 }
 #dic-translFor{
 	background-color:Beige;
 }
 #dic-topResult{
+}
+#dic-resTabs{
+	margin: 0 0 .5em 0;
+}
+li.dic-dicSwBase{
+
+	list-style:none outside none;
+	color:gray;
+	float:left;
 }
