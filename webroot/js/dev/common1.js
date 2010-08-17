@@ -242,20 +242,10 @@ $(document).ready( function(){
 			
 			$("#dic-translFor").text($userWord);
 			
-			
-			
 			//dictionary preparation
-			$(".dic-dicSwBase").addClass("newTEst").hide().css({"color":"red"});
+			$(".dic-dicSwBase").hide();
 			$(".dic-dicSwBase ul li").remove();
-
-			
-			
-			
-			
-			
-			
-
-
+			$("#dic-topResult").text('');
 
 
 
@@ -275,17 +265,13 @@ $(document).ready( function(){
 					    success: function(data){
 											
 											if( data[0] ) {
-											  
-											  	
-										  
+									  
 												if( data[1] ) {
 													
 												  var dic = data[1];
 												  var typeW = null;
-												  
-												  
+												  												  
 												  $.each(dic, function( keyD, valD) {	
-												  	//alert(valD[0]+' | '+valD[1]);	
 												  	
 												  			switch(valD[0]){
 												  				case(''):
@@ -326,23 +312,16 @@ $(document).ready( function(){
 																}												  	
 												  	
 												  	
-												  	$("li."+typeW).show();
+												  	$("li.dic-"+typeW).show();
 												  											  	
 														$.each(valD[1], function(keyM, valM) {
 																
-																$("li."+typeW+" ul").append('<li>'+ valM+'</li>');
+																$("li.dic-"+typeW+" ul").append('<li>'+ valM+'</li>');
 																													
 														});
-
-												  	
-												  			
-
 												  	
 												  });
-												  
-												  
-												  
-
+											  
 												} else {
 													
 												}
@@ -360,16 +339,8 @@ $(document).ready( function(){
 												//alert($translatedSentence);											
 												$("#dic-topResult").text($translatedSentence);
 
+												$("#dic-dicWrapper").show();
 												
-												//check if word is translated or not. if not giving back not translated word
-												if($userWord != $translatedSentence) {
-													
-												} else {
-		
-												}
-
-
-
 												
 											} else {
 											  //alert('not');

@@ -6,44 +6,26 @@
 	</ul>
 </div>
 
-<div id="dic-dicWrapper">
-	<span id="dic-translFor">boy</span>
+<div id="dic-dicWrapper" class="hide">
+	<div id="dic-translForWrapper">
+		<span class="dic-translForLabel"><?php __('translation for:');?></span>&nbsp;<span id="dic-translFor"></span>
+	</div>
 	<div id="dic-branding"></div>
 	
 	<div id="dic-topResult"></div>
 
 		<ul id="#dic-resTabs">
-			<li class="none dic-dicSwBase hide"><?php __('none');?><ul></ul></li>		
-			<li class="noun dic-dicSwBase hide"><?php __('Noun');?><ul></ul></li>
-			<li class="verb dic-dicSwBase hide"><?php __('Verb');?><ul></ul></li>
-			<li class="adjective dic-dicSwBase hide"><?php __('Adjec');?><ul></ul></li>			
-			<li class="adverb dic-dicSwBase hide"><?php __('Adverb');?><ul></ul></li>	
-			<li class="pronoun dic-dicSwBase hide"><?php __('Pronoun');?><ul></ul></li>
-			<li class="conjunction dic-dicSwBase hide"><?php __('Conjunction');?><ul></ul></li>
-			<li class="preposition dic-dicSwBase hide"><?php __('Preposition');?><ul></ul></li>
-			<li class="article dic-dicSwBase hide"><?php __('Article');?><ul></ul></li>
-			<li class="numeral dic-dicSwBase hide"><?php __('Numeral');?><ul></ul></li>	
-			<li class="suffix dic-dicSwBase hide"><?php __('Suffix');?><ul></ul></li>
+			<li class="dic-none dic-dicSwBase hide"><span class="dic-partOfSpeech"></span><ul></ul></li>		
+			<li class="dic-noun dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Noun');?></span><ul></ul></li>
+			<li class="dic-verb dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Verb');?></span><ul></ul></li>
+			<li class="dic-adjective dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Adjec');?></span><ul></ul></li>			
+			<li class="dic-adverb dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Adverb');?></span><ul></ul></li>	
+			<li class="dic-pronoun dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Pronoun');?></span><ul></ul></li>
+			<li class="dic-conjunction dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Conjunction');?></span><ul></ul></li>
+			<li class="dic-preposition dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Preposition');?></span><ul></ul></li>
+			<li class="dic-article dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Article');?></span><ul></ul></li>
+			<li class="dic-numeral dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Numeral');?></span><ul></ul></li>	
+			<li class="dic-suffix dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Suffix');?></span><ul></ul></li>
 		</ul>
-
-		<div class="dicTerms" style="float:left;">
-			<ul class="noneTerms"> </ul>
-      <ul class="nounTerms"> </ul>	
-      <ul class="verbTerms "> </ul>
-      <ul class="adjectiveTerms "> </ul>     
-      <ul class="adverbTerms "> </ul>
-      <ul class="pronounTerms "> </ul>
-      <ul class="conjunctionTerms "> </ul>
-      <ul class="prepositionTerms "> </ul>
-      <ul class="articleTerms "> </ul>
-      <ul class="numeralTerms "> </ul>	
-      <ul class="suffixTerms "> </ul>		
-		</div>
-
-
-
-
-
-
-	
+		
 </div>

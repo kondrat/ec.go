@@ -7,25 +7,44 @@
 	border-top:1px solid;
 	left:0;
 	position:absolute;
-	top:340px;
+	top:335px;
 	width:950px;
 }
 #dic-branding{
 	position:absolute;
-	top:5px;
-	right:0;
+	top:-50px;
+	right:0px;
+}
+#dic-translForWrapper{
+	margin:5px;
 }
 #dic-translFor{
 	background-color:Beige;
 }
+.dic-translForLabel{
+	color:gray;
+	border-bottom:1px dashed;
+}
 #dic-topResult{
+	font-size:large;
+	margin:10px 0 5px 10px;
 }
 #dic-resTabs{
 	margin: 0 0 .5em 0;
 }
 li.dic-dicSwBase{
-
+	max-width:180px;
 	list-style:none outside none;
 	color:gray;
 	float:left;
+}
+li.dic-dicSwBase ul{
+	margin-bottom:1em;
+	list-style:decimal outside none;
+}
+.dic-partOfSpeech{
+	color:#000000;
+	font-family:verdana,arial,serif;
+	font-style:italic;
+	margin:0 0 0 1em;
 }
