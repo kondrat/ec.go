@@ -8,7 +8,8 @@
 
 <div id="dic-dicWrapper" class="hide">
 	<div id="dic-translForWrapper">
-		<span class="dic-translForLabel"><?php __('translation for:');?></span>&nbsp;<span id="dic-translFor"></span>
+		<span id="dic-translFor"></span>
+		<span class="dic-sound" id="dic-playSound"></span>
 	</div>
 	<div id="dic-branding"></div>
 	

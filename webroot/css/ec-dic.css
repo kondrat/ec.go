@@ -16,15 +16,19 @@
 	right:0px;
 }
 #dic-translForWrapper{
-	margin:5px;
+	float:left;
+	width:950px;
 }
 #dic-translFor{
 	background-color:Beige;
+	color:DarkCyan;
+	float:left;
+	font-size:larger;
+	font-style:italic;
+	margin:10px 10px 0;
+	padding:0 3px;
 }
-.dic-translForLabel{
-	color:gray;
-	border-bottom:1px dashed;
-}
+
 #dic-topResult{
 	font-size:large;
 	margin:10px 0 5px 10px;
@@ -47,4 +51,22 @@ li.dic-dicSwBase ul{
 	font-family:verdana,arial,serif;
 	font-style:italic;
 	margin:0 0 0 1em;
+}
+
+.dic-sound{
+  width:24px;
+  height:24px;
+  display:block;
+  float:left;
+  background:transparent url(../img/icons/sounds.png) no-repeat scroll 0 0;
+  margin-top:7px;
+}
+.dic-activeSound{
+  background-position: 0 -32px;
+}
+.dic-activeSoundPlay{
+	background-position: 0 -64px;
+}
+.dic-activeSoundHover{
+		background-position: 0 -96px;
 }

@@ -246,14 +246,9 @@ $(document).ready( function(){
 			$(".dic-dicSwBase").hide();
 			$(".dic-dicSwBase ul li").remove();
 			$("#dic-topResult").text('');
-
-
-
 			
-	//trimm and check uesr word;		
-			//com.songWord = userWordLower;
-			
-			
+	// check uesr word;		
+						
 			//com.song = "http://www.gstatic.com/dictionary/static/sounds/de/0/"+com.songWord+".mp3";
 			
 				
@@ -360,18 +355,6 @@ $(document).ready( function(){
 		
 			return false;
 		});
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

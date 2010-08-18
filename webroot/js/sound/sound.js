@@ -17,7 +17,7 @@ $(document).ready( function(){
         
     $('#submitTranslId').click(function() {
          $("#playSound").removeClass("activeSound");
-					 var aSoundObject = soundManager.createSound({			
+					 var aSoundObject = soundManager.createSound({					 				
 					  id: 'mySound',
 					  url: com.song,
 					  autoLoad: false,
@@ -26,20 +26,13 @@ $(document).ready( function(){
 					  multiShotEvents:false,
 					  volume: 0,
 					  onload: function() {
-					    //alert( 'The sound '+this.sID+' loaded!');	
 					    if( this.readyState !== 3 ) {
 					    	sound.noSound = 0;
-					    	$(".wordToSound").text("No sound");
-					      this.destruct();
 					    } else {
-					    	//alert('sound');
-					      $("#playSound").removeClass("activeSoundPlay").addClass("activeSound");
 					      sound.noSound = 1;
-					      $(".wordToSound").text(com.songWord);
 					    }					
 					  },
 					  onfinish:function() {	
-					  	//$("#playSound").removeClass("activeSoundPlay").addClass("activeSound");
 					  	this.destruct();					  	
 					  }
 
@@ -57,7 +50,7 @@ $(document).ready( function(){
 					  	id: 'mySound',
 					  	url: com.song,
 						  onload: function() {
-						    //alert( 'The sound '+this.sID+' loaded!');	
+						    
 						    if( this.readyState !== 3 ) {
 						      this.destruct();
 						    } else {
