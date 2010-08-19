@@ -25,7 +25,7 @@
     (function($){
       $.event.special.click = {
         setup: function() {       	
-        	if( !$(this).hasClass("cardEditor") ) {
+        	if( !$(this).hasClass("dic-dicWrapper") ) {
           	$(this).css('cursor','pointer');
           }
           return false;

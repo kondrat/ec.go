@@ -6,14 +6,14 @@
 	</ul>
 </div>
 
-<div id="dic-dicWrapper" class="hide">
+<div id="dic-dicWrapper" class="dic-dicWrapper hide">
 	<div id="dic-translForWrapper">
 		<span id="dic-translFor"></span>
-		<span class="dic-sound" id="dic-playSound"></span>
+		<span class="dic-sound" id="dic-playSound" ></span>
 	</div>
 	<div id="dic-branding"></div>
 	
-	<div id="dic-topResult"></div>
+	<div id="dic-topResult" class="dic-res"></div>
 
 		<ul id="#dic-resTabs">
 			<li class="dic-none dic-dicSwBase hide"><span class="dic-partOfSpeech"></span><ul></ul></li>		

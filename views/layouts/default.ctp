@@ -66,6 +66,7 @@
 						<div class="span-16 ">
 							<div style="float:left;margin:0.8em 0 0 2em;">
 								<?php echo $html->link($html->image(
+																										//'pic/card2.png'
 																										'pic/ez-logo-24-dev.png'
 																										//'pic/ez-logo-50-w.png'
 																										//'pic/ez-logo-50-3.png'

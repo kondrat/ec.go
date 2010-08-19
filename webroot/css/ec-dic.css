@@ -9,6 +9,7 @@
 	position:absolute;
 	top:335px;
 	width:950px;
+	padding-bottom:0.5em;
 }
 #dic-branding{
 	position:absolute;
@@ -32,6 +33,13 @@
 #dic-topResult{
 	font-size:large;
 	margin:10px 0 5px 10px;
+}
+.dic-res{
+	cursor:pointer;
+	text-decoration:underline;
+}
+.dic-res:hover{
+	text-decoration:none;
 }
 #dic-resTabs{
 	margin: 0 0 .5em 0;

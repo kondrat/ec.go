@@ -311,7 +311,7 @@ $(document).ready( function(){
 												  											  	
 														$.each(valD[1], function(keyM, valM) {
 																
-																$("li.dic-"+typeW+" ul").append('<li>'+ valM+'</li>');
+																$("li.dic-"+typeW+" ul").append('<li class="dic-res">'+ valM+'</li>');
 																													
 														});
 												  	
@@ -340,7 +340,9 @@ $(document).ready( function(){
 											} else {
 											  //alert('not');
 											}					
-									
+											
+											//sliding up translate button
+											$com1_inBlTrWrap.slideUp();
 					      },
 					    error: function(e, xhr, settings, exception){
 					      alert('Problem with the server. Try again later.');
@@ -357,6 +359,9 @@ $(document).ready( function(){
 		});
 
 
+		$("#dic-dicWrapper").delegate(".dic-res","click",function(){
+			alert($(this).text());
+		});
 
 				
 });
