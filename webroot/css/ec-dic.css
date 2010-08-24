@@ -78,3 +78,16 @@ li.dic-dicSwBase ul{
 .dic-activeSoundHover{
 		background-position: 0 -96px;
 }
+
+.dic-insertIntoWrapper{
+	background-color:white;
+	border:1px solid;
+	height:40px;
+	left:300px;
+	position:absolute;
+	top:10px;
+	width:300px;
+}
+.dic-insertInto{
+	padding:5px 20px;
+}

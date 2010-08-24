@@ -11,11 +11,11 @@
 	
 		echo $html->meta('icon');
 		echo $html->css(array(
-													'ez',
+													'ec',
 													'ec-ce',
 													'ec-dic',
-													'lt',
-													'ez-u',
+													'ec-lt',
+													'ec-u',
 													'screen',
 													//'jqcss/css/smoothness/jquery-ui-1.8.2.custom'
 													)
@@ -24,7 +24,7 @@
 		//echo $html->css('print');
 		echo '<!--[if IE]>';
 		echo $html->css('ie');
-		echo $html->css('ez-ie');
+		echo $html->css('ec-ie');
 		echo '<![endif]-->';
 		$userReg = ($this->Session->read('Auth.User.id'))? 1:0;
 		echo $html->scriptBlock(

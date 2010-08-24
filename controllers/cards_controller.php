@@ -46,11 +46,11 @@ class CardsController extends AppController {
 				//main staff
 				
 				
-						$str= $this->data['Card']['ext'];
+						$str= $this->data['cardword'];
 						//google returning wrong json format: ,, instead of ,"",
 						$str = urlencode(str_replace(",,",",",$str));
-					 	$from=urlencode($this->data['Card']['langFrom']);
-					 	$to=urlencode($this->data['Card']['langTo']);
+					 	$from=urlencode($this->data['langFrom']);
+					 	$to=urlencode($this->data['langTo']);
 				    $userAgent = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2.1) Gecko/20021204";
          		 
         //$fpEr = fopen(dirname(__FILE__).'/errorlog.txt', 'w'); 

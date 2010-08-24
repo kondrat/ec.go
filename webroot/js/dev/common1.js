@@ -1,10 +1,9 @@
-
 $(document).ready( function(){
 		//test comment
 		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"ce-ins-1"});;
-		var $com1_mainWord =  $("#ce-ins-1");//.data({"tip":"Type main word in"});
-		var $com1_moreWord =  $("#ce-ins-2");//.data({"tip":"Type more info in"});
-		var $com1_translWord =  $("#ce-ins-3");//.data({"tip":"Type here a translation"});
+		var $com1_mainWord =  $("#ce-ins-1").data({"dicIns":"#ce-ins-3"});
+		var $com1_moreWord =  $("#ce-ins-2");//.data({"tip":"#ce-ins-1"});
+		var $com1_translWord =  $("#ce-ins-3").data({"dicIns":"Type here a translation"});
 		var $com1_exWord =  $("#ce-ins-4");//.data({"tip":"Type here a example"});
 		var $com1_defWord =  $("#ce-ins-5");//.data({"tip":"Type here a defenition"});
 		var $com1_synWord =  $("#ce-ins-6");//.data({"tip":"Type here a synonims"});
@@ -15,6 +14,9 @@ $(document).ready( function(){
 		var $com1_inStr = $("#ce-inStr");
 		//this block slides down with button "translate"
 		var $com1_inBlTrWrap = $("#ce-inBlTrWrap");
+		var $com1_langTo = "ru";
+		var $com1_langFrom = "en";
+		var $com1_insInAlert = $("#dic-insInAlert");
 
 		
 		$com1_cardEditor.hover(function(){
@@ -99,7 +101,7 @@ $(document).ready( function(){
 			
 			//set input line next to current line;		
 			var setTop = (posMainWord.top - cardEditorPos.top) + $thisLine.height() + 2; 
-			var setLeft = (posMainWord.left - cardEditorPos.left) - 25; 
+			var setLeft = (posMainWord.left - cardEditorPos.left) - 30; 
 			
 			$com1_inputBlock.css({"top":setTop,"left":setLeft}).show();//.find("input").val(inputTip);	
 
@@ -255,7 +257,7 @@ $(document).ready( function(){
 						$.ajax({
 							type: "POST",
 							url: path+"/cards/getTransl",
-							data: {"data[Card][ext]": $userWord, "data[Card][langFrom]" : "en", "data[Card][langTo]" : "ru" },
+							data: {"data[cardword]": $userWord, "data[langFrom]" : $com1_langFrom, "data[langTo]" : $com1_langTo },
 							dataType: "json",					
 					    success: function(data){
 											
@@ -360,8 +362,18 @@ $(document).ready( function(){
 
 
 		$("#dic-dicWrapper").delegate(".dic-res","click",function(){
-			alert($(this).text());
+			//alert($insInto);
+			$com1_insInAlert.show();
+			var $curLine = $com1_cardEditor.data("curLineId");
+			var $insInto = $("#"+$curLine).data("dicIns");
+
+			$($insInto).find("span.ce-insStrText").append('<span style="color:red;">'+$(this).text()+'</span>');
 		});
+
+		$("#ce-dicIns").click(function(){
+			$com1_insInAlert.hide();;
+		});
+
 
 				
 });
