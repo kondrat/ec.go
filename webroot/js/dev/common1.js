@@ -17,6 +17,8 @@ $(document).ready( function(){
 		var $com1_langTo = "ru";
 		var $com1_langFrom = "en";
 		var $com1_insInAlert = $("#dic-insInAlert");
+		var $com1_dicWrapper = $("#dic-dicWrapper");
+		var $com1_dicIns = $("#ce-dicIns");
 
 		
 		$com1_cardEditor.hover(function(){
@@ -103,7 +105,7 @@ $(document).ready( function(){
 			var setTop = (posMainWord.top - cardEditorPos.top) + $thisLine.height() + 2; 
 			var setLeft = (posMainWord.left - cardEditorPos.left) - 30; 
 			
-			$com1_inputBlock.css({"top":setTop,"left":setLeft}).show();//.find("input").val(inputTip);	
+			$com1_inputBlock.css({"top":setTop,"left":setLeft}).show();
 
 			
 			
@@ -333,10 +335,10 @@ $(document).ready( function(){
 														$translatedSentence += value[0];										
 												});	
 												
-												//alert($translatedSentence);											
+												
 												$("#dic-topResult").text($translatedSentence);
 
-												$("#dic-dicWrapper").show();
+												$com1_dicWrapper.show();
 												
 												
 											} else {
@@ -361,18 +363,61 @@ $(document).ready( function(){
 		});
 
 
-		$("#dic-dicWrapper").delegate(".dic-res","click",function(){
-			//alert($insInto);
-			$com1_insInAlert.show();
+		$com1_dicWrapper.delegate(".dic-res","click",function(e){
+			
+			if(e) e.stopPropagation();
+			if(e) e.preventDefault();	
+			
+			$com1_inputBlock.hide();
+			$("#ec-overlay").show();
+			var $thisLine = $(this);
+			
+			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
+			$thisLine.addClass("dic-resActive");
+			
+			//var dicPos = $com1_dicWrapper.offset();			
+			var insInAlertPos = $thisLine.offset();
+			
+			//set input line next to current line;
+		
+			//var setTop = (insInAlertPos.top - dicPos.top) + $thisLine.height() + 2; 
+			//var setLeft = (insInAlertPos.left - dicPos.left) - 50; 
+
+			
+			var setTop = (insInAlertPos.top) + $thisLine.height() - 70; 
+			var setLeft = (insInAlertPos.left) - 50; 			
+			//due to ie7
+			$com1_insInAlert.appendTo("body");
+			$com1_insInAlert.css({"top":setTop,"left":setLeft});
+			$com1_insInAlert.toggle();
+				
+
 			var $curLine = $com1_cardEditor.data("curLineId");
 			var $insInto = $("#"+$curLine).data("dicIns");
 
-			$($insInto).find("span.ce-insStrText").append('<span style="color:red;">'+$(this).text()+'</span>');
+			$($insInto).find("span.ce-insStrText").append('<span style="color:red;">'+$thisLine.text()+'</span>');
 		});
 
-		$("#ce-dicIns").click(function(){
-			$com1_insInAlert.hide();;
+
+	 	$com1_insInAlert.bind("clickoutside", function(){
+	 		
+	 		$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
+	 		
+	 		$(this).hide();
+	 		
+	 		$("#ec-overlay").hide();
+	 		
+	 	});
+
+		$com1_dicIns.click(function(){
+			//temp.  toDel
+			$com1_insInAlert.trigger("clickoutside");
 		});
+
+
+
+
+
 
 
 				

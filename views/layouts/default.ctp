@@ -40,6 +40,7 @@
 															//'jquery/jquery.ui.tabs.min',
 															'jquery/jquery.ui.mouse.min.js',
 															'jquery/jquery.ui.draggable.min',
+															'dev/jquery.ba-outside-events.min',
 															'dev/jquery.coloranim',
 															'dev/jquery.elastic',
 															'dev/func',
@@ -59,6 +60,7 @@
 
 </head>
 <body>
+	<div id="ec-overlay" class="hide"></div>
 	<div class="ec-pageHeader">
 
 			<div class="container">
@@ -125,5 +127,6 @@
 	</div>
 			
 	<?php //echo $this->element('sql_dump'); ?>
+	
 </body>
 </html>

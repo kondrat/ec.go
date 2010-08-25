@@ -2,6 +2,17 @@
  * ec- main set for default layout and so on
 */
 /*header*/
+#ec-overlay{
+	background-color:#CCCCCC;
+	height:100%;
+	left:0;
+	opacity:0;
+	filter: alpha(opacity = 0);
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:1002;	
+}
 .ec-pageHeader{
 	min-width:75em;
 	position: relative;
