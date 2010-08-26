@@ -60,7 +60,7 @@
 
 </head>
 <body>
-	<div id="ec-overlay" class="hide"></div>
+	<?php echo $this->element('popUpWrapper/popups');?>
 	<div class="ec-pageHeader">
 
 			<div class="container">

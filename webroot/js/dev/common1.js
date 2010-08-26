@@ -19,6 +19,7 @@ $(document).ready( function(){
 		var $com1_insInAlert = $("#dic-insInAlert");
 		var $com1_dicWrapper = $("#dic-dicWrapper");
 		var $com1_dicIns = $("#ce-dicIns");
+		var $com1_overlay = $("#ec-overlay");
 
 		
 		$com1_cardEditor.hover(function(){
@@ -40,16 +41,15 @@ $(document).ready( function(){
 
 		
 
-		
+		//this is a click on the fileds in the editior.
 		$com1_inlineMiddleDiv.click( function(){
 
 			
-			var $prevLineId = $com1_cardEditor.data("curLineId");
+			//treatment of the line which we has left.
 			
+			var $prevLineId = $com1_cardEditor.data("curLineId");			
 			
-			//$com1_inStr.css({"height":"20px"});
-
-	
+			//$com1_inStr.css({"height":"20px"});	
 			//.css({"color":"red"};
 
 			var $prevLine = $("#"+$prevLineId);
@@ -139,7 +139,7 @@ $(document).ready( function(){
 		  	}	
 		});
 		
-
+		//creating input string elastic whith the  plugin.
 		$com1_inStr.elastic();
 		
 		$com1_inStr.keyup( function() {									
@@ -151,7 +151,7 @@ $(document).ready( function(){
 		  			
 		  			var $curLineTipBlock = $curLine.find("span.ce-insStrTip");
 		  			//??
-		  			var $curLineTipBlockText = $curLineTipBlock.text();
+		  			//var $curLineTipBlockText = $curLineTipBlock.text();
 		  			
 		  			var inStrText = $.trim($com1_inStr.val());
 		  			
@@ -163,7 +163,8 @@ $(document).ready( function(){
 			  			$com1_inStr.removeClass("ce-inputTip");
 			  			$com1_inBlTrWrap.slideDown();
 			  		}
-		  							
+		  			
+		  			//printing the text from input to the correspondent line;				
 						$curLineTextBlock.text( inStrText );	  
 							
 							/*			
@@ -369,14 +370,29 @@ $(document).ready( function(){
 			if(e) e.preventDefault();	
 			
 			$com1_inputBlock.hide();
-			$("#ec-overlay").show();
+			$com1_overlay.show();
 			var $thisLine = $(this);
+			//$("#dic-dicWrapper").scrollTop(200);
+			//alert($thisLine.offset().top);
+			
+					 $("html:not(:animated),body:not(:animated)").animate(
+						{
+							scrollTop: $("body","html").offset().top
+						},
+						 500,
+						 function() {
+						 	//alert('compl');
+    					// Animation complete.
+  					}
+					);
+				
+
 			
 			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
 			$thisLine.addClass("dic-resActive");
 			
 			//var dicPos = $com1_dicWrapper.offset();			
-			var insInAlertPos = $thisLine.offset();
+			//var insInAlertPos = $thisLine.offset();
 			
 			//set input line next to current line;
 		
@@ -384,18 +400,19 @@ $(document).ready( function(){
 			//var setLeft = (insInAlertPos.left - dicPos.left) - 50; 
 
 			
-			var setTop = (insInAlertPos.top) + $thisLine.height() - 70; 
-			var setLeft = (insInAlertPos.left) - 50; 			
+			//var setTop = (insInAlertPos.top) + $thisLine.height() - 70; 
+			//var setLeft = (insInAlertPos.left) - 50; 			
 			//due to ie7
-			$com1_insInAlert.appendTo("body");
-			$com1_insInAlert.css({"top":setTop,"left":setLeft});
+			//$com1_insInAlert.appendTo("body");
+			//$com1_insInAlert.css({"top":setTop,"left":setLeft});
 			$com1_insInAlert.toggle();
 				
 
 			var $curLine = $com1_cardEditor.data("curLineId");
 			var $insInto = $("#"+$curLine).data("dicIns");
 
-			$($insInto).find("span.ce-insStrText").append('<span style="color:red;">'+$thisLine.text()+'</span>');
+			$($insInto).find("span.ce-insStrTip").hide().end().find("span.ce-insStrSug").html($thisLine.text());
+			
 		});
 
 
@@ -405,13 +422,14 @@ $(document).ready( function(){
 	 		
 	 		$(this).hide();
 	 		
-	 		$("#ec-overlay").hide();
+	 		$com1_overlay.hide();
 	 		
 	 	});
 
 		$com1_dicIns.click(function(){
 			//temp.  toDel
-			$com1_insInAlert.trigger("clickoutside");
+			$com1_insInAlert.hide();
+			$com1_overlay.hide();
 		});
 
 

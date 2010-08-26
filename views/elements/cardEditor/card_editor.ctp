@@ -1,8 +1,5 @@
 <div id="ce-cardEditor" class="ce-cardEditor">
 
-
-
-
 		
 		<div class="ce-cardPad">
 			<div class="ce-plusMenu">
@@ -31,8 +28,8 @@
 			<table class="ce-tableCard">
 				<tr><td>
 					<div class="ce-inlineMiddle">
-						<div id="ce-ins-3" class="ce-translWord"><span class="ce-insStrTip">Transl test</span><span class="ce-insStrText"></span></div>
-						<div id="ce-ins-4" class="ce-exWord hide" class="hide"><span class="ce-insStrPerf">[ex]</span><span class="ce-insStrTip">ex test</span><span class="ce-insStrText"></span></div>
+						<div id="ce-ins-3" class="ce-translWord"><span class="ce-insStrTip">Transl test</span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
+						<div id="ce-ins-4" class="ce-exWord hide" class="hide"><span class="ce-insStrPerf">[ex]</span><span class="ce-insStrTip">ex test</span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
 						<div id="ce-ins-5" class="ce-defWord hide" class="hide"><span class="ce-insStrPerf">[def]</span><span class="ce-insStrTip">def test</span><span class="ce-insStrText"></span></div>
 						<div id="ce-ins-6" class="ce-synWord hide" class="hide"><span class="ce-insStrPerf">[syn]</span><span class="ce-insStrTip">syn test</span><span class="ce-insStrText"></span></div>
 					</div>

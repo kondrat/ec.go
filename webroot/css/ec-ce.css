@@ -95,7 +95,10 @@ div.ce-cardEditorActive {
 	font-style:normal;
 	margin:0 5px 0 3px;
 }
-
+.ce-insStrSug{
+	color:red;
+	margin-left:.4em;
+}
 
 
 /*
@@ -115,18 +118,13 @@ div.ce-cardEditorActive {
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	border:1px solid #DDDDDD;
-	padding:3px 15px;	
+	padding:3px 90px 3px 15px;	
 }
 #ce-inputBlock div.ce-inputBlockCtrl{
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background-color:NavajoWhite;
-	border:1px solid #DDDDDD;
-	position:absolute;
-	right:0;
 	margin-top:2px;
-	padding:3px 7px;
+	position:absolute;
+	right:10px;
+	top:10px;
 }
 #ce-inputBlock div.ce-inputBlockTransl{
 	-webkit-border-radius: 5px;
