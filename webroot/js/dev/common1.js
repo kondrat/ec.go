@@ -42,8 +42,8 @@ $(document).ready( function(){
 		
 
 		//this is a click on the fileds in the editior.
+		
 		$com1_inlineMiddleDiv.click( function(){
-
 			
 			//treatment of the line which we has left.
 			
@@ -102,10 +102,11 @@ $(document).ready( function(){
 			var posMainWord = $thisLine.offset();
 			
 			//set input line next to current line;		
-			var setTop = (posMainWord.top - cardEditorPos.top) + $thisLine.height() + 2; 
+			//var setTop = (posMainWord.top - cardEditorPos.top) + $thisLine.height() + 2; 
 			var setLeft = (posMainWord.left - cardEditorPos.left) - 30; 
 			
-			$com1_inputBlock.css({"top":setTop,"left":setLeft}).show();
+			$com1_inputBlock.css({"left":setLeft}).show();
+			//$com1_inputBlock.show();
 
 			
 			

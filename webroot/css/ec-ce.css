@@ -107,7 +107,7 @@ div.ce-cardEditorActive {
 
 #ce-inputBlock{
 	position:absolute;
-	top:0;
+	top:175px;
 	left:0;
 
 }
@@ -152,6 +152,7 @@ div.ce-cardEditorActive {
  */
 .ce-inputTip{
 	color:gray;
+	font-style:italic;
 }
 .ce-currentLine{
 	background-color:#ddd;
