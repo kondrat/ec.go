@@ -35,6 +35,9 @@ div.ce-cardEditorActive {
 .ce-plusMenu span.ce-plusMenuActive{
 	color:#ff9900;
 }
+.ce-plusMenu span.ce-plusMenuHover{
+	color:red;
+}
 .ce-plusMenu span:hover{
 	color:#ff9900;
 }

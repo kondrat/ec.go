@@ -31,10 +31,16 @@ $(document).ready( function(){
 
 		
 		$com1_inlineMiddleDiv.hover(function(){
-			$(this).addClass("ce-currentLineActive");
+			
+			var $thisLine = $(this);
+			var $thisLineId = $thisLine.attr("id");
+			$(this).addClass("ce-currentLineActive");	
+			$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuHover");
+			
 		},
 		function(){
 			$(this).removeClass("ce-currentLineActive");
+			$com1_plusMenu.removeClass("ce-plusMenuHover");
 		});
 
 
