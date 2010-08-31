@@ -112,6 +112,7 @@
 		    </div>
 	
 	</div>
+	
 	<div class="ec-pageFooter" style="">
 			<div class="container">
 				<div class="span-24">

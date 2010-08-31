@@ -80,7 +80,6 @@ li.dic-dicSwBase ul{
 }
 
 .dic-insertIntoWrapper{
-	-moz-border-radius:10px;
 	background:transparent url(../img/pic/aaaaaa_40x100.png) scroll 0 0;
 	left:550px;
 	position:absolute;
@@ -88,12 +87,21 @@ li.dic-dicSwBase ul{
 	width:300px;
 	padding:5px;
 	z-index:1027;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	/*behavior: url(./css/border-radius.htc);*/
 }
-.dic-insertInto{
-	-moz-border-radius:6px 6px 6px 6px;
+.dic-insertInto{	
 	padding:5px 20px;
 	background-color:#FFFFC6;
 	border:1px solid #aaaaaa;
+
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	/*behavior: url(./css/border-radius.htc);*/
 }
 .dic-resActive{
 	color:blue;

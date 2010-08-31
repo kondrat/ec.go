@@ -102,8 +102,11 @@ div.ce-cardEditorActive {
 	color:red;
 	margin-left:.4em;
 }
-
-
+.ce-insStrTip{
+	color:#aaa;
+	font-family:Times New Roman;
+	font-style:italic;
+}
 /*
  * Input block: moving input field
  */
@@ -112,16 +115,24 @@ div.ce-cardEditorActive {
 	position:absolute;
 	top:175px;
 	left:0;
+	background:transparent url(../img/pic/aaaaaa_40x100.png) scroll 0 0;
+	padding:5px;
 
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	/*behavior: url(./css/border-radius.htc);*/	
 }
 #ce-inputBlock div.ce-inputBlockMain {
 	background-color:#FF9900;
 	background:-moz-linear-gradient(center top , #FF9900, white 140%) repeat scroll 0 0 #FF9900;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	border:1px solid #DDDDDD;
-	padding:3px 90px 3px 15px;	
+	border:1px solid #aaa;
+	padding:3px 90px 3px 15px;
+	
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	/*behavior: url(./css/border-radius.htc);*/	
 }
 #ce-inputBlock div.ce-inputBlockCtrl{
 	margin-top:2px;
@@ -130,26 +141,58 @@ div.ce-cardEditorActive {
 	top:10px;
 }
 #ce-inputBlock div.ce-inputBlockTransl{
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
 	background-color:NavajoWhite;
 	border:1px solid #DDDDDD;
 	position:absolute;
-	left:0;
-	margin-top:2px;
+	left:6px;
+	margin-top:6px;
 	padding:3px 7px;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	/*behavior: url(./css/border-radius.htc);*/
 }
 
 
 .ce-inputString {
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
 	padding:3px;
 	width:285px;
 	height:10px;
+		
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	/*behavior: url(./css/border-radius.htc);*/
 }
+
+#ce-saveCardWrapper{
+	background:url("../img/pic/aaaaaa_40x100.png") repeat scroll 0 0 transparent;
+	bottom:100px;
+	padding:5px;
+	position:absolute;
+	right:297px;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	/*behavior: url(./css/border-radius.htc);*/
+}
+.ce-saveCard{
+	background-color:red;
+	border:1px solid #aaa;
+	padding:3px;
+	
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	/*behavior: url(./css/border-radius.htc);*/	
+}
+/*chech ie.css file*/
+.ce-saveCard button{
+	top:0;
+}
+
 /*
  * decoration classes from JS only.
  */

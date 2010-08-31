@@ -8,7 +8,7 @@
 			<table class="ce-tableCard">
 				<tr><td>
 					<div class="ce-inlineMiddle">
-						<div id="ce-ins-1" class="ce-mainWord"><span class="ce-insStrTip">Word test</span><span class="ce-insStrText"></span></div>
+						<div id="ce-ins-1" class="ce-mainWord hide"><span class="ce-insStrTip"><?php __('Your word...');?></span><span class="ce-insStrText"></span></div>
 						<div id="ce-ins-2" class="ce-moreWord hide"><span class="ce-insStrPerf">[info]</span><span class="ce-insStrTip">more test</span><span class="ce-insStrText"></span></div>
 					</div>
 				</tr></td>
@@ -28,7 +28,7 @@
 			<table class="ce-tableCard">
 				<tr><td>
 					<div class="ce-inlineMiddle">
-						<div id="ce-ins-3" class="ce-translWord"><span class="ce-insStrTip">Transl test</span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
+						<div id="ce-ins-3" class="ce-translWord hide"><span class="ce-insStrTip">Transl test</span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
 						<div id="ce-ins-4" class="ce-exWord hide" class="hide"><span class="ce-insStrPerf">[ex]</span><span class="ce-insStrTip">ex test</span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
 						<div id="ce-ins-5" class="ce-defWord hide" class="hide"><span class="ce-insStrPerf">[def]</span><span class="ce-insStrTip">def test</span><span class="ce-insStrText"></span></div>
 						<div id="ce-ins-6" class="ce-synWord hide" class="hide"><span class="ce-insStrPerf">[syn]</span><span class="ce-insStrTip">syn test</span><span class="ce-insStrText"></span></div>
@@ -59,10 +59,11 @@
 		<div id="ce-inBlTrWrap" class="ce-inputBlockTransl hide">
 			<a id="ce-inpBlTr" href="javascript:;" class="ec-but-minibutton"><span><?php __('Translate');?></span></a>
 			<span style="color:brown;font-weight:bold;">en</span> &raquo; <span style="color:green;font-weight:bold;">ru</span>
-		</div>
-
-
-	
+		</div>	
 	</div>	
-	
+	<div id="ce-saveCardWrapper">
+		<div class="ce-saveCard">
+			<?php echo $form->button(__('Save',true), array('id'=>'ce-saveCardBtn','disabled'=>'disabled') );?>
+		</div>
+	</div>
 </div>

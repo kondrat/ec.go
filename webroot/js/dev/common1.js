@@ -21,6 +21,16 @@ $(document).ready( function(){
 		var $com1_dicIns = $("#ce-dicIns");
 		var $com1_overlay = $("#ec-overlay");
 
+
+		//if($com1_inputBlock.is(":hidden") ) {
+			var $com1_timerInputStr = window.setTimeout(
+				function(){
+					$com1_mainWord.trigger("click");
+				},
+				3000
+			);
+		//}
+
 		
 		$com1_cardEditor.hover(function(){
 			$(this).addClass("ce-cardEditorActive");
@@ -59,16 +69,18 @@ $(document).ready( function(){
 			//.css({"color":"red"};
 
 			var $prevLine = $("#"+$prevLineId);
-
+			//alert($prevLineId);
 			var $prevTextBlock = $prevLine.find("span.ce-insStrText");
 		
 			var $prevText = $.trim($prevTextBlock.text());
 			
 			if( $prevText === '') {					
-						$prevTextBlock.prev().show();						
-					 	if(	$prevLine.children().hasClass("ce-insStrPerf") ) {
-							$prevLine.hide();
-						}										
+						$prevTextBlock.prev().show();
+						$prevLine.hide();	
+						/*					
+					 	if(	$prevLine.children().hasClass("ce-insStrPerf") ) {						
+						}			
+						*/						
 			} else {
 				$prevTextBlock.prev().hide();
 			}					
@@ -82,6 +94,7 @@ $(document).ready( function(){
 			var $thisTextBlock = $thisLine.find("span.ce-insStrText");
 			var $thisTipBlock = $thisTextBlock.prev();			
 			var $thisText = $.trim($thisTextBlock.text());
+			
 			//var $thisLineHeight = $thisLine.height();
 			
 			$thisLine.show();
@@ -95,7 +108,8 @@ $(document).ready( function(){
 			} else {
 				$thisTipBlock.hide();
 				$com1_inStr.removeClass("ce-inputTip");
-				$com1_inStr.val($thisText).focus();
+				//console.log('con log '+$thisText);
+				$com1_inStr.focus().val($thisText);
 				$com1_inBlTrWrap.slideDown();
 			}					
 	
@@ -129,6 +143,7 @@ $(document).ready( function(){
 
 	
 		$com1_plusMenu.click(function(){
+			clearTimeout($com1_timerInputStr);
 			var $this = $(this);
 			var insId = $this.attr("id").replace("ce-plus-ins-","");
 			if(typeof(insId) !== "undefined") {
@@ -143,6 +158,7 @@ $(document).ready( function(){
 		  	var $curLineTextBlockText = $("#"+$curLineId).find("span.ce-insStrText");
 		  	if( $curLineTextBlockText.text() === '' ) {
 		  		$(this).val('');
+		  		//$curLineTextBlockText.prev().hide().end().show().text('/');
 		  	}	
 		});
 		
@@ -205,7 +221,18 @@ $(document).ready( function(){
 
 		
 		$("#ce-inpBlOk").click(function(){
+			
+			var $curLineId = $com1_cardEditor.data("curLineId");
+		  var $curLineTextBlockText = $("#"+$curLineId).find("span.ce-insStrText");
+		  
+		  if( $curLineTextBlockText.text() === '' ) {
+		  	$(this).val('');
+		  }	
+		  			
 			$com1_inputBlock.hide();
+			$com1_inlineMiddleDiv.removeClass("ce-currentLine");
+			$com1_plusMenu.removeClass("ce-plusMenuActive");
+			
 		});
 
 		
@@ -438,11 +465,6 @@ $(document).ready( function(){
 			$com1_insInAlert.hide();
 			$com1_overlay.hide();
 		});
-
-
-
-
-
 
 
 				
