@@ -20,6 +20,8 @@ $(document).ready( function(){
 		var $com1_dicWrapper = $("#dic-dicWrapper");
 		var $com1_dicIns = $("#ce-dicIns");
 		var $com1_overlay = $("#ec-overlay");
+		var $com1_saveCardBtn = $("#ce-saveCardBtn");
+		var $com1_inpBlOk = $("#ce-inpBlOk");
 
 
 		//if($com1_inputBlock.is(":hidden") ) {
@@ -30,6 +32,27 @@ $(document).ready( function(){
 				3000
 			);
 		//}
+
+		var cardDataLookUp = function(){
+			var $res = '';
+			$com1_inlineMiddleDiv.each(function(){				
+				var $thisLine = $(this);				
+				if($thisLine.find("span.ce-insStrText").text() !== '' ) {
+					$res = '1';
+					return false; 
+				}			
+			});
+			
+			if($res !== ''){
+				$com1_saveCardBtn.attr("disabled",false);
+			}else{
+				$com1_saveCardBtn.attr("disabled","disabled");
+			}
+		
+		}
+
+
+
 
 		
 		$com1_cardEditor.hover(function(){
@@ -60,6 +83,8 @@ $(document).ready( function(){
 		//this is a click on the fileds in the editior.
 		
 		$com1_inlineMiddleDiv.click( function(){
+			//disable save button
+			$com1_saveCardBtn.attr("disabled","disabled");
 			
 			//treatment of the line which we has left.
 			
@@ -135,7 +160,7 @@ $(document).ready( function(){
 			$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuActive");
 			
 			
-
+			
 		
 		});
 
@@ -220,7 +245,7 @@ $(document).ready( function(){
 
 
 		
-		$("#ce-inpBlOk").click(function(){
+		$com1_inpBlOk.click(function(){
 			
 			var $curLineId = $com1_cardEditor.data("curLineId");
 		  var $curLineTextBlockText = $("#"+$curLineId).find("span.ce-insStrText");
@@ -233,6 +258,8 @@ $(document).ready( function(){
 			$com1_inlineMiddleDiv.removeClass("ce-currentLine");
 			$com1_plusMenu.removeClass("ce-plusMenuActive");
 			
+			$com1_saveCardBtn.attr("disabled",false);
+			cardDataLookUp();
 		});
 
 		
@@ -260,7 +287,60 @@ $(document).ready( function(){
 
 
 
+		//saving of the card
+    $("#saveCardMain").click(function(){
 
+    	
+	    var cardObj = {
+	    								//"data[Theme][id]": themeName.data('id'),
+	    								//"data[Theme][theme]": themeName.data('theme'),
+	    								"data[Card][word]": com1.mainWord.text(),
+	    								"data[Card][more]": com1.mainMore.text(),
+	    								"data[Card][tr]": com1.wordTran.text(),
+	    								"data[Card][ex]": com1.exTran.text(),
+	    								"data[Card][def]": com1.defTran.text(),
+	    								"data[Card][syn]": com1.synTran.text() 
+	    							};
+    							
+      $.ajax({
+        type: "POST",
+        url: path+"/cards/saveCard",
+        dataType: "json",
+        data: cardObj,
+        success: function(data) {
+        	
+					
+					
+        	if ( data.stat === 1 ) {        		
+          	$('.newCards').prepend('<li></li>').find('li:first').text(data.word).data(cardObj).css({'color':'red'}).next().css({'color':'blue'});
+          	
+          	$('#mainWord,#wordTran,#exTran span:last,#defTran span:last,#synTran span:last').empty();
+          	com1.cardExt.val('');
+          	
+			 			$(".additionalRes").hide();
+						$(".dicTerms ul").empty().addClass("hide");
+						$("ul.rSugTabs li").removeClass("dicSwitcherM dicActive"); 
+						
+					
+						com1.hideArrow.hide().removeClass("hideArrowL hideArrowR");	
+							
+						if (data.theme){
+							themeName.data('id',data.themeId);
+							themeName.data('theme',data.themeName);
+						}												        	
+          	flash_message('saved','flok');
+          	
+          } else {
+          	
+          }
+          
+          
+        },
+        error: function(){
+            alert('Problem with the server. Try again later.');
+        }
+      });
+    });		
 
 
 
@@ -465,6 +545,10 @@ $(document).ready( function(){
 			$com1_insInAlert.hide();
 			$com1_overlay.hide();
 		});
+
+
+
+
 
 
 				
