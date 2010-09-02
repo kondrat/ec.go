@@ -30,15 +30,16 @@ div.ce-cardEditorActive {
 	color:gray;
 	font-weight:bold;
 	margin-left:1em;
+	border-bottom:3px solid white;
 }
 .ce-plusMenu span.ce-plusMenuActive{
 	color:#ff9900;
 }
 .ce-plusMenu span.ce-plusMenuHover{
-	color:#ff9900;
+	border-color:#aaa;
 }
 .ce-plusMenu span:hover{
-	color:#ff9900;
+	border-color:#ff9900;
 }
 
 

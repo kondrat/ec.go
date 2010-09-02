@@ -64,14 +64,13 @@ $(document).ready( function(){
 
 		
 		$com1_inlineMiddleDiv.hover(function(){
-			
 			var $thisLine = $(this);
 			var $thisLineId = $thisLine.attr("id");
 			$(this).addClass("ce-currentLineActive");	
 			$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuHover");
 			
 		},
-		function(){
+		function(){			
 			$(this).removeClass("ce-currentLineActive");
 			$com1_plusMenu.removeClass("ce-plusMenuHover");
 		});
@@ -83,16 +82,17 @@ $(document).ready( function(){
 		//this is a click on the fileds in the editior.
 		
 		$com1_inlineMiddleDiv.click( function(){
+			
 			//disable save button
 			$com1_saveCardBtn.attr("disabled","disabled");
 			
+
+			
 			//treatment of the line which we has left.
 			
-			var $prevLineId = $com1_cardEditor.data("curLineId");			
-			
+			var $prevLineId = $com1_cardEditor.data("curLineId");						
 			//$com1_inStr.css({"height":"20px"});	
 			//.css({"color":"red"};
-
 			var $prevLine = $("#"+$prevLineId);
 			//alert($prevLineId);
 			var $prevTextBlock = $prevLine.find("span.ce-insStrText");
@@ -143,15 +143,7 @@ $(document).ready( function(){
 
 			$com1_cardEditor.data("curLineId",$thisLineId);
 					
-			var cardEditorPos = $com1_cardEditor.offset();			
-			var posMainWord = $thisLine.offset();
-			
-			//set input line next to current line;		
-			//var setTop = (posMainWord.top - cardEditorPos.top) + $thisLine.height() + 2; 
-			var setLeft = (posMainWord.left - cardEditorPos.left) - 30; 
-			
-			$com1_inputBlock.css({"left":setLeft}).show();
-			//$com1_inputBlock.show();
+
 
 			
 			
@@ -160,7 +152,31 @@ $(document).ready( function(){
 			$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuActive");
 			
 			
+			$com1_inputBlock.hide();
+			//function(){
+					var cardEditorPos = $com1_cardEditor.offset();			
+					var posMainWord = $thisLine.offset();
+					
+					//set input line next to current line;		
+					var setTop = (posMainWord.top - cardEditorPos.top) + $thisLine.height() + 2; 
+					var setLeft = (posMainWord.left - cardEditorPos.left) - 30; 
+					
+					$com1_inputBlock.css({"left":setLeft,"top":setTop});
+					$com1_inputBlock.show();
+					var timer = window.setTimeout(function(){	
+						 $com1_inputBlock.animate(
+							 	{					    
+							    top: '175'
+							  },
+							 	500,
+							 	function() {
+							    // Animation complete.
+							  }
+						 );
+						},500
+					)
 			
+			//});			
 		
 		});
 
@@ -251,14 +267,13 @@ $(document).ready( function(){
 		  var $curLineTextBlockText = $("#"+$curLineId).find("span.ce-insStrText");
 		  
 		  if( $curLineTextBlockText.text() === '' ) {
-		  	$(this).val('');
+		  	$("#"+$curLineId).hide();
 		  }	
 		  			
 			$com1_inputBlock.hide();
 			$com1_inlineMiddleDiv.removeClass("ce-currentLine");
 			$com1_plusMenu.removeClass("ce-plusMenuActive");
 			
-			$com1_saveCardBtn.attr("disabled",false);
 			cardDataLookUp();
 		});
 
