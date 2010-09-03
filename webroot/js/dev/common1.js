@@ -1,6 +1,6 @@
 $(document).ready( function(){
 		//test comment
-		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"ce-ins-1"});;
+		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"1"});;
 		var $com1_mainWord =  $("#ce-ins-1").data({"dicIns":"#ce-ins-3"});
 		var $com1_moreWord =  $("#ce-ins-2");//.data({"tip":"#ce-ins-1"});
 		var $com1_translWord =  $("#ce-ins-3").data({"dicIns":"Type here a translation"});
@@ -54,7 +54,7 @@ $(document).ready( function(){
 
 
 
-		
+		//?? toDel??
 		$com1_cardEditor.hover(function(){
 			$(this).addClass("ce-cardEditorActive");
 		},
@@ -66,16 +66,29 @@ $(document).ready( function(){
 		$com1_inlineMiddleDiv.hover(function(){
 			var $thisLine = $(this);
 			var $thisLineId = $thisLine.attr("id");
+			//cur line
 			$(this).addClass("ce-currentLineActive");	
-			$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuHover");
+			//menu
+			if($thisLineId !== ("ce-ins-")+$com1_cardEditor.data("curLineId") ) {
+				$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuHover");
+			}
 			
 		},
-		function(){			
+		function(){	
+			//cur line		
 			$(this).removeClass("ce-currentLineActive");
+			//menu
 			$com1_plusMenu.removeClass("ce-plusMenuHover");
 		});
 
-
+		$com1_plusMenu.hover(function(){
+			$thisLine = $(this);
+			if( !$thisLine.hasClass("ce-plusMenuActive") ){
+				$thisLine.addClass("ce-plusMenuHover");
+			}
+		},function(){
+			$thisLine.removeClass("ce-plusMenuHover");
+		});
 
 		
 
@@ -93,15 +106,14 @@ $(document).ready( function(){
 			var $prevLineId = $com1_cardEditor.data("curLineId");						
 			//$com1_inStr.css({"height":"20px"});	
 			//.css({"color":"red"};
-			var $prevLine = $("#"+$prevLineId);
-			//alert($prevLineId);
+			var $prevLine = $("#ce-ins-"+$prevLineId);
 			var $prevTextBlock = $prevLine.find("span.ce-insStrText");
 		
 			var $prevText = $.trim($prevTextBlock.text());
 			
 			if( $prevText === '') {					
 						$prevTextBlock.prev().show();
-						$prevLine.hide();	
+						$prevLine.fadeOut();	
 						/*					
 					 	if(	$prevLine.children().hasClass("ce-insStrPerf") ) {						
 						}			
@@ -133,7 +145,6 @@ $(document).ready( function(){
 			} else {
 				$thisTipBlock.hide();
 				$com1_inStr.removeClass("ce-inputTip");
-				//console.log('con log '+$thisText);
 				$com1_inStr.focus().val($thisText);
 				$com1_inBlTrWrap.slideDown();
 			}					
@@ -141,7 +152,7 @@ $(document).ready( function(){
 			$thisLine.addClass("ce-currentLine");
 
 
-			$com1_cardEditor.data("curLineId",$thisLineId);
+			$com1_cardEditor.data("curLineId",$thisLineId.replace("ce-ins-",""));
 					
 
 
@@ -162,7 +173,7 @@ $(document).ready( function(){
 					var setLeft = (posMainWord.left - cardEditorPos.left) - 30; 
 					
 					$com1_inputBlock.css({"left":setLeft,"top":setTop});
-					$com1_inputBlock.show();
+					$com1_inputBlock.show().addClass("ce-inputStringDisabled");
 					var timer = window.setTimeout(function(){	
 						 $com1_inputBlock.animate(
 							 	{					    
@@ -170,7 +181,8 @@ $(document).ready( function(){
 							  },
 							 	500,
 							 	function() {
-							    // Animation complete.
+							    $com1_inputBlock.removeClass("ce-inputStringDisabled");
+							    $com1_inStr.attr("disabled",false).focus();
 							  }
 						 );
 						},500
@@ -196,7 +208,7 @@ $(document).ready( function(){
 
 		$com1_inStr.focus(function(){
 		  	var $curLineId = $com1_cardEditor.data("curLineId");
-		  	var $curLineTextBlockText = $("#"+$curLineId).find("span.ce-insStrText");
+		  	var $curLineTextBlockText = $("#ce-ins-"+$curLineId).find("span.ce-insStrText");
 		  	if( $curLineTextBlockText.text() === '' ) {
 		  		$(this).val('');
 		  		//$curLineTextBlockText.prev().hide().end().show().text('/');
@@ -210,7 +222,7 @@ $(document).ready( function(){
 			
 		  			//getting string from input and putting it in corresopndent card line	
 		  			var $curLineId = $com1_cardEditor.data("curLineId");
-		  			var $curLine = $("#"+$curLineId);
+		  			var $curLine = $("#ce-ins-"+$curLineId);
 		  			var $curLineTextBlock = $curLine.find("span.ce-insStrText");
 		  			
 		  			var $curLineTipBlock = $curLine.find("span.ce-insStrTip");
@@ -264,10 +276,10 @@ $(document).ready( function(){
 		$com1_inpBlOk.click(function(){
 			
 			var $curLineId = $com1_cardEditor.data("curLineId");
-		  var $curLineTextBlockText = $("#"+$curLineId).find("span.ce-insStrText");
+		  var $curLineTextBlockText = $("#ce-ins-"+$curLineId).find("span.ce-insStrText");
 		  
 		  if( $curLineTextBlockText.text() === '' ) {
-		  	$("#"+$curLineId).hide();
+		  	$("#ce-ins-"+$curLineId).fadeOut();
 		  }	
 		  			
 			$com1_inputBlock.hide();
@@ -538,7 +550,7 @@ $(document).ready( function(){
 				
 
 			var $curLine = $com1_cardEditor.data("curLineId");
-			var $insInto = $("#"+$curLine).data("dicIns");
+			var $insInto = $("#ce-ins-"+$curLine).data("dicIns");
 
 			$($insInto).find("span.ce-insStrTip").hide().end().find("span.ce-insStrSug").html($thisLine.text());
 			

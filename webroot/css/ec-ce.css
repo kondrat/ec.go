@@ -38,9 +38,7 @@ div.ce-cardEditorActive {
 .ce-plusMenu span.ce-plusMenuHover{
 	border-color:#aaa;
 }
-.ce-plusMenu span:hover{
-	border-color:#ff9900;
-}
+
 
 
 
@@ -103,8 +101,7 @@ div.ce-cardEditorActive {
 	margin-left:.4em;
 }
 .ce-insStrTip{
-	color:#aaa;
-	font-family:Times New Roman;
+	color:#f00;
 	font-style:italic;
 }
 /*
@@ -156,7 +153,8 @@ div.ce-cardEditorActive {
 
 
 .ce-inputString {
-	padding:3px;
+	padding:5px;
+	margin:5px 0;
 	width:285px;
 	height:10px;
 		
@@ -166,12 +164,19 @@ div.ce-cardEditorActive {
 	/*behavior: url(./css/border-radius.htc);*/
 }
 
+.ce-inputStringDisabled{
+	
+}
+.ce-inputStringDisabled textarea{
+	color:red;
+	background-color:LemonChiffon;
+}
 #ce-saveCardWrapper{
 	background:url("../img/pic/aaaaaa_40x100.png") repeat scroll 0 0 transparent;
-	bottom:220px;
+	bottom:150px;
 	padding:3px;
 	position:absolute;
-	right:297px;
+	right:300px;
 	
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;

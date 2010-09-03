@@ -28,7 +28,7 @@
 			<table class="ce-tableCard">
 				<tr><td>
 					<div class="ce-inlineMiddle">
-						<div id="ce-ins-3" class="ce-translWord hide"><span class="ce-insStrTip">Transl test</span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
+						<div id="ce-ins-3" class="ce-translWord hide"><span class="ce-insStrTip"><?php __('Translation');?></span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
 						<div id="ce-ins-4" class="ce-exWord hide" class="hide"><span class="ce-insStrPerf">[ex]</span><span class="ce-insStrTip">ex test</span><span class="ce-insStrText"></span><span class="ce-insStrSug"></span></div>
 						<div id="ce-ins-5" class="ce-defWord hide" class="hide"><span class="ce-insStrPerf">[def]</span><span class="ce-insStrTip">def test</span><span class="ce-insStrText"></span></div>
 						<div id="ce-ins-6" class="ce-synWord hide" class="hide"><span class="ce-insStrPerf">[syn]</span><span class="ce-insStrTip">syn test</span><span class="ce-insStrText"></span></div>
@@ -48,12 +48,12 @@
 
 	<div id="ce-inputBlock" class="hide">
 		<div class="ce-inputBlockMain">
-			<?php echo $form->textarea('inStr',array('id'=>'ce-inStr','label'=>false,'div'=>false,'class'=>'ce-inputString'));?>
+			<?php echo $form->textarea('inStr',array('id'=>'ce-inStr','label'=>false,'div'=>false,'class'=>'ce-inputString','disabled'=>'disabled'));?>
 		</div>
 		<div class="ce-inputBlockCtrl">
 			<a id="ce-inpBlOk" href="javascript:;" class="ec-but-minibutton"><span><?php __('Ok');?></span></a>
 			<?php //echo $form->button('save',array('id'=>'ce-inpBlSave','class'=>'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'));?>
-			<?php //echo $form->button(__('Ok',true),array('id'=>'ce-inpBlSave','class'=>''));?>
+			<?php //echo $form->button(__('Ok',true),array('id'=>'ce-inpBlOk','class'=>''));?>
 			<?php echo $html->link(__('Clear',true),array("#"),array('id'=>'ce-inpBlClear') );?>
 		</div>
 		<div id="ce-inBlTrWrap" class="ce-inputBlockTransl hide">
