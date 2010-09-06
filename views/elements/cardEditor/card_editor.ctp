@@ -51,10 +51,10 @@
 			<?php echo $form->textarea('inStr',array('id'=>'ce-inStr','label'=>false,'div'=>false,'class'=>'ce-inputString','disabled'=>'disabled'));?>
 		</div>
 		<div class="ce-inputBlockCtrl">
-			<a id="ce-inpBlOk" href="javascript:;" class="ec-but-minibutton"><span><?php __('Ok');?></span></a>
+			<a id="ce-inpBlOk" href="javascript:;" class="ec-but-minibutton"><span><?php __('X');?></span></a>
 			<?php //echo $form->button('save',array('id'=>'ce-inpBlSave','class'=>'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'));?>
 			<?php //echo $form->button(__('Ok',true),array('id'=>'ce-inpBlOk','class'=>''));?>
-			<?php echo $html->link(__('Clear',true),array("#"),array('id'=>'ce-inpBlClear') );?>
+			<?php //echo $html->link(__('Clear',true),array("#"),array('id'=>'ce-inpBlClear') );?>
 		</div>
 		<div id="ce-inBlTrWrap" class="ce-inputBlockTransl hide">
 			<a id="ce-inpBlTr" href="javascript:;" class="ec-but-minibutton"><span><?php __('Translate');?></span></a>

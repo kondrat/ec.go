@@ -22,6 +22,7 @@ $(document).ready( function(){
 		var $com1_overlay = $("#ec-overlay");
 		var $com1_saveCardBtn = $("#ce-saveCardBtn");
 		var $com1_inpBlOk = $("#ce-inpBlOk");
+		var $com1_dicWrapperCtrl = $("#dic-dicWrapperCtrl");
 
 
 		//if($com1_inputBlock.is(":hidden") ) {
@@ -67,18 +68,20 @@ $(document).ready( function(){
 			var $thisLine = $(this);
 			var $thisLineId = $thisLine.attr("id");
 			//cur line
-			$(this).addClass("ce-currentLineActive");	
+			$(this).addClass("ce-currentLineActive");
+				
 			//menu
-			if($thisLineId !== ("ce-ins-")+$com1_cardEditor.data("curLineId") ) {
-				$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuHover");
-			}
+			var $menuLine = $( "#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") );
 			
+			if( !$($menuLine).hasClass("ce-plusMenuActive") ){
+				$menuLine.addClass("ce-plusMenuHover");
+			}			
 		},
 		function(){	
 			//cur line		
 			$(this).removeClass("ce-currentLineActive");
 			//menu
-			$com1_plusMenu.removeClass("ce-plusMenuHover");
+      $com1_plusMenu.removeClass("ce-plusMenuHover");
 		});
 
 		$com1_plusMenu.hover(function(){
@@ -103,25 +106,18 @@ $(document).ready( function(){
 			
 			//treatment of the line which we has left.
 			
-			var $prevLineId = $com1_cardEditor.data("curLineId");						
-			//$com1_inStr.css({"height":"20px"});	
-			//.css({"color":"red"};
+			var $prevLineId = $com1_cardEditor.data("curLineId");	
+			//??					
+			$com1_inStr.css({"height":"20px"});	
 			var $prevLine = $("#ce-ins-"+$prevLineId);
-			var $prevTextBlock = $prevLine.find("span.ce-insStrText");
-		
-			var $prevText = $.trim($prevTextBlock.text());
-			
+			var $prevTextBlock = $prevLine.find("span.ce-insStrText");	
+			var $prevText = $.trim($prevTextBlock.text());		
 			if( $prevText === '') {					
-						$prevTextBlock.prev().show();
-						$prevLine.fadeOut();	
-						/*					
-					 	if(	$prevLine.children().hasClass("ce-insStrPerf") ) {						
-						}			
-						*/						
+						//$prevTextBlock.prev().show();
+						$prevLine.fadeOut();							
 			} else {
-				$prevTextBlock.prev().hide();
-			}					
-							
+				//$prevTextBlock.prev().hide();
+			}												
 			$prevLine.removeClass("ce-currentLine");
 
 		//current line deal
@@ -153,18 +149,13 @@ $(document).ready( function(){
 
 
 			$com1_cardEditor.data("curLineId",$thisLineId.replace("ce-ins-",""));
-					
-
-
-			
-			
-			$com1_plusMenu.removeClass("ce-plusMenuActive");
-
+			//changing active plus menu item.			
+			$com1_plusMenu.removeClass("ce-plusMenuActive ce-plusMenuHover");
 			$("#ce-plus-ins-"+$thisLineId.replace("ce-ins-","") ).addClass("ce-plusMenuActive");
 			
 			
 			$com1_inputBlock.hide();
-			//function(){
+
 					var cardEditorPos = $com1_cardEditor.offset();			
 					var posMainWord = $thisLine.offset();
 					
@@ -186,9 +177,7 @@ $(document).ready( function(){
 							  }
 						 );
 						},500
-					)
-			
-			//});			
+					)			
 		
 		});
 
@@ -306,10 +295,10 @@ $(document).ready( function(){
 		);		
 		
 		
-		
-		$("#ce-inpBlClear").click(function(){
-			return false;
-		});
+	  //?? toDel	
+		//$("#ce-inpBlClear").click(function(){
+			//return false;
+		//});
 
 
 
@@ -373,7 +362,11 @@ $(document).ready( function(){
 
 
 	//word submiting for translation
-
+	
+    $com1_dicWrapperCtrl.click(function(){
+      $com1_dicWrapper.toggle();
+    });
+	
 //CHEck if word is empty or not!!!!!!!!!
 
 						
@@ -382,10 +375,7 @@ $(document).ready( function(){
 		
 			var $userWord = $.trim($com1_inStr.val()).toLowerCase();
 
-
-
-			
-			
+		
 			$("#dic-translFor").text($userWord);
 			
 			//dictionary preparation

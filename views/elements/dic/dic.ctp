@@ -1,5 +1,5 @@
 <div class="span-24" style="background-color:#224466;margin-top:230px;color:white;">
-	<div style="margin:5px;float:left;">[transltions]:</div>
+	<div id="dic-dicWrapperCtrl">[transltions]:</div>
 	<ul style="float:left;margin:5px;">
 		<li style="display:inline;margin-left:5px;"><a href="javascript:void(0);" style="color:#66AACC;">test</a></li>
 		<li style="display:inline;margin-left:5px;"><a href="javascript:void(0);" style="color:#66AACC;">test2</a></li>
@@ -7,6 +7,11 @@
 </div>
 
 <div id="dic-dicWrapper" class="dic-dicWrapper hide">
+  <div>
+    <span>En</span> » <span>Ru</span>
+    <?php echo $form->input('word2transl',array('id'=>'dic-word2Transl','label'=>false,'div'=>false ) );?>
+    <?php echo $form->button(__('Translate',true) );?>
+  </div>
 	<div id="dic-translForWrapper">
 		<span id="dic-translFor"></span>
 		<span class="dic-sound" id="dic-playSound" ></span>

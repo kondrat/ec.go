@@ -24,11 +24,10 @@ div.ce-cardEditorActive {
 .ce-plusMenu{
 	position:absolute;
 	left:10px;
-	top:-10px;
+	top:-14px;
 }
 .ce-plusMenu span{
 	color:gray;
-	font-weight:bold;
 	margin-left:1em;
 	border-bottom:3px solid white;
 }
@@ -38,7 +37,10 @@ div.ce-cardEditorActive {
 .ce-plusMenu span.ce-plusMenuHover{
 	border-color:#aaa;
 }
-
+#ce-plus-ins-1, #ce-plus-ins-3{
+  font-size:11pt;
+  font-weight:bold;
+}
 
 
 
@@ -124,7 +126,7 @@ div.ce-cardEditorActive {
 	background-color:#FF9900;
 	background:-moz-linear-gradient(center top , #FF9900, white 140%) repeat scroll 0 0 #FF9900;
 	border:1px solid #aaa;
-	padding:3px 90px 3px 15px;
+	padding:3px 45px 3px 15px;
 	
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
@@ -134,8 +136,8 @@ div.ce-cardEditorActive {
 #ce-inputBlock div.ce-inputBlockCtrl{
 	margin-top:2px;
 	position:absolute;
-	right:10px;
-	top:10px;
+	right:14px;
+	top:14px;
 }
 #ce-inputBlock div.ce-inputBlockTransl{
 	background-color:NavajoWhite;
