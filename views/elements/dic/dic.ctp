@@ -8,9 +8,11 @@
 
 <div id="dic-dicWrapper" class="dic-dicWrapper hide">
   <div>
-    <span>En</span> » <span>Ru</span>
+  	<div class="dic-langToFrom">
+    	<span>En</span> » <span>Ru</span> <span class="dic-upDownArr1"></span>
+    </div>
     <?php echo $form->input('word2transl',array('id'=>'dic-word2Transl','label'=>false,'div'=>false ) );?>
-    <?php echo $form->button(__('Translate',true) );?>
+    <?php echo $form->button(__('Translate',true),array('id'=>'dic-word2TranslBtn') );?>
   </div>
 	<div id="dic-translForWrapper">
 		<span id="dic-translFor"></span>

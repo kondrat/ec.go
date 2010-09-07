@@ -22,7 +22,11 @@ $(document).ready( function(){
 		var $com1_overlay = $("#ec-overlay");
 		var $com1_saveCardBtn = $("#ce-saveCardBtn");
 		var $com1_inpBlOk = $("#ce-inpBlOk");
+		var $com1_inpBlTr = $("#ce-inpBlTr");
 		var $com1_dicWrapperCtrl = $("#dic-dicWrapperCtrl");
+		//input line in translation block.
+		var $com1_word2Transl = $("#dic-word2Transl");
+		var $com1_word2TranslBtn = $("#dic-word2TranslBtn");
 
 
 		//if($com1_inputBlock.is(":hidden") ) {
@@ -367,13 +371,26 @@ $(document).ready( function(){
       $com1_dicWrapper.toggle();
     });
 	
-//CHEck if word is empty or not!!!!!!!!!
+
+		$com1_inpBlTr.click(function(){
+			
+			$com1_dicWrapperCtrl.trigger("click");
+			
+			var $word2Transl = $com1_inStr.val();
+			$com1_word2Transl.val($word2Transl);
+			
+			$com1_word2TranslBtn.trigger("click");
+			
+			
+			
+		});
+
 
 						
-		$("#ce-inpBlTr").click( function() {
+		$com1_word2TranslBtn.click( function() {
 			
 		
-			var $userWord = $.trim($com1_inStr.val()).toLowerCase();
+			var $userWord = $.trim($com1_word2Transl.val()).toLowerCase();
 
 		
 			$("#dic-translFor").text($userWord);
