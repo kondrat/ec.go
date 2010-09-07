@@ -1,5 +1,5 @@
-<div class="span-24" style="background-color:#224466;margin-top:230px;color:white;">
-	<div id="dic-dicWrapperCtrl">[transltions]:</div>
+<div class="span-24 dic-dicBar" style="">
+	<div id="dic-dicWrapperCtrl" class="dic-dicWrapperCtrl">[transltions]:</div>
 	<ul style="float:left;margin:5px;">
 		<li style="display:inline;margin-left:5px;"><a href="javascript:void(0);" style="color:#66AACC;">test</a></li>
 		<li style="display:inline;margin-left:5px;"><a href="javascript:void(0);" style="color:#66AACC;">test2</a></li>

@@ -107,11 +107,20 @@ li.dic-dicSwBase ul{
 	color:blue;
 }
 
-#dic-dicWrapperCtrl{
+.dic-dicWrapperCtrl{
   margin:5px;
   float:left;
   background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -35px transparent;
   padding:0 17px 0 0;
+}
+.dic-dicBar{
+  background-color:#224466;
+  margin-top:230px;
+  color:white;
+}
+.dic-dicBar div.ttm{
+  color:yellow;
+  background-position: 100% -54px;
 }
 .dic-langToFrom{
 	background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -17px transparent;

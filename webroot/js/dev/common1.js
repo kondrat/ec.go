@@ -369,6 +369,7 @@ $(document).ready( function(){
 	
     $com1_dicWrapperCtrl.click(function(){
       $com1_dicWrapper.toggle();
+      $(this).toggleClass('ttm');
     });
 	
 
