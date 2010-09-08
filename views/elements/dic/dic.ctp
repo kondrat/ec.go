@@ -1,6 +1,7 @@
 <div class="span-24 dic-dicBar" style="">
 	<div id="dic-dicWrapperCtrl" class="dic-dicWrapperCtrl">[transltions]:</div>
 	<ul id="dic-wordHisList" class="dic-wordHisList"></ul>
+	<span class="tete"></span>
 </div>
 
 <div id="dic-dicWrapper" class="dic-dicWrapper hide">

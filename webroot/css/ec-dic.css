@@ -118,7 +118,7 @@ li.dic-dicSwBase ul{
 	float:left;
 	margin:5px;
 	overflow:hidden;
-	width:800px;	
+	width:820px;	
 }
 .dic-wordHis{
 	display:inline;
@@ -134,6 +134,7 @@ li.dic-wordHis:hover{
   background-color:#224466;
   margin-top:230px;
   color:white;
+  position:relative;
 }
 .dic-dicBar div.ttm{
   color:yellow;
@@ -144,6 +145,14 @@ li.dic-wordHis:hover{
 	float:left;
 	margin:7px 5px 0 0;
 	padding:0 17px 0 0;
+}
+.tete{
+  position:absolute;
+  background:url("../img/pic/ec-fade-out.png") repeat-y scroll -80px 0 transparent;
+  width:60px;
+  height:100%;
+  top:0;
+  right:20px;
 }
 
 
