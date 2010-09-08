@@ -106,13 +106,30 @@ li.dic-dicSwBase ul{
 .dic-resActive{
 	color:blue;
 }
-
+/* line with history of translated words */
 .dic-dicWrapperCtrl{
   margin:5px;
   float:left;
   background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -35px transparent;
   padding:0 17px 0 0;
 }
+.dic-wordHisList{
+	cursor:pointer;
+	float:left;
+	margin:5px;
+	overflow:hidden;
+	width:800px;	
+}
+.dic-wordHis{
+	display:inline;
+	margin-left:5px;
+	color:#66AACC;
+}
+li.dic-wordHis:hover{
+	color:#fff;
+	text-decoration:underline;
+}
+
 .dic-dicBar{
   background-color:#224466;
   margin-top:230px;

@@ -24,6 +24,7 @@ $(document).ready( function(){
 		var $com1_inpBlOk = $("#ce-inpBlOk");
 		var $com1_inpBlTr = $("#ce-inpBlTr");
 		var $com1_dicWrapperCtrl = $("#dic-dicWrapperCtrl");
+		var $com1_wordHisList = $("#dic-wordHisList");
 		//input line in translation block.
 		var $com1_word2Transl = $("#dic-word2Transl");
 		var $com1_word2TranslBtn = $("#dic-word2TranslBtn");
@@ -487,6 +488,8 @@ $(document).ready( function(){
 												
 												
 												$("#dic-topResult").text($translatedSentence);
+												//history line prepending new word.
+												$com1_wordHisList.prepend('<li class="dic-wordHis">'+$userWord+'</li>');												
 
 												$com1_dicWrapper.show();
 												
@@ -564,6 +567,14 @@ $(document).ready( function(){
 			
 		});
 
+
+		$com1_wordHisList.delegate(".dic-wordHis","click",function(){
+			$com1_word2Transl.val($(this).text());
+			if($com1_dicWrapper.is(":hidden")){
+				$com1_dicWrapperCtrl.click();
+			}
+			$com1_word2TranslBtn.click();
+		});
 
 	 	$com1_insInAlert.bind("clickoutside", function(){
 	 		
