@@ -1,17 +1,23 @@
 <div class="span-24 dic-dicBar" style="">
 	<div id="dic-dicWrapperCtrl" class="dic-dicWrapperCtrl">[transltions]:</div>
 	<ul id="dic-wordHisList" class="dic-wordHisList"></ul>
-	<span class="tete"></span>
+	<span class="dic-fadeOutLine"></span>
+	<span class="dic-wordHisMore"><?php __('more');?></span>
 </div>
 
 <div id="dic-dicWrapper" class="dic-dicWrapper hide">
+	
   <div>
-  	<div class="dic-langToFrom">
+  	<div id="dic-langToFrom" class="dic-langToFrom">
     	<span>En</span> » <span>Ru</span> <span class="dic-upDownArr1"></span>
     </div>
     <?php echo $form->input('word2transl',array('id'=>'dic-word2Transl','label'=>false,'div'=>false ) );?>
     <?php echo $form->button(__('Translate',true),array('id'=>'dic-word2TranslBtn') );?>
+    
+    <?php echo $this->element('cardEditor/langSwitcher/lang_switcher');?>
+    
   </div>
+  
 	<div id="dic-translForWrapper">
 		<span id="dic-translFor"></span>
 		<span class="dic-sound" id="dic-playSound" ></span>
@@ -34,7 +40,10 @@
 			<li class="dic-suffix dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Suffix');?></span><ul></ul></li>
 		</ul>
 
-
-
 		
 </div>
+
+<div class="dic-toDel" style="position:absolute;top:0;left:0;">
+	click toDel
+</div>
+

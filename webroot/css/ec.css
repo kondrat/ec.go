@@ -486,19 +486,7 @@ div.changeLangDirect{
 		color:CadetBlue;
 }
 
-.popUpPad{
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px; 
-	-moz-box-shadow:0 0 3px;
-  background-color:Cornsilk;
-  border:1px solid;
-  padding:10px;
-  position:absolute;
-  text-align:center;
-  z-index:1000;
-  top:130px;
-  left:120px;
-}
+
 #langPadSubmit{
 	padding:0 .5em;
 }

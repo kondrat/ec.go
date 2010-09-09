@@ -64,21 +64,26 @@
   		);
   	?>  
 
-<div id="langPad" class="span-10 popUpPad hide" style="">
-  <div class="span-10" style="border-bottom:1px solid gray;margin-bottom:0.5em;padding-bottom:0.5em;position:relative;">
-  	   	 	
-    <div class="span-5" style="">
-    	<div class="langPadLabel"><?php __('Side A');?></div>
-    	<?php echo $form->input('sideA', array('selected'=>'en','label'=>false,'options' => $sideA)); ?>
-    </div>   
-    <div class="span-5 last" style="">
-    	<div class="langPadLabel"><?php __('Side B');?></div>
-    	<?php echo $form->input('sideB', array('selected'=>'ru','label'=>false,'options' => $sideA)); ?>
-    </div>
-    <div id="closeLangPad"></div>
-    		    	  
-  </div>
-  
-  <div class="span-10" style=""><?php echo $form->button(__("Submit",true),array('id'=>'langPadSubmit') );?></div>
-  
+<div id="dic-langPad" class="dic-langPadWrapper hide">
+	
+  <div class="dic-langPad">
+  	
+	  	
+	  	   	 	
+	    <div class="tetete">
+	    	<div class="langPadLabel"><?php __('From');?></div>
+	    	<?php echo $form->input('from', array('selected'=>'en','label'=>false,'options' => $sideA)); ?>
+	    </div>   
+	    <div class="tetete">
+	    	<div class="langPadLabel"><?php __('To');?></div>
+	    	<?php echo $form->input('to', array('selected'=>'ru','label'=>false,'options' => $sideA)); ?>
+	    </div>
+	    <div id="closeLangPad"></div>
+	    		    	  
+	  	
+	  
+	  	<div class=""><?php echo $form->button(__("Submit",true),array('id'=>'langPadSubmit') );?></div>
+
+	</div> 
+	 
 </div>			    	  	

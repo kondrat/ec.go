@@ -28,6 +28,7 @@ $(document).ready( function(){
 		//input line in translation block.
 		var $com1_word2Transl = $("#dic-word2Transl");
 		var $com1_word2TranslBtn = $("#dic-word2TranslBtn");
+		var $com1_langToFrom = $("#dic-langToFrom");
 
 
 		//if($com1_inputBlock.is(":hidden") ) {
@@ -489,7 +490,16 @@ $(document).ready( function(){
 												
 												$("#dic-topResult").text($translatedSentence);
 												//history line prepending new word.
-												$com1_wordHisList.prepend('<li class="dic-wordHis">'+$userWord+'</li>');												
+												$com1_wordHisList.find("li.dic-wordHisFirst").removeClass("dic-wordHisFirst");
+												
+												var $userWordCat = '';
+												if($userWord.length > 10 ){
+													$userWordCat = $userWord.substr(0,10)+"...";
+												} else {
+													$userWordCat = $userWord;
+												}
+												
+												$com1_wordHisList.prepend('<li class="dic-wordHis dic-wordHisFirst">'+$userWordCat+'</li>').find("li:first").data("userWord",$userWord);												
 
 												$com1_dicWrapper.show();
 												
@@ -515,6 +525,10 @@ $(document).ready( function(){
 			return false;
 		});
 
+
+		$com1_langToFrom.click(function(){
+			$("#dic-langPad").toggle();
+		});
 
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
 			
@@ -592,7 +606,12 @@ $(document).ready( function(){
 			$com1_overlay.hide();
 		});
 
-
+		$(".dic-toDel").click(function(){
+			var $i = 20;
+			for($i = 0; $i<= 20; $i++){
+				$com1_wordHisList.prepend('<li class="dic-wordHis">testWord'+$i+'</li>');
+			}
+		});
 
 
 
