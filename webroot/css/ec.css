@@ -487,21 +487,11 @@ div.changeLangDirect{
 }
 
 
-#langPadSubmit{
-	padding:0 .5em;
-}
 .langPadLabel{
 	font-weight:bold;
 	color:Brown;
 }
-#closeLangPad,#closeAlertPad, .closeCardTable{
-	background:transparent url(../img/icons/error.png) no-repeat scroll right 0;
-	height:16px;
-	width:16px;
-	position:absolute;
-	right:0;
-	top:0;
-}
+
 .closeCardTable {
 	right:10px;
 	top:10px;	

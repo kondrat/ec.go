@@ -2,14 +2,31 @@
  * dic- dictionary editor
  */
 #dic-dicWrapper{
-	background-color:#FFFFFF;
-	border-bottom:1px solid;
-	border-top:1px solid;
-	left:0;
+	background:url("../img/pic/aaaaaa_40x100.png") repeat scroll 0 0 transparent;
+
+	left:10px;
 	position:absolute;
 	top:335px;
-	width:950px;
-	padding-bottom:0.5em;
+	width:920px;
+	padding:5px;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	/*behavior: url(./css/border-radius.htc);*/
+}
+.dic-dicInner{
+	background-color:#fff;
+	padding:5px;
+	border:1px solid #aaa;
+
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	/*behavior: url(./css/border-radius.htc);*/	
+}
+.dic-bottom{
+	text-align:right;
 }
 #dic-branding{
 	position:absolute;
@@ -17,13 +34,11 @@
 	right:0px;
 }
 #dic-translForWrapper{
-	float:left;
-	width:950px;
+	
 }
 #dic-translFor{
 	background-color:Beige;
 	color:DarkCyan;
-	float:left;
 	font-size:larger;
 	font-style:italic;
 	margin:10px 10px 0;
@@ -41,8 +56,10 @@
 .dic-res:hover{
 	text-decoration:none;
 }
-#dic-resTabs{
-	margin: 0 0 .5em 0;
+ul#dic-resTabs{
+	float:left;
+	margin:0 5px;
+	width:100%;
 }
 li.dic-dicSwBase{
 	max-width:180px;
@@ -125,7 +142,7 @@ li.dic-dicSwBase ul{
 	margin-left:5px;
 	color:#66AACC;
 }
-li.dic-wordHis:hover{
+span.dic-wordHis:hover{
 	color:#fff;
 	text-decoration:underline;
 }
@@ -136,6 +153,7 @@ li.dic-wordHis:hover{
   color:white;
   position:relative;
 }
+
 .dic-dicBar div.ttm{
   color:yellow;
   background-position: 100% -54px;
@@ -169,8 +187,8 @@ li.dic-wordHis:hover{
 	background:url("../img/pic/aaaaaa_40x100.png") repeat scroll 0 0 transparent;
   padding:5px;
   position:absolute;
-  top:30px;
-  left:0;
+  top:25px;
+  left:10px;
   
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -180,7 +198,7 @@ li.dic-wordHis:hover{
 .dic-langPad{
 	background-color:#f9f9f9;
 	border:1px solid #aaa;
-	padding:3px;
+	padding:3px 10px;
 	
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
@@ -191,6 +209,19 @@ li.dic-wordHis:hover{
 	float:left;
 }
 
+#dic-closeLangPad {
+	background:transparent url(../img/icons/error.png) no-repeat scroll right 0;
+	height:16px;
+	width:16px;
+	position:absolute;
+	right:8px;
+	top:8px;
+}
+
+
+.dic-upDownArr1{
+	
+}
 
 
 

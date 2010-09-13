@@ -29,6 +29,8 @@ $(document).ready( function(){
 		var $com1_word2Transl = $("#dic-word2Transl");
 		var $com1_word2TranslBtn = $("#dic-word2TranslBtn");
 		var $com1_langToFrom = $("#dic-langToFrom");
+		//up the dic if too many results
+		var $com1_bottomUp = $("#dic-bottomUp");
 
 
 		//if($com1_inputBlock.is(":hidden") ) {
@@ -372,6 +374,8 @@ $(document).ready( function(){
     $com1_dicWrapperCtrl.click(function(){
       $com1_dicWrapper.toggle();
       $(this).toggleClass('ttm');
+      //catting off first aminamion
+      clearTimeout($com1_timerInputStr);
     });
 	
 
@@ -490,16 +494,16 @@ $(document).ready( function(){
 												
 												$("#dic-topResult").text($translatedSentence);
 												//history line prepending new word.
-												$com1_wordHisList.find("li.dic-wordHisFirst").removeClass("dic-wordHisFirst");
+												$com1_wordHisList.find("span.dic-wordHisFirst").removeClass("dic-wordHisFirst");
 												
-												var $userWordCat = '';
+												var $userWordCut = '';
 												if($userWord.length > 10 ){
-													$userWordCat = $userWord.substr(0,10)+"...";
+													$userWordCut = $userWord.substr(0,10)+"...";
 												} else {
-													$userWordCat = $userWord;
+													$userWordCut = $userWord;
 												}
-												
-												$com1_wordHisList.prepend('<li class="dic-wordHis dic-wordHisFirst">'+$userWordCat+'</li>').find("li:first").data("userWord",$userWord);												
+
+												$com1_wordHisList.prepend('<span class="dic-wordHis dic-wordHisFirst"></span>').find("span:first").data("userWord",$userWord).text($userWordCut);												
 
 												$com1_dicWrapper.show();
 												
@@ -529,6 +533,20 @@ $(document).ready( function(){
 		$com1_langToFrom.click(function(){
 			$("#dic-langPad").toggle();
 		});
+
+		$("#dic-langPad").bind("clickoutside", function(){
+	 		
+	 		//$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
+	 		if( !$(this).is(":hidden") ) {
+	 			
+	 			//$(this).hide();
+	 			
+	 		}
+	 		//$com1_overlay.hide();
+	 		
+	 	});
+
+
 
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
 			
@@ -580,7 +598,19 @@ $(document).ready( function(){
 			$($insInto).find("span.ce-insStrTip").hide().end().find("span.ce-insStrSug").html($thisLine.text());
 			
 		});
-
+		//up page from bottom of the dic
+		$com1_bottomUp.click(function(){
+			$("html:not(:animated),body:not(:animated)").animate(
+					{
+						scrollTop: $("body","html").offset().top
+					},
+					 500,
+					 function() {
+					 	//alert('compl');
+						// Animation complete.
+					}	
+			);		
+		});
 
 		$com1_wordHisList.delegate(".dic-wordHis","click",function(){
 			$com1_word2Transl.val($(this).text());
@@ -609,7 +639,7 @@ $(document).ready( function(){
 		$(".dic-toDel").click(function(){
 			var $i = 20;
 			for($i = 0; $i<= 20; $i++){
-				$com1_wordHisList.prepend('<li class="dic-wordHis">testWord'+$i+'</li>');
+				$com1_wordHisList.prepend('<span class="dic-wordHis">test Word '+$i+'</span>');
 			}
 		});
 

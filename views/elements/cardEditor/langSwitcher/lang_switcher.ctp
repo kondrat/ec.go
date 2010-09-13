@@ -69,20 +69,18 @@
   <div class="dic-langPad">
   	
 	  	
-	  	   	 	
-	    <div class="tetete">
-	    	<div class="langPadLabel"><?php __('From');?></div>
-	    	<?php echo $form->input('from', array('selected'=>'en','label'=>false,'options' => $sideA)); ?>
-	    </div>   
-	    <div class="tetete">
-	    	<div class="langPadLabel"><?php __('To');?></div>
-	    	<?php echo $form->input('to', array('selected'=>'ru','label'=>false,'options' => $sideA)); ?>
-	    </div>
-	    <div id="closeLangPad"></div>
-	    		    	  
-	  	
-	  
-	  	<div class=""><?php echo $form->button(__("Submit",true),array('id'=>'langPadSubmit') );?></div>
+	 	   	 	
+	    
+	    	<span class="langPadLabel"><?php __('From');?></span>
+	    	<?php echo $form->input('from', array('selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
+	     
+	    
+	    
+	    	<span class="langPadLabel"><?php __('To');?></span>
+	    	<?php echo $form->input('to', array('selected'=>'ru','label'=>false,'div'=>false,'options' => $sideA)); ?>
+	    
+	    <!--<div id="dic-closeLangPad"></div>-->
+
 
 	</div> 
 	 
