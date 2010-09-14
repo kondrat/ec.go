@@ -530,23 +530,25 @@ $(document).ready( function(){
 		});
 
 
-		$com1_langToFrom.click(function(){
-			$("#dic-langPad").toggle();
-		});
+
 
 		$("#dic-langPad").bind("clickoutside", function(){
 	 		
-	 		//$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
-	 		if( !$(this).is(":hidden") ) {
+
 	 			
-	 			//$(this).hide();
-	 			
-	 		}
-	 		//$com1_overlay.hide();
+	 			$(this).hide();
+
+	 			$com1_overlay.hide();
 	 		
 	 	});
-
-
+	 	
+		$com1_langToFrom.click(function(e){
+			if(e) e.stopPropagation();
+			if(e) e.preventDefault();
+			$com1_overlay.show();
+			$("#dic-langPad").toggle();
+			
+		});
 
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
 			
