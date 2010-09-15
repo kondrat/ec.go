@@ -532,22 +532,22 @@ $(document).ready( function(){
 
 
 
-		$("#dic-langPad").bind("clickoutside", function(){
-	 		
-
-	 			
+		$("#dic-langPad").bind("clickoutside", function(){	 			
 	 			$(this).hide();
-
-	 			$com1_overlay.hide();
-	 		
+	 			$com1_overlay.hide(); 		
 	 	});
 	 	
 		$com1_langToFrom.click(function(e){
+		
 			if(e) e.stopPropagation();
 			if(e) e.preventDefault();
-			$com1_overlay.show();
+			
 			$("#dic-langPad").toggle();
 			
+		});
+
+		$("#from option").click(function(){
+			alert($(this).attr('value'));
 		});
 
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){

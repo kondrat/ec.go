@@ -395,14 +395,7 @@ a.sideToEdit:hover {
 .userActionTip {
 	color:red;
 }
-.langSwitch{
-  margin:1px 0 0;
-  background:transparent url(../img/icons/langSwitch.png) no-repeat scroll 0 -24px;
-  width:16px;
-  height:16px;
-  float:left;
-  vertical-align:middle;
-}
+
 #langSideA,#langSideB{
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px; 
@@ -445,52 +438,10 @@ a.sideToEdit:hover {
 	background-color:#fff;	
 }
 
-.langToFromWrapper{
-	left:305px;
-	position:absolute;
-	top:80px;
-}
 
 
-#changeLangPair{
-	color:gray;
-	font-size:smaller;
-	font-weight:normal;
-	text-decoration:underline;
-	position:absolute;
-	right:-72px;
-	text-align:center;
-	top:16px;
-	width:160px;
-}
-#changeLangPair:hover{
-	color:red;
-	text-decoration:none;
-}
-
-.backDir div.langSwitch {
-	background-position: 0 0;
-}
-.backDir div.changeLangDirect{
-		background-position: 0 -72px;
-}
-div.changeLangDirect{
-		background-position: 0 -48px;
-}
-.backDir #langSideA{
-		border:1px solid BurlyWood;
-		color:BurlyWood;
-}
-.backDir #langSideB{
-		border:1px solid CadetBlue;
-		color:CadetBlue;
-}
 
 
-.langPadLabel{
-	font-weight:bold;
-	color:Brown;
-}
 
 .closeCardTable {
 	right:10px;
