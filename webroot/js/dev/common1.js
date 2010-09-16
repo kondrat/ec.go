@@ -14,8 +14,10 @@ $(document).ready( function(){
 		var $com1_inStr = $("#ce-inStr");
 		//this block slides down with button "translate"
 		var $com1_inBlTrWrap = $("#ce-inBlTrWrap");
+		/*
 		var $com1_langTo = "ru";
 		var $com1_langFrom = "en";
+		*/
 		var $com1_insInAlert = $("#dic-insInAlert");
 		var $com1_dicWrapper = $("#dic-dicWrapper");
 		var $com1_dicIns = $("#ce-dicIns");
@@ -31,7 +33,15 @@ $(document).ready( function(){
 		var $com1_langToFrom = $("#dic-langToFrom");
 		//up the dic if too many results
 		var $com1_bottomUp = $("#dic-bottomUp");
-
+		
+		//langPad
+		var $com1_langPad = $("#dic-langPad");
+		var $com1_langFrom = $("#dic-langFrom");
+		var $com1_langTo = $("#dic-langTo");
+		var $com1_langFromOpt = $("#dic-langFromOpt");
+		var $com1_langToOpt = $("#dic-langToOpt");
+		var $com1_langSwitch = $("#dic-langSwitch");
+		
 
 		//if($com1_inputBlock.is(":hidden") ) {
 			var $com1_timerInputStr = window.setTimeout(
@@ -532,24 +542,69 @@ $(document).ready( function(){
 
 
 
-		$("#dic-langPad").bind("clickoutside", function(){	 			
+		$com1_langPad.bind("clickoutside", function(){	 			
 	 			$(this).hide();
-	 			$com1_overlay.hide(); 		
+	 			$com1_overlay.hide(); 
+	 			$com1_langToFrom.removeClass("dic-langToFromActive");		
 	 	});
-	 	
+	 	//must be after corresopondent pad whith clickoutside
 		$com1_langToFrom.click(function(e){
 		
 			if(e) e.stopPropagation();
 			if(e) e.preventDefault();
 			
-			$("#dic-langPad").toggle();
+			var $thisCtrlPanel = $(this);
+			if( $com1_langPad.is(":hidden") ) {
+				$com1_langPad.show();
+				$thisCtrlPanel.addClass("dic-langToFromActive");
+			}else{
+				$com1_langPad.hide();
+				$thisCtrlPanel.removeClass("dic-langToFromActive");
+			}
 			
 		});
 
-		$("#from option").click(function(){
-			alert($(this).attr('value'));
-		});
 
+		$com1_langFromOpt.click(function(){
+			$com1_langFrom.text($(this).val()).animate(
+												{"background-color": "lightgreen"},
+												{duration: 1000}
+											).animate(
+												{"background-color": "#f5f5dc"},{
+													duration: 1000,
+													complete: function() {$(this).removeAttr("style")}
+												}
+											);
+											
+		});
+		
+		$com1_langToOpt.click(function(){
+			$com1_langTo.text($(this).val()).animate(
+												{"background-color": "lightgreen"},{duration: 1000}
+											).animate(
+												{"background-color": "#f5f5dc"},{
+													duration: 1000,
+													complete: function() {$(this).removeAttr("style")}
+												}
+											);
+		});
+		
+		$com1_langSwitch.click(function(){
+			
+			var $curLangFrom = $com1_langFromOpt.val();
+			var $curLangTo = $com1_langToOpt.val();
+			$com1_langFromOpt.val($curLangTo);
+			$com1_langToOpt.val($curLangFrom);
+			
+			$com1_langFromOpt.click();
+			$com1_langToOpt.click();
+			
+			
+		});		
+
+
+
+		
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
 			
 			if(e) e.stopPropagation();

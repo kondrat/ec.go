@@ -13,7 +13,7 @@
 		  	<div id="dic-langToFrom" class="dic-langToFrom">
 
 		  		
-		    	<span><?php __('From');?>: <span id="dic-langFrom">En</span></span> » <span>get<?php __('To');?>: <span id="dic-langTo">Ru</span></span> 
+		    	<span><?php __('From');?>: <span id="dic-langFrom">en</span></span> » <span><?php __('To');?>: <span id="dic-langTo">ru</span></span> 
 		    	
 		    	
 		    </div>

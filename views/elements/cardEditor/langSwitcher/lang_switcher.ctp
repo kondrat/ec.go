@@ -72,14 +72,14 @@
 	 	   	 	
 	    <div style="float:left;">
 	    	<span class="dic-langPadLabel"><?php __('From');?></span>
-	    	<?php echo $form->input('from', array('selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
+	    	<?php echo $form->input('from', array('id'=>'dic-langFromOpt','selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
 	    </div> 
 	    <div style="float:left;">
-	    	<span class="dic-langSwitch"></span>
+	    	<span id="dic-langSwitch"></span>
 	    </div>
 	    <div style="float:left;">
 	    	<span class="dic-langPadLabel"><?php __('To');?></span>
-	    	<?php echo $form->input('to', array('selected'=>'ru','label'=>false,'div'=>false,'options' => $sideA)); ?>
+	    	<?php echo $form->input('to', array('id'=>'dic-langToOpt','selected'=>'ru','label'=>false,'div'=>false,'options' => $sideA)); ?>
 	    </div>
 	    <!--<div id="dic-closeLangPad"></div>-->
 

@@ -163,10 +163,20 @@ span.dic-wordHis:hover{
 	float:left;
 	margin:7px 5px 0 0;
 	padding:0 17px 0 0;
+	border-bottom:1px solid #fff;
+}
+.dic-langToFrom:hover{
+	border-color:#ccc;
+}
+.dic-langToFromActive{
+	border-color:#ccc;
+	background-position:100% 2px;
+	background-color:Beige;
 }
 #dic-langTo,#dic-langFrom{
 	color:blue;
 	font-weight:bold;
+	padding:0 3px;
 }
 .dic-fadeOutLine{
   position:absolute;
@@ -203,7 +213,7 @@ span.dic-wordHis:hover{
 	background-color:#f9f9f9;
 	border:1px solid #aaa;
 	padding:3px 10px;
-	height:35px;
+	float:left;
 	
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
@@ -225,7 +235,7 @@ span.dic-wordHis:hover{
 
 
 
-.dic-langSwitch{
+#dic-langSwitch{
 	background:url("../img/icons/lang_switch.png") no-repeat scroll 0 0 #EEEEEE;
 	border:1px solid #AAAAAA;
 	color:red;
@@ -235,7 +245,7 @@ span.dic-wordHis:hover{
 	vertical-align:text-bottom;
 	margin:6px 7px;
 }
-.dic-langSwitch:hover{
+#dic-langSwitch:hover{
 	background-color:#ddd;
 	border-color:#aaa;
 }
