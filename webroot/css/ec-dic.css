@@ -167,11 +167,12 @@ span.dic-wordHis:hover{
 }
 .dic-langToFrom:hover{
 	border-color:#ccc;
+	background-color:#f5f5dc;
 }
 .dic-langToFromActive{
 	border-color:#ccc;
 	background-position:100% 2px;
-	background-color:Beige;
+	background-color:#f5f5dc;
 }
 #dic-langTo,#dic-langFrom{
 	color:blue;
@@ -244,6 +245,11 @@ span.dic-wordHis:hover{
 	width:17px;
 	vertical-align:text-bottom;
 	margin:6px 7px;
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	/*behavior: url(./css/border-radius.htc);*/
 }
 #dic-langSwitch:hover{
 	background-color:#ddd;

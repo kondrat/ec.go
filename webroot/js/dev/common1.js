@@ -43,14 +43,14 @@ $(document).ready( function(){
 		var $com1_langSwitch = $("#dic-langSwitch");
 		
 
-		//if($com1_inputBlock.is(":hidden") ) {
+
 			var $com1_timerInputStr = window.setTimeout(
 				function(){
 					$com1_mainWord.trigger("click");
 				},
 				3000
 			);
-		//}
+
 
 		var cardDataLookUp = function(){
 			var $res = '';
@@ -80,6 +80,8 @@ $(document).ready( function(){
 		function(){
 			$(this).removeClass("ce-cardEditorActive");
 		});
+
+
 
 		
 		$com1_inlineMiddleDiv.hover(function(){
@@ -115,7 +117,17 @@ $(document).ready( function(){
 
 		//this is a click on the fileds in the editior.
 		
-		$com1_inlineMiddleDiv.click( function(){
+		//bind outside event
+		$com1_inputBlock.bind("clickoutside", function(){	 			
+	 			//$(this).hide();
+	 			$com1_inpBlOk.click();		
+	 	});	
+	 		
+		$com1_inlineMiddleDiv.click( function(e){
+			
+			if(e) e.stopPropagation();
+			if(e) e.preventDefault();
+			
 			
 			//disable save button
 			$com1_saveCardBtn.attr("disabled","disabled");
@@ -202,13 +214,15 @@ $(document).ready( function(){
 		
 
 	
-		$com1_plusMenu.click(function(){
+		$com1_plusMenu.click(function(e){
+			if(e) e.stopPropagation();
+			if(e) e.preventDefault();
 			clearTimeout($com1_timerInputStr);
 			var $this = $(this);
 			var insId = $this.attr("id").replace("ce-plus-ins-","");
 			if(typeof(insId) !== "undefined") {
 				insIdObj = $("#ce-ins-"+insId);
-				insIdObj.trigger("click");
+				insIdObj.click();
 			}
 		});	
 
@@ -655,6 +669,7 @@ $(document).ready( function(){
 			$($insInto).find("span.ce-insStrTip").hide().end().find("span.ce-insStrSug").html($thisLine.text());
 			
 		});
+		
 		//up page from bottom of the dic
 		$com1_bottomUp.click(function(){
 			$("html:not(:animated),body:not(:animated)").animate(
@@ -677,15 +692,13 @@ $(document).ready( function(){
 			$com1_word2TranslBtn.click();
 		});
 
-	 	$com1_insInAlert.bind("clickoutside", function(){
-	 		
-	 		$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
-	 		
-	 		$(this).hide();
-	 		
-	 		$com1_overlay.hide();
-	 		
+
+	 	$com1_insInAlert.bind("clickoutside", function(){	 		
+	 		$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");	 		
+	 		$(this).hide();	 		
+	 		$com1_overlay.hide();	 		
 	 	});
+
 
 		$com1_dicIns.click(function(){
 			//temp.  toDel
@@ -699,8 +712,6 @@ $(document).ready( function(){
 				$com1_wordHisList.prepend('<span class="dic-wordHis">test Word '+$i+'</span>');
 			}
 		});
-
-
 
 
 				

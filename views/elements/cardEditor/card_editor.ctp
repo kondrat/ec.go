@@ -14,6 +14,7 @@
 				</tr></td>
 			</table>
 			<div class="ec-cardLogo"></div>
+			<div id="ce-langFrom" class="ce-langFrom">EN</div>
 		</div>
 
 
@@ -36,6 +37,7 @@
 				</tr></td>
 			</table>
 			<div class="ec-cardLogo"></div>
+			<div id="ce-langTo" class="ce-langTo">RU</div>
 		</div>	
 
 
