@@ -7,7 +7,7 @@
 	left:10px;
 	position:absolute;
 	top:335px;
-	width:920px;
+
 	padding:5px;
 	
 	-webkit-border-radius: 10px;
@@ -19,6 +19,8 @@
 	background-color:#fff;
 	padding:5px;
 	border:1px solid #aaa;
+	width:900px;
+	float:left;
 
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
@@ -26,12 +28,13 @@
 	/*behavior: url(./css/border-radius.htc);*/	
 }
 .dic-bottom{
-	text-align:right;
+	bottom:10px;
+	position:absolute;
+	right:14px;
 }
 #dic-branding{
-	position:absolute;
-	top:-50px;
-	right:0px;
+	float:left;
+	margin:5px;
 }
 #dic-translForWrapper{
 	
@@ -159,10 +162,10 @@ span.dic-wordHis:hover{
   background-position: 100% -54px;
 }
 .dic-langToFrom{
-	background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -17px transparent;
-	float:left;
+	/*background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -17px transparent;
 	margin:7px 5px 0 0;
-	padding:0 17px 0 0;
+	padding:0 17px 0 0;*/
+	float:left;
 	border-bottom:1px solid #fff;
 }
 .dic-langToFrom:hover{
@@ -244,8 +247,8 @@ span.dic-wordHis:hover{
 	height:17px;
 	width:17px;
 	vertical-align:text-bottom;
-	margin:6px 7px;
-
+	margin:0 6px;
+	
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -259,3 +262,13 @@ span.dic-wordHis:hover{
 	color:brown;
 }
 
+#dic-word2Transl{
+	width:600px;
+	padding:3px;
+}
+.dic-translLine{
+	background-color:#FAEBD7;
+	float:left;
+	margin-bottom:1em;
+	padding:5px 5px 5px 10px;
+}

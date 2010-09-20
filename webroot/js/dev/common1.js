@@ -38,9 +38,15 @@ $(document).ready( function(){
 		var $com1_langPad = $("#dic-langPad");
 		var $com1_langFrom = $("#dic-langFrom");
 		var $com1_langTo = $("#dic-langTo");
-		var $com1_langFromOpt = $("#dic-langFromOpt");
+		
+		var $com1_langFromOpt = $("#dic-langFromOpt");		
 		var $com1_langToOpt = $("#dic-langToOpt");
+		
+		var $com1_langToOptItem = $("#dic-langToOpt option");
+		var $com1_langFromOptItem = $("#dic-langFromOpt option");
+		
 		var $com1_langSwitch = $("#dic-langSwitch");
+		
 		
 
 
@@ -554,14 +560,18 @@ $(document).ready( function(){
 		});
 
 
-
+	 	//lang pad control
+	 	/*
 
 		$com1_langPad.bind("clickoutside", function(){	 			
 	 			$(this).hide();
-	 			$com1_overlay.hide(); 
+	 			//$com1_langToFrom.click();
+	 			//$com1_overlay.hide(); 
 	 			$com1_langToFrom.removeClass("dic-langToFromActive");		
 	 	});
+	 	
 	 	//must be after corresopondent pad whith clickoutside
+
 		$com1_langToFrom.click(function(e){
 		
 			if(e) e.stopPropagation();
@@ -577,9 +587,16 @@ $(document).ready( function(){
 			}
 			
 		});
+		*/
 
 
-		$com1_langFromOpt.click(function(){
+
+
+
+
+
+	
+		$com1_langFromOptItem.click(function(){
 			$com1_langFrom.text($(this).val()).animate(
 												{"background-color": "lightgreen"},
 												{duration: 1000}
@@ -589,10 +606,11 @@ $(document).ready( function(){
 													complete: function() {$(this).removeAttr("style")}
 												}
 											);
+			
 											
 		});
 		
-		$com1_langToOpt.click(function(){
+		$com1_langToOptItem.click(function(){
 			$com1_langTo.text($(this).val()).animate(
 												{"background-color": "lightgreen"},{duration: 1000}
 											).animate(
@@ -601,7 +619,9 @@ $(document).ready( function(){
 													complete: function() {$(this).removeAttr("style")}
 												}
 											);
+			
 		});
+
 		
 		$com1_langSwitch.click(function(){
 			
@@ -610,13 +630,16 @@ $(document).ready( function(){
 			$com1_langFromOpt.val($curLangTo);
 			$com1_langToOpt.val($curLangFrom);
 			
-			$com1_langFromOpt.click();
-			$com1_langToOpt.click();
-			
 			
 		});		
 
-
+		/*
+		$com1_langFromOpt.mouseleave(function(){
+			$com1_langFromOpt.hide();
+			$com1_langToOpt.hide();
+		});
+		*/
+		
 
 		
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
