@@ -43,6 +43,7 @@
 															'dev/jquery.ba-outside-events.min',
 															'dev/jquery.coloranim',
 															'dev/jquery.elastic',
+															'dev/jquery.tmpl.min',
 															'dev/func',
 															'dev/common1',
 															'dev/common2',

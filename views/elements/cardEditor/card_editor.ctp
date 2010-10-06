@@ -69,3 +69,12 @@
 		</div>
 	</div>
 </div>
+
+
+<script id="movieTemplate" type="text/x-jquery-tmpl"> 
+    <li><b>${Name}</b> <i>${Type}</i> (${ReleaseYear})</li>
+</script>
+
+
+
+

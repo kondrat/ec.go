@@ -9,8 +9,218 @@ Changes by Nick Fetchak:
 Published date : 2009/11/18
 
 
-<public:attach event="oncontentready" onevent="oncontentready('v08vnSVo78t4JfjH')" />
+Changes by Tom Butler (http://r.je : tom@r.je )
+
+- Now allows the <body> element to have border-radius applied
+- Added dwestp...@filesmania.de's fix for (partial) background-position support
+- Fixed issue where adding a border to a div with a background image would incorrectly position the background image
+- Fixed issue where background fill would be black in nested elements that had border-radius applied
+- Fixed issue on 3 levels of nesting by changing to ondocumentready instead of oncontentready
+- Separated out code into smaller functions in an attempt to make further CSS3 effect additions easier. Use createUnderlay() to create the base VML element underneath the target for any effect to be applied to.
+- Added support for box-shadow 
+- Added a better, more easily forward compatible window_resize function
+- Added atg2dg's implementation of border-top-right-radius from http://code.google.com/p/curved-corner/issues/detail?id=22
+- Added element.redraw() function to elements which can be called by javascript to allow dynamic resizing of the element.
+- Added hover support (not for IE6, also slower than I'd like)
+- Will now automatically redraw the element when it changes (e.g. is resized in javascript. Will be slow if the change affects document flow. I don't suggest doing this in a timeout).
+
+
+Published date: 2010/09/28
+
+
+
+<public:attach event="ondocumentready" onevent="oncontentready('v08vnSVo78t4JfjH')" />
 <script type="text/javascript">
+
+function createUnderlay(element) {
+
+var el = element;
+var i = 0;
+var limit = 100;
+
+if (element.tagName == 'BODY') {
+		el = el.parentElement;
+	
+		//this is silly but the only way to measure the body's x/y (body.offsetLeft is 0 in everything but IE7).
+		var measure = window.document.createElement('div');
+	
+		if (element.firstChild) element.insertBefore(measure, element.firstChild);
+		else element.appendChild(measure);
+
+		measure.style.width = '1px';
+		measure.style.height = '1px';
+		
+		//in IE7 (and possibly 6, this.offsetLeft is set)
+		var left_add = measure.offsetLeft + this.offsetLeft;
+		var top_add = measure.offsetTop + this.offsetTop;
+				
+		//now remove any padding
+		left_add -= parseInt(this.currentStyle.paddingLeft.split('px')[0]);
+		top_add -= parseInt(this.currentStyle.paddingTop.split('px')[0]);
+
+	}
+	else {
+		var left_add = 0;
+		var top_add = 0;
+		while ((typeof(el) != 'unknown') && (el.currentStyle.position != 'relative') && (el.tagName != 'BODY')) {
+			el = el.parentElement;
+			i++;
+			if (i >= limit) { return(false); }
+		}
+	}
+	
+	var strokeColor = element.currentStyle.borderColor;
+	var strokeWeight = parseInt(element.currentStyle.borderWidth);
+	
+	var el_zindex = parseInt(el.currentStyle.zIndex);
+	var el_pos = findPos(el);
+	
+
+	if (isNaN(el_zindex)) { el_zindex = 0; }
+	
+	var this_pos = findPos(element);
+	if (isNaN(strokeWeight)) strokeWeight = 0;
+	this_pos.y = top_add + this_pos.y + (0.5 * strokeWeight) - el_pos.y;
+	this_pos.x = left_add + this_pos.x + (0.5 * strokeWeight) - el_pos.x;
+	
+	
+
+	var corners = getarcs(element); 
+
+	var rect_size = {
+		'width': this.offsetWidth - strokeWeight,
+		'height': this.offsetHeight - strokeWeight
+	};
+	
+	
+	
+	var rect = document.createElement('v:shape');
+	
+	
+	 rect.coordorigin="0 0";
+    rect.coordsize = rect_size.width+" "+rect_size.height;
+    var topRightPoint = (rect_size.width - corners.topRight);
+    if (topRightPoint < 0) {
+        topRightPoint = corners.topLeft;
+    }
+    topRightPoint += ',0';
+
+    var rightTopPoint = rect_size.width+','+corners.topRight;
+    var rightBottomPoint = (rect_size.height - corners.bottomRight);
+
+
+    if (isNaN(rightBottomPoint) || rightBottomPoint < 0) {
+        rightBottomPoint = corners.topRight;
+    }
+    rightBottomPoint = rect_size.width+','+rightBottomPoint;
+    var bottomRightPoint = (rect_size.width - corners.bottomRight)+','+rect_size.height;
+    var bottomLeftPoint = corners.bottomLeft+','+rect_size.height;
+    var leftBottomPoint = '0,'+(rect_size.height - corners.bottomLeft);
+    var leftTopPoint = '0,'+corners.topLeft;
+    var topLeftPoint = corners.topLeft+',0';
+
+    var rightTopArc = '';
+    if (corners.topRight != 0) {
+        rightTopArc = 'c '+(rect_size.width-Math.ceil(corners.topRight/2))+',0 '+
+            rect_size.width+','+(Math.ceil(corners.topRight/2))+' '+
+            rightTopPoint+' ';
+    }
+    
+    
+    var rightBottomArc = '';
+    if (corners.bottomRight != 0) {
+        rightBottomArc = 'c '+(rect_size.width)+','+(rect_size.height - Math.ceil(corners.bottomRight/2))+' '+
+            (rect_size.width - Math.ceil(corners.bottomRight/2))+','+(rect_size.height)+' '+
+            bottomRightPoint+' ';
+    }
+    var leftBottomArc = '';
+    if (corners.bottomLeft != 0) {
+        leftBottomArc = 'c '+(Math.ceil(corners.bottomLeft/2))+','+rect_size.height+' '+
+            '0,'+(rect_size.height - Math.ceil(corners.bottomLeft/2))+' '+
+            leftBottomPoint+' ';
+    }
+    var topLeftArc = '';
+    if (corners.topLeft != 0) {
+        topLeftArc = 'c '+
+            '0,'+(Math.ceil(corners.topLeft/2))+' '+
+            (Math.ceil(corners.topLeft/2))+',0 '+
+            topLeftPoint+' ';
+    }
+
+    rect.path = 'm '+topLeftPoint+                          // start point
+        'l '+topRightPoint+' '+                             // top line
+        rightTopArc+                                        // top right arc
+        'l '+ rightBottomPoint+' '+                         // right line
+        rightBottomArc+                                     // bottom right arc
+        'l '+bottomLeftPoint+' '+                           // bottom line
+        leftBottomArc+                                      // bottom left arc
+        'l '+leftTopPoint+' '+                              // left line
+        topLeftArc+                                         // top left arc
+        ' x e';
+
+
+
+	rect.style.display = 'block';
+	rect.style.position = 'absolute';
+	
+	rect.style.top = this_pos.y +'px';
+	rect.style.left = this_pos.x +'px';
+	rect.style.width = rect_size.width +'px';
+	rect.style.height = rect_size.height +'px';
+	rect.style.antialias = true;
+	rect.style.zIndex = el_zindex - 1;
+	
+	
+	
+
+	
+	           
+	           
+	 	
+/*
+var arcSize = Math.min(parseInt(this.currentStyle['-moz-border-radius'] ||
+	                                this.currentStyle['-webkit-border-radius'] ||
+	                                this.currentStyle['border-radius'] ||
+	                                this.currentStyle['-khtml-border-radius']) /
+	                       Math.min(this.offsetWidth, this.offsetHeight), 1);
+	
+	
+	var rect = document.createElement('v:roundrect');
+	rect.arcsize = arcSize +'px';
+
+	rect.style.display = 'block';
+	rect.style.position = 'absolute';
+	
+	rect.style.top = this_pos.y +'px';
+	rect.style.left = this_pos.x +'px';
+	rect.style.width = rect_size.width +'px';
+	rect.style.height = rect_size.height +'px';
+	rect.style.antialias = true;
+	rect.style.zIndex = el_zindex - 1;
+	*/
+	
+	
+	
+	
+	window.document.body.appendChild(rect);
+	
+	
+	
+	
+	if (typeof(window.vml) == 'undefined') {
+		window.vml = new Array();
+
+		if (typeof(window.onresize) == 'function') { window.previous_onresize = window.onresize; }
+		window.onresize = full_redraw;
+	}
+	
+	
+	element.css3Effects.push(rect);
+
+	
+	return rect;
+}
+
 
 // findPos() borrowed from http://www.quirksmode.org/js/findpos.html
 function findPos(obj) {
@@ -22,28 +232,37 @@ function findPos(obj) {
 			curtop += obj.offsetTop;
 		} while (obj = obj.offsetParent);
 	}
-
+	
+	
 	return({
 		'x': curleft,
 		'y': curtop
 	});
 }
 
-function oncontentready(classID) {
-  if (this.className.match(classID)) { return(false); }
+function borderRadius(element) {
+	var rect  = createUnderlay(element);
+	
+	//element.style.background = '';
+	//element.style.borderColor = '';
+	
+	
+	
+	
+	var fillColor = element.currentStyle.backgroundColor;
+	var fillSrc = element.currentStyle.backgroundImage.replace(/^url\("(.+)"\)$/, '$1');
 
-	if (!document.namespaces.v) { document.namespaces.add("v", "urn:schemas-microsoft-com:vml"); }
-
-	this.className = this.className.concat(' ', classID);
-	var arcSize = Math.min(parseInt(this.currentStyle['-moz-border-radius'] ||
-	                                this.currentStyle['-webkit-border-radius'] ||
-	                                this.currentStyle['border-radius'] ||
-	                                this.currentStyle['-khtml-border-radius']) /
-	                       Math.min(this.offsetWidth, this.offsetHeight), 1);
-	var fillColor = this.currentStyle.backgroundColor;
-	var fillSrc = this.currentStyle.backgroundImage.replace(/^url\("(.+)"\)$/, '$1');
+	var fillPositionX = parseInt(element.currentStyle.backgroundPositionX.replace('px', '')) + Math.ceil(element.currentStyle.borderLeftWidth.replace('px', '')/2);
+	var fillPositionY = parseInt(element.currentStyle.backgroundPositionY.replace('px', '')) + Math.ceil( element.currentStyle.borderTopWidth.replace('px', '')/2);
+	
+	
+	var fillElementWidth = this.currentStyle.width.replace('px', '');
+	var fillElementHeight = this.currentStyle.height.replace('px', '');
 	var strokeColor = this.currentStyle.borderColor;
+	
+	
 	var strokeWeight = parseInt(this.currentStyle.borderWidth);
+
 	var stroked = 'true';
 	if (isNaN(strokeWeight)) {
 		strokeWeight = 0;
@@ -51,56 +270,96 @@ function oncontentready(classID) {
 		stroked = 'false';
 	}
 
-	this.style.background = 'transparent';
-	this.style.borderColor = 'transparent';
+	
+	element.style.background = 'transparent';
+	element.style.borderColor = 'transparent';
+	
 
-	// Find which element provides position:relative for the target element (default to BODY)
-	var el = this;
-	var limit = 100, i = 0;
-	while ((typeof(el) != 'unknown') && (el.currentStyle.position != 'relative') && (el.tagName != 'BODY')) {
-		el = el.parentElement;
-		i++;
-		if (i >= limit) { return(false); }
-	}
-	var el_zindex = parseInt(el.currentStyle.zIndex);
-	if (isNaN(el_zindex)) { el_zindex = 0; }
-	//alert('got tag '+ el.tagName +' with pos '+ el.currentStyle.position);
-
-	var rect_size = {
-		'width': this.offsetWidth - strokeWeight,
-		'height': this.offsetHeight - strokeWeight
-	};
-	var el_pos = findPos(el);
-	var this_pos = findPos(this);
-	this_pos.y = this_pos.y + (0.5 * strokeWeight) - el_pos.y;
-	this_pos.x = this_pos.x + (0.5 * strokeWeight) - el_pos.x;
-
-	var rect = document.createElement('v:roundrect');
-	rect.arcsize = arcSize +'px';
 	rect.strokecolor = strokeColor;
 	rect.strokeWeight = strokeWeight +'px';
 	rect.stroked = stroked;
-	rect.style.display = 'block';
-	rect.style.position = 'absolute';
-	rect.style.top = this_pos.y +'px';
-	rect.style.left = this_pos.x +'px';
-	rect.style.width = rect_size.width +'px';
-	rect.style.height = rect_size.height +'px';
-	rect.style.antialias = true;
-	rect.style.zIndex = el_zindex - 1;
-
+	//alert(rect.stroked);
+	
+	if (fillColor == 'transparent' && fillSrc == 'none') rect.filled = false;
 	var fill = document.createElement('v:fill');
+	
 	fill.color = fillColor;
 	fill.src = fillSrc;
+	fill.style.backgroundPosition = '5px 5px';
+	
 	fill.type = 'tile';
+	
+	
+	// from http://code.google.com/p/curved-corner/issues/attachmentText?id=51&aid=3354459078227954812&name=rounded-corners.htc&token=2b629c64fcefdb811ee7a67a4dfc42af
+	if((fillPositionX != 0 || fillPositionY != 0) && !isNaN(fillElementWidth) && fillElementWidth > 0 && !isNaN(fillElementHeight) && fillElementHeight > 0) {
+		fill.position = fillPositionX / fillElementWidth + ',' + fillPositionY / fillElementHeight;
+	}
 
-	rect.appendChild(fill);
-	el.appendChild(rect);
+	if (fillColor !== 'transparent' || fillSrc !== 'none') {
+		rect.appendChild(fill);
+	}
 
-	var css = el.document.createStyleSheet();
+
+/*rect.stroked = true;
+rect.strokedWeight = '2px';
+rect.strokecolor = '#000000';
+rect.filled = true;
+rect.style.top = '100px';*/
+	
+	
+}
+
+function boxShadow(element) {
+	
+	var style = element.currentStyle['-moz-box-shadow'] || element.currentStyle['-webkit-box-shadow'] || element.currentStyle['box-shadow'] || '';
+	
+	var parts = style.split('px');
+	if (parts.length == 1) { return(false); }
+
+	
+	var shadow = {
+		x: parseInt(parts[0] || 0),
+		y: parseInt(parts[1] || 0),
+		radius: parseInt(parts[2] || 0),
+		color: parts[3]
+	};		
+
+	var shad  = createUnderlay(element);	
+	shad.fillcolor = shadow.color;
+	shad.filled = true;
+	shad.stroked = false;	
+	shad.strokeWeight = 0 +'px';
+	shad.strokecolor = shadow.color;
+	shad.style.filter = 'progid:DXImageTransform.Microsoft.MotionBlur(Strength=' + shadow.radius + ', Direction=0, Add=\'false\') progid:DXImageTransform.Microsoft.MotionBlur(Strength=' + shadow.radius + ', Direction=90, Add=\'false\')';
+	shad.antialias = true;
+	shad.strokeOpacity = 0;
+	shad.style.left = 2 +  parseInt(shad.style.left) - (shadow.radius/2) + 'px';
+	shad.style.top = 2 + parseInt(shad.style.top) - (shadow.radius/2) + 'px';
+}
+
+
+window.originalHTML;
+
+function oncontentready(classID) {
+	if (!window.originalHTML) window.originalHTML = window.document.body.innerHTML;
+	
+	if (!window.css3elements) window.css3elements = new Array();
+	 window.css3elements.push(this);
+	 
+ 	if (this.className.match(classID)) { return(false); }
+
+	if (!document.namespaces.v) { document.namespaces.add("v", "urn:schemas-microsoft-com:vml"); }
+	this.className = this.className.concat(' ', classID);
+	
+	
+try {
+	var css = window.document.createStyleSheet();
 	css.addRule("v\\:roundrect", "behavior: url(#default#VML)");
 	css.addRule("v\\:fill", "behavior: url(#default#VML)");
-
+	css.addRule("v\\:shape", "behavior: url(#default#VML)");
+} catch (e) {}
+	
+	
 	isIE6 = /msie|MSIE 6/.test(navigator.userAgent);
 	// IE6 doesn't support transparent borders, use padding to offset original element
 	if (isIE6 && (strokeWeight > 0)) {
@@ -109,35 +368,159 @@ function oncontentready(classID) {
 		this.style.paddingBottom = parseInt(this.currentStyle.paddingBottom || 0) + strokeWeight;
 	}
 
-	if (typeof(window.rounded_elements) == 'undefined') {
-		window.rounded_elements = new Array();
-
-		if (typeof(window.onresize) == 'function') { window.previous_onresize = window.onresize; }
-		window.onresize = window_resize;
-	}
-	this.element.vml = rect;
-	window.rounded_elements.push(this.element);
+	this.zIndex = parseInt(this.currentStyle.zIndex);
+	
+	processElement(this);
 }
 
-function window_resize() {
-	if (typeof(window.rounded_elements) == 'undefined') { return(false); }
 
-	for (var i in window.rounded_elements) {
-		var el = window.rounded_elements[i];
+window.css3Elements = new Array();
 
-		var strokeWeight = parseInt(el.currentStyle.borderWidth);
-		if (isNaN(strokeWeight)) { strokeWeight = 0; }
 
-		var parent_pos = findPos(el.vml.parentNode);
-		var pos = findPos(el);
-		pos.y = pos.y + (0.5 * strokeWeight) - parent_pos.y;
-		pos.x = pos.x + (0.5 * strokeWeight) - parent_pos.x;
-
-		el.vml.style.top = pos.y +'px';
-		el.vml.style.left = pos.x +'px';
+function processElement(element) {
+	if (!element.css3Effects) window.css3Elements.push(element);
+		
+	element.css3Effects = new Array();
+	
+	
+	var pos = findPos(element);
+	element.processedOn = {
+		x: pos.x,
+		y: pos.y,
+		height: element.offsetHeight,
+		width: element.offsetWidth
+	};
+	
+	
+	if (!element.redraw) {
+		
+		
+		
+		element.originals = {
+			backgroundColor: element.currentStyle.backgroundColor,
+			backgroundImage: element.currentStyle.backgroundImage
+		};
+				
+	
+	    element.hasChanged = function() {
+	    	//compare current size/position to the values recorded when the effects were drawn  	
+	    	if (this.css3Effects.length > 0) {
+	    		var pos = findPos(this);
+	    		return !(
+	    				 this.processedOn.x == pos.x &&
+	    				 this.processedOn.y == pos.y &&
+	    				 this.processedOn.height == this.offsetHeight &&
+	    				 this.processedOn.width == this.offsetWidth
+	    				 ) ;
+	    		
+	    	}
+	    	else return false;
+	    }
+	    
+		element.redraw = function() {
+			if (!this.hasChanged()) return;
+			//Reset the original background color/image (these are reset by the radius vml)
+			if (this.originals.backgroundColor) {
+				this.style.backgroundColor = this.originals.backgroundColor;
+			}
+			if (this.originals.backgroundImage != '') {
+				 try {
+					 this.style.backgroundColor = this.originals.backgroundImage;
+				} catch(e) {}
+			}
+			
+			//remove all the attached effects
+			for (var i = 0; i < this.css3Effects.length; i++) 	this.css3Effects[i].parentNode.removeChild(this.css3Effects[i]);
+			
+			
+			//And get them redrawn
+			processElement(this);
+		}
+		
+		//Loop through styles looking for hovers
+		//Delete them... apply them to related elements
+		var hover = function() {
+			//IE needs time to apply the CSS :hover filter, it seems to do it after onmouseover
+			setTimeout(function() {
+				if (element.hasChanged()) {
+				 if (element.hasLayout)  element.redraw();
+				 else full_redraw();
+				} 
+			}, 1); 	
+		}
+		
+		element.attachEvent('onmouseover', hover);
+		element.attachEvent('onmouseout', hover);
+		element.attachEvent('onpropertychange', hover);		
 	}
-
-	if (typeof(window.previous_onresize) == 'function') { window.previous_onresize(); }
+	
+	//Apply shadow then radius. Must be done in this order as it builds from the bottom up.
+	boxShadow(element);
+	borderRadius(element);
 }
+
+function full_redraw() {
+	//Redraw each element needed. Should be easier to keep this forward compatible.
+	for (var i = 0; i < window.css3Elements.length; i++) window.css3Elements[i].redraw();
+}
+
+
+function getarcs(elem) {
+    var corners = {topRight: 0, bottomRight: 0, bottomLeft: 0, topLeft: 0}
+    
+    var arcSize = elem.currentStyle['-moz-border-radius'] ||
+                           elem.currentStyle['-webkit-border-radius'] ||
+                           elem.currentStyle['border-radius'] ||
+                           elem.currentStyle['-khtml-border-radius'];
+                           
+                           
+    if (arcSize) {
+    	if (arcSize.toString().split(' ').length > 2) {
+    		var parts = arcSize.split(' ');
+    		corners = {topRight: parseInt(parts[1]), bottomRight: parseInt(parts[2]), bottomLeft: parseInt(parts[3]), topLeft: parseInt(parts[0])};
+    	}
+        else corners = {topRight: parseInt(arcSize), bottomRight: parseInt(arcSize), bottomLeft: parseInt(arcSize), topLeft: parseInt(arcSize)}
+    }
+
+    var topRightArc = parseInt(elem.currentStyle['-moz-border-radius-topright'] ||
+                               elem.currentStyle['-webkit-border-top-right-radius'] ||
+                               elem.currentStyle['border-top-right-radius'] ||
+                               elem.currentStyle['-khtml-border-top-right-radius']);
+
+    if (!isNaN(topRightArc)) {
+        corners.topRight = parseInt(topRightArc);
+    }
+
+    var bottomRightArc = parseInt(elem.currentStyle['-moz-border-radius-bottomright'] ||
+                                  elem.currentStyle['-webkit-border-bottom-right-radius'] ||
+                                  elem.currentStyle['border-bottom-right-radius'] ||
+                                  elem.currentStyle['-khtml-border-bottom-right-radius']);
+
+    if (!isNaN(bottomRightArc)) {
+        corners.bottomRight = parseInt(bottomRightArc);
+    }
+
+    var bottomLeftArc = parseInt(elem.currentStyle['-moz-border-radius-bottomleft'] ||
+                                 elem.currentStyle['-webkit-border-bottom-left-radius'] ||
+                                 elem.currentStyle['border-bottom-left-radius'] ||
+                                 elem.currentStyle['-khtml-border-bottom-left-radius']);
+
+    if (!isNaN(bottomLeftArc)) {
+        corners.bottomLeft = parseInt(bottomLeftArc);
+    }
+
+    var topLeftArc = parseInt(elem.currentStyle['-moz-border-radius-topleft'] ||
+                              elem.currentStyle['-webkit-border-top-left-radius'] ||
+                              elem.currentStyle['border-top-left-radius'] ||
+                              elem.currentStyle['-khtml-border-top-left-radius']);
+
+    if (!isNaN(topLeftArc)) {
+        corners.topLeft = parseInt(topLeftArc);
+    }
+
+    return corners;
+}
+
+
 </script>
 

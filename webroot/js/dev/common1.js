@@ -445,7 +445,9 @@ $(document).ready( function(){
 						$.ajax({
 							type: "POST",
 							url: path+"/cards/getTransl",
-							data: {"data[cardword]": $userWord, "data[langFrom]" : $com1_langFrom, "data[langTo]" : $com1_langTo },
+							//temp
+							//data: {"data[cardword]": $userWord, "data[langFrom]" : $com1_langFrom, "data[langTo]" : $com1_langTo },
+							data: {"data[cardword]": "get", "data[langFrom]" : "en", "data[langTo]" : "ru" },
 							dataType: "json",					
 					    success: function(data){
 											
