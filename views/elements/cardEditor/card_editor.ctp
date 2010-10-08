@@ -71,10 +71,13 @@
 </div>
 
 
-<script id="movieTemplate" type="text/x-jquery-tmpl"> 
-    <li><b>${Name}</b> <i>${Type}</i> (${ReleaseYear})</li>
+<script id="translTemplate" type="text/x-jquery-tmpl"> 
+    <li><b>${$item}  </b></li>
 </script>
 
-
-
+<div style="position:absolute;top:20px;left:0;background-color:#eee;padding:3px;">
+	transl will be here
+	<button id="testBut">transl</button>
+	<div id="translTempWrapper">transl...</div>
+</div>
 

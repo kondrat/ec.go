@@ -561,6 +561,53 @@ $(document).ready( function(){
 			return false;
 		});
 
+		/*
+		var temp = 
+								{"The Red Violin"},{"yello"},{"red"}
+
+								;*/
+		var temp2 = [
+									["violin","yello","red"]
+								];
+
+
+		$("#testBut").click(function(){
+						
+						$("#translTempWrapper").empty();
+			
+						$.ajax({
+							type: "POST",
+							url: path+"/cards/getTransl",
+							data: {"data[cardword]": "get", "data[langFrom]" : "en", "data[langTo]" : "ru" },
+							dataType: "json",					
+					    success: function(data){
+											
+											if( data[0] ) {
+									  
+												if( data[1] ) {
+													
+													$( "#translTemplate" ).tmpl( temp2
+																											).appendTo("#translTempWrapper");
+													
+																							  
+												} else {
+																															/*	, { 
+																															    gt: function( separator ) {
+																															        return this.data.item.join( separator );
+																															    }	*/												
+												}
+												
+											}				
+											
+					      },
+					    error: function(e, xhr, settings, exception){
+					      alert('Problem with the server. Try again later.');
+					    }
+          	});			
+		})
+
+
+
 
 	 	//lang pad control
 	 	/*
