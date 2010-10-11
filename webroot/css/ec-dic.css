@@ -201,47 +201,18 @@ span.dic-wordHis:hover{
 }
 
 
-.dic-langPadWrapper {
-	background:url("../img/pic/aaaaaa_40x100.png") repeat scroll 0 0 transparent;
-  padding:5px;
-  position:absolute;
-  top:40px;
-  left:10px;
-  
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	/*behavior: url(./css/border-radius.htc);*/  
-}
-.dic-langPad{
-	background-color:#f9f9f9;
-	border:1px solid #aaa;
-	padding:3px 10px;
-	float:left;
-	
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-	/*behavior: url(./css/border-radius.htc);*/		
-}
+
 .tetete{
 	float:left;
 }
 
-#dic-closeLangPad {
-	background:transparent url(../img/icons/error.png) no-repeat scroll right 0;
-	height:16px;
-	width:16px;
-	position:absolute;
-	right:8px;
-	top:8px;
-}
+
 
 
 
 #dic-langSwitch{
-	background:url("../img/icons/lang_switch.png") no-repeat scroll 0 0 #EEEEEE;
-	border:1px solid #AAAAAA;
+	background:url("../img/icons/lang_switch.png") no-repeat scroll 0 0 #eee;
+	border:1px solid #aaa;
 	color:red;
 	display:inline-block;
 	height:17px;
@@ -258,9 +229,7 @@ span.dic-wordHis:hover{
 	background-color:#ddd;
 	border-color:#aaa;
 }
-.dic-langPadLabel{
-	color:brown;
-}
+
 
 #dic-word2Transl{
 	width:600px;

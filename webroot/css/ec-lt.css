@@ -18,3 +18,51 @@
 .lt-edit a{
 	text-decoration:none;
 }
+
+.lt-langFrom, .lt-langTo{
+	background-color:beige;
+	border:1px solid #aaa;
+	line-height:1em;
+	padding:3px;
+	margin:0 5px;
+
+	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	/*behavior: url(./css/border-radius.htc);*/	
+}
+
+
+.lt-langPadWrapper {
+	background:url("../img/pic/aaaaaa_40x100.png") repeat scroll 0 0 transparent;
+  padding:5px;
+  position:absolute;
+	top:80px;
+	z-index:1000;
+  left:350px;
+  
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	/*behavior: url(./css/border-radius.htc);*/  
+}
+.lt-langPad{
+	background-color:#f9f9f9;
+	border:1px solid #aaa;
+	padding:3px 10px;
+	float:left;
+	
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	/*behavior: url(./css/border-radius.htc);*/		
+}
+#lt-closeLangPad {
+	background:transparent url(../img/icons/error.png) no-repeat scroll right 0;
+	height:16px;
+	width:16px;
+	position:absolute;
+	right:8px;
+	top:8px;
+}

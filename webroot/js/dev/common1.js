@@ -786,5 +786,27 @@ $(document).ready( function(){
 		});
 
 
+
+
+			$("#lt-langPad").bind("clickoutside", function(){	 			
+		 			//$("#lt-langTo").trigger("click");
+		 			console.log('nu');
+		 	});
+
+	
+
+		$("#lt-langTo").click(function(){
+			
+			if( $("#lt-langPad").is(":hidden") ) {
+				$("#lt-langPad").show();
+			} else {
+				$("#lt-langPad").hide();
+			}
+
+		});
+		
+		$("#lt-langFrom").click(function(){
+			
+		});	
 				
 });

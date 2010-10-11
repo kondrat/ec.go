@@ -64,25 +64,14 @@
   		);
   	?>  
 
-<div id="dic-langPad" class="dic-langPadWrapper hide">
+<div id="lt-langPad" class="lt-langPadWrapper hide">
 	
-  <div class="dic-langPad">
-  	
-	  	
-	 	   	 	
+  <div class="lt-langPad">
+  	 	   	 	
 	    <div style="float:left;">
-	    	<span class="dic-langPadLabel"><?php __('From');?></span>
-	    	<?php echo $form->input('from', array('id'=>'dic-langFromOpt','selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
+	    	<?php echo $form->input('from', array('id'=>'lt-langFromOpt','selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
 	    </div> 
-	    <div style="float:left;">
-	    	<span id="dic-langSwitch"></span>
-	    </div>
-	    <div style="float:left;">
-	    	<span class="dic-langPadLabel"><?php __('To');?></span>
-	    	<?php echo $form->input('to', array('id'=>'dic-langToOpt','selected'=>'ru','label'=>false,'div'=>false,'options' => $sideA)); ?>
-	    </div>
-	    <!--<div id="dic-closeLangPad"></div>-->
-
+	    <!--<div id="lt-closeLangPad"></div>-->
 
 	</div> 
 	 
