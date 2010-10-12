@@ -71,7 +71,7 @@
 	    <div style="float:left;">
 	    	<?php echo $form->input('from', array('id'=>'lt-langFromOpt','selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
 	    </div> 
-	    <!--<div id="lt-closeLangPad"></div>-->
+	    <div id="lt-closeLangPad"></div>
 
 	</div> 
 	 
