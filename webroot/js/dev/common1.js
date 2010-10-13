@@ -49,7 +49,8 @@ $(document).ready( function(){
 		var $com1_langSwitch = $("#dic-langSwitch");
 		
 
-		var $com1_ltLangToFrom = $("#lt-langTo,#lt-langFrom");		
+		var $com1_ltLangToFrom = $("#lt-langTo,#lt-langFrom");
+		var $com1_ltLangPad = $("#lt-langPad");		
 		var $com1_ltCloseLangPad = $("#lt-closeLangPad");
 
 
@@ -134,10 +135,10 @@ $(document).ready( function(){
 	 		
 		$com1_inlineMiddleDiv.click( function(e){
 			
-			/*
+			
 			if(e) e.stopPropagation();
 			if(e) e.preventDefault();
-			*/
+			
 			
 			
 			//disable save button
@@ -224,10 +225,8 @@ $(document).ready( function(){
 
 		
 		//bind outside event
-		$com1_inputBlock.bind("clickoutside", function(){	 			
-	 			$(this).hide();
-	 			
-	 			//$com1_inpBlOk.click();		
+		$com1_inputBlock.bind("clickoutside", function(){	 				 			
+	 			$com1_inpBlOk.click();		
 	 	});	
 	
 		$com1_plusMenu.click(function(e){
@@ -798,8 +797,9 @@ $(document).ready( function(){
 
 
 			
-			$("#lt-langPad").bind("clickoutside", function(event){
+			$com1_ltLangPad.bind("clickoutside", function(event){
 				$(this).hide();
+				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
 		 	});
 			
 	
@@ -809,17 +809,18 @@ $(document).ready( function(){
 				if(event) event.stopPropagation();
 				if(event) event.preventDefault();
 
-			$thisLang = $(this);
-			$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+				$thisLang = $(this);
+				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+				//$com1_overlay.show();	
 							
-			if( $("#lt-langPad").is(":hidden") ) {
-				$("#lt-langPad").show();
-			} else {
-				$("#lt-langPad").hide();
-			}
-			
-			$("#lt-langFromOpt").val( $thisLang.text().toLowerCase() );
-			$thisLang.addClass("lt-langToFromActive");
+				if( $com1_ltLangPad.is(":hidden") ) {
+					$com1_ltLangPad.show();
+				} else {
+					$com1_ltLangPad.hide();
+				}
+				
+				$("#lt-langFromOpt").val( $thisLang.text().toLowerCase() );
+				$thisLang.addClass("lt-langToFromActive");
 
 		});
 		
@@ -827,11 +828,16 @@ $(document).ready( function(){
 			
 			var t =	$(this).val().toUpperCase();
 			$com1_ltLangToFrom.filter(".lt-langToFromActive").text(t);
-		
+			setTimeout(
+									function(){
+										$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+										$com1_ltLangPad.fadeOut();
+									}, 1000);
+			
 		});	
 	
 		$com1_ltCloseLangPad.click(function(){
-			$("#lt-langPad").hide();
+			$com1_ltLangPad.trigger("clickoutside");
 		});
 	
 				
