@@ -226,7 +226,7 @@ $(document).ready( function(){
 		
 		//bind outside event
 		$com1_inputBlock.bind("clickoutside", function(){	 				 			
-	 			$com1_inpBlOk.click();		
+	 			//$com1_inpBlOk.click();		
 	 	});	
 	
 		$com1_plusMenu.click(function(e){
@@ -796,48 +796,58 @@ $(document).ready( function(){
 
 
 
-			
-			$com1_ltLangPad.bind("clickoutside", function(event){
-				$(this).hide();
+
+		//lt lang pad play
+		
+			//to close this lang pad by several methods.
+			function ltLangPagClose(){
+				$com1_ltLangPad.hide();
 				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+			};
+			
+			$com1_ltLangPad.bind("clickoutside", function(event){	
+				console.log(event.target);			
+				ltLangPagClose();
 		 	});
 			
 	
 
-		$com1_ltLangToFrom.click(function(event){
+		$com1_ltLangToFrom.click( function(event){
 			
 				if(event) event.stopPropagation();
 				if(event) event.preventDefault();
 
 				$thisLang = $(this);
-				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+				
 				//$com1_overlay.show();	
 							
 				if( $com1_ltLangPad.is(":hidden") ) {
 					$com1_ltLangPad.show();
+					$thisLang.addClass("lt-langToFromActive");
 				} else {
-					$com1_ltLangPad.hide();
+					ltLangPagClose();
 				}
 				
 				$("#lt-langFromOpt").val( $thisLang.text().toLowerCase() );
-				$thisLang.addClass("lt-langToFromActive");
+				
 
 		});
 		
 		$("#lt-langFromOpt option").click(function(){
 			
+			
 			var t =	$(this).val().toUpperCase();
 			$com1_ltLangToFrom.filter(".lt-langToFromActive").text(t);
-			setTimeout(
-									function(){
-										$com1_ltLangToFrom.removeClass("lt-langToFromActive");
-										$com1_ltLangPad.fadeOut();
-									}, 1000);
+			setTimeout(function(){
+				$com1_ltLangPad.fadeOut();
+				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+			}, 1000);
 			
 		});	
 	
 		$com1_ltCloseLangPad.click(function(){
-			$com1_ltLangPad.trigger("clickoutside");
+				$com1_ltLangPad.fadeOut();
+				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
 		});
 	
 				
