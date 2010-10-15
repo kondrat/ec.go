@@ -1,12 +1,15 @@
 $(document).ready( function(){
+	
 		//test comment
-		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"1"});;
-		var $com1_mainWord =  $("#ce-ins-1").data({"dicIns":"#ce-ins-3"});
-		var $com1_moreWord =  $("#ce-ins-2");//.data({"tip":"#ce-ins-1"});
-		var $com1_translWord =  $("#ce-ins-3").data({"dicIns":"Type here a translation"});
-		var $com1_exWord =  $("#ce-ins-4");//.data({"tip":"Type here a example"});
-		var $com1_defWord =  $("#ce-ins-5");//.data({"tip":"Type here a defenition"});
-		var $com1_synWord =  $("#ce-ins-6");//.data({"tip":"Type here a synonims"});
+		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"1"});
+		
+		var $com1_mainWord =  $("#ce-ins-1").data({"side":1});
+		var $com1_moreWord =  $("#ce-ins-2").data({"side":1});
+		var $com1_translWord =  $("#ce-ins-3").data({"side":2});
+		var $com1_exWord =  $("#ce-ins-4").data({"side":2});
+		var $com1_defWord =  $("#ce-ins-5").data({"side":2});
+		var $com1_synWord =  $("#ce-ins-6").data({"side":2});
+		
 		var $com1_plusMenu =  $(".ce-plusMenu span", "#ce-cardEditor");
 		var $com1_inputBlock =  $("#ce-inputBlock");
 		var $com1_inlineMiddleDiv =  $("div[id^='ce-ins-']", "#ce-cardEditor");
@@ -48,10 +51,14 @@ $(document).ready( function(){
 		
 		var $com1_langSwitch = $("#dic-langSwitch");
 		
-
+		var $com1_ltWrapper = $("#lt-wrapper");
 		var $com1_ltLangToFrom = $("#lt-langTo,#lt-langFrom");
+		var $com1_ltLangTo = $("#lt-langTo");
+		var $com1_ltLangFrom = $("#lt-langFrom");
+		
 		var $com1_ltLangPad = $("#lt-langPad");		
 		var $com1_ltCloseLangPad = $("#lt-closeLangPad");
+		var $com1_ltLangFromOpt = $("#lt-langFromOpt");
 
 
 
@@ -130,8 +137,6 @@ $(document).ready( function(){
 		
 
 		//this is a click on the fileds in the editior.
-		
-
 	 		
 		$com1_inlineMiddleDiv.click( function(e){
 			
@@ -170,7 +175,9 @@ $(document).ready( function(){
 			var $thisTipBlock = $thisTextBlock.prev();			
 			var $thisText = $.trim($thisTextBlock.text());
 			
-			//var $thisLineHeight = $thisLine.height();
+			var $curLineSide = $thisLine.data("side");		
+			$com1_cardEditor.data( "sides",$curLineSide );
+			
 			
 			$thisLine.show();
 		
@@ -236,7 +243,7 @@ $(document).ready( function(){
 			var $this = $(this);
 			var insId = $this.attr("id").replace("ce-plus-ins-","");
 			if(typeof(insId) !== "undefined") {
-				insIdObj = $("#ce-ins-"+insId);
+				var insIdObj = $("#ce-ins-"+insId);
 				insIdObj.click();
 			}
 		});	
@@ -417,22 +424,22 @@ $(document).ready( function(){
       clearTimeout($com1_timerInputStr);
     });
 	
-
+		
 		$com1_inpBlTr.click(function(){
-			
+		
+			alert("sides: "+$com1_cardEditor.data( "sides"));
+		
 			$com1_dicWrapperCtrl.trigger("click");
 			
 			var $word2Transl = $com1_inStr.val();
 			$com1_word2Transl.val($word2Transl);
 			
-			$com1_word2TranslBtn.trigger("click");
-			
-			
+			$com1_word2TranslBtn.trigger("click");		
 			
 		});
 
 
-						
+		//translation of the word				
 		$com1_word2TranslBtn.click( function() {
 			
 		
@@ -570,6 +577,7 @@ $(document).ready( function(){
 			return false;
 		});
 
+//toDel!!!!!!!!!!!!
 		/*
 		var temp = 
 								{"The Red Violin"},{"yello"},{"red"}
@@ -579,7 +587,7 @@ $(document).ready( function(){
 									["violin","yello","red"]
 								];
 
-
+//toDel!!!!!!!!!!!!!!!!!!
 		$("#testBut").click(function(){
 						
 						$("#translTempWrapper").empty();
@@ -614,39 +622,6 @@ $(document).ready( function(){
 					    }
           	});			
 		})
-
-
-
-
-	 	//lang pad control
-	 	/*
-
-		$com1_langPad.bind("clickoutside", function(){	 			
-	 			$(this).hide();
-	 			//$com1_langToFrom.click();
-	 			//$com1_overlay.hide(); 
-	 			$com1_langToFrom.removeClass("dic-langToFromActive");		
-	 	});
-	 	
-	 	//must be after corresopondent pad whith clickoutside
-
-		$com1_langToFrom.click(function(e){
-		
-			if(e) e.stopPropagation();
-			if(e) e.preventDefault();
-			
-			var $thisCtrlPanel = $(this);
-			if( $com1_langPad.is(":hidden") ) {
-				$com1_langPad.show();
-				$thisCtrlPanel.addClass("dic-langToFromActive");
-			}else{
-				$com1_langPad.hide();
-				$thisCtrlPanel.removeClass("dic-langToFromActive");
-			}
-			
-		});
-		*/
-
 
 
 
@@ -690,14 +665,7 @@ $(document).ready( function(){
 			
 			
 		});		
-
-		/*
-		$com1_langFromOpt.mouseleave(function(){
-			$com1_langFromOpt.hide();
-			$com1_langToOpt.hide();
-		});
-		*/
-		
+	
 
 		
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
@@ -798,51 +766,70 @@ $(document).ready( function(){
 
 
 		//lt lang pad play
-		
-			//to close this lang pad by several methods.
-			function ltLangPagClose(){
-				$com1_ltLangPad.hide();
-				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
-			};
+
+			//set initial langTo and langFrom from html
+			
+
 			
 			$com1_ltLangPad.bind("clickoutside", function(event){	
-				console.log(event.target);			
-				ltLangPagClose();
+				$com1_ltCloseLangPad.click();
 		 	});
 			
-	
-
-		$com1_ltLangToFrom.click( function(event){
-			
-				if(event) event.stopPropagation();
-				if(event) event.preventDefault();
-
-				$thisLang = $(this);
+			//lt lang pad functions
+			$.fn.thisLangSide = function(thisLangSide){
+					
+				return this.each(function(){
 				
-				//$com1_overlay.show();	
-							
-				if( $com1_ltLangPad.is(":hidden") ) {
-					$com1_ltLangPad.show();
-					$thisLang.addClass("lt-langToFromActive");
-				} else {
-					ltLangPagClose();
-				}
-				
-				$("#lt-langFromOpt").val( $thisLang.text().toLowerCase() );
-				
-
-		});
+					if(!thisLangSide){
+						return;
+					}
+					
+					$(this).click(function(e){
+						
+							if(e) e.stopPropagation();
+							if(e) e.preventDefault();
+						
+							$thisLang = $(this);
+														
+							if(  !$thisLang.hasClass("lt-langToFromActive") ) {
+								$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+								var ltLangToPos = $thisLang.offset();			
+								var ltWrapperPos = $com1_ltWrapper.offset();						
 		
-		$("#lt-langFromOpt option").click(function(){
-			
-			
-			var t =	$(this).val().toUpperCase();
-			$com1_ltLangToFrom.filter(".lt-langToFromActive").text(t);
-			setTimeout(function(){
-				$com1_ltLangPad.fadeOut();
-				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
-			}, 1000);
-			
+								var setTop = (ltLangToPos.top - ltWrapperPos.top) + 23 ; 
+								var setLeft = (ltLangToPos.left - ltWrapperPos.left) - 80; 
+								
+								$com1_ltLangPad.css({"left":setLeft,"top":setTop});														
+								$com1_ltLangPad.show();
+								$thisLang.addClass("lt-langToFromActive");
+								$com1_ltLangFromOpt.val( $thisLang.text().toLowerCase() );
+								
+							} else {
+								$com1_ltLangPad.hide();
+								$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+							}						
+					});
+					
+				});
+			};
+
+
+
+			$com1_ltLangTo.thisLangSide('m').data("lang", $com1_ltLangTo.text().toLowerCase());
+			$com1_ltLangFrom.thisLangSide('m').data("lang", $com1_ltLangFrom.text().toLowerCase());;
+
+
+
+		
+		$com1_ltLangFromOpt.change(function(){
+
+				var t =	$(this).val().toUpperCase();
+				$com1_ltLangToFrom.filter(".lt-langToFromActive").text(t).data("lang",t);
+				setTimeout(function(){
+					$com1_ltLangPad.fadeOut();
+					$com1_ltLangToFrom.removeClass("lt-langToFromActive");
+				}, 500);
+
 		});	
 	
 		$com1_ltCloseLangPad.click(function(){

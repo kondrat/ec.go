@@ -4,6 +4,7 @@
 
 .lt-wrapper{
 	float:left;
+	position:relative;
 }
 .lt-lesson, .lt-theme{
 	font-family:Georgia, Times New Roman, serif;
