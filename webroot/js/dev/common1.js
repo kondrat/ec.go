@@ -4,11 +4,11 @@ $(document).ready( function(){
 		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"1"});
 		
 		var $com1_mainWord =  $("#ce-ins-1").data({"side":1});
-		var $com1_moreWord =  $("#ce-ins-2").data({"side":1});
+		var $com1_moreWord =  $("#ce-ins-2").data({"side":3});
 		var $com1_translWord =  $("#ce-ins-3").data({"side":2});
-		var $com1_exWord =  $("#ce-ins-4").data({"side":2});
-		var $com1_defWord =  $("#ce-ins-5").data({"side":2});
-		var $com1_synWord =  $("#ce-ins-6").data({"side":2});
+		var $com1_exWord =  $("#ce-ins-4").data({"side":3});
+		var $com1_defWord =  $("#ce-ins-5").data({"side":3});
+		var $com1_synWord =  $("#ce-ins-6").data({"side":3});
 		
 		var $com1_plusMenu =  $(".ce-plusMenu span", "#ce-cardEditor");
 		var $com1_inputBlock =  $("#ce-inputBlock");
@@ -102,7 +102,31 @@ $(document).ready( function(){
 			$(this).removeClass("ce-cardEditorActive");
 		});
 
-
+        //function thats slides down the translate btn.
+        //side type we take from data "side" from cad editor top wrapper.
+        //add logic for lang to from switching.
+        function slideDownTrl(sideTrlType) {
+          if(!sideTrlType){
+            return;
+          } else {
+            var type = sideTrlType;
+          }
+          switch(type){
+            case 1:
+//              alert(type+": case");
+              $com1_inBlTrWrap.slideDown();
+              return;
+            case 2:
+//              alert(type+": case");
+              $com1_inBlTrWrap.slideDown();
+              return;
+            case 3:
+              $com1_inBlTrWrap.hide();
+              return;
+            default:
+              return;
+          }
+        };
 
 		
 		$com1_inlineMiddleDiv.hover(function(){
@@ -122,7 +146,7 @@ $(document).ready( function(){
 			//cur line		
 			$(this).removeClass("ce-currentLineActive");
 			//menu
-      $com1_plusMenu.removeClass("ce-plusMenuHover");
+            $com1_plusMenu.removeClass("ce-plusMenuHover");
 		});
 
 		$com1_plusMenu.hover(function(){
@@ -148,9 +172,7 @@ $(document).ready( function(){
 			
 			//disable save button
 			$com1_saveCardBtn.attr("disabled","disabled");
-			
-
-			
+						
 			//treatment of the line which we has left.
 			
 			var $prevLineId = $com1_cardEditor.data("curLineId");	
@@ -160,8 +182,8 @@ $(document).ready( function(){
 			var $prevTextBlock = $prevLine.find("span.ce-insStrText");	
 			var $prevText = $.trim($prevTextBlock.text());		
 			if( $prevText === '') {					
-						//$prevTextBlock.prev().show();
-						$prevLine.fadeOut();							
+			//$prevTextBlock.prev().show();
+              $prevLine.fadeOut();
 			} else {
 				//$prevTextBlock.prev().hide();
 			}												
@@ -182,16 +204,17 @@ $(document).ready( function(){
 			$thisLine.show();
 		
 			if( $thisText === '') {										
-					$thisTipBlock.show();
-					$com1_inStr.addClass("ce-inputTip");
-					var $thisTipText = $thisTipBlock.text();						
-					$com1_inStr.val($thisTipText);
-					$com1_inBlTrWrap.hide();												
+                $thisTipBlock.show();
+                $com1_inStr.addClass("ce-inputTip");
+                var $thisTipText = $thisTipBlock.text();
+                $com1_inStr.val($thisTipText);
+                $com1_inBlTrWrap.hide();
 			} else {
 				$thisTipBlock.hide();
 				$com1_inStr.removeClass("ce-inputTip");
 				$com1_inStr.focus().val($thisText);
-				$com1_inBlTrWrap.slideDown();
+                //function with we checking if it sutable for translation of not
+                slideDownTrl($com1_cardEditor.data("sides"));
 			}					
 	
 			$thisLine.addClass("ce-currentLine");
@@ -280,7 +303,7 @@ $(document).ready( function(){
 			  		} else {
 			  			$curLineTipBlock.hide();
 			  			$com1_inStr.removeClass("ce-inputTip");
-			  			$com1_inBlTrWrap.slideDown();
+			  			slideDownTrl($com1_cardEditor.data("sides"));
 			  		}
 		  			
 		  			//printing the text from input to the correspondent line;				
