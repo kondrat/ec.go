@@ -32,7 +32,7 @@
 													);
 		echo $html->script(array(	
 															'dev/vars',
-															'jquery/jquery-1.4.2.min',
+															'jquery/jquery-1.4.3.min',
 															//'jquery/jquery.form',
 															//'jquery/jquery-ui-1.8.custom.min',
 															'jquery/jquery.ui.core.min',

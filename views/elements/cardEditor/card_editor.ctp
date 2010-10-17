@@ -58,7 +58,7 @@
 		</div>
 		<div id="ce-inBlTrWrap" class="ce-inputBlockTransl hide">
 			<a id="ce-inpBlTr" href="javascript:;" class="ec-but-minibutton"><span><?php __('Translate');?></span></a>
-			<span style="color:brown;font-weight:bold;">en</span> &raquo; <span style="color:green;font-weight:bold;">ru</span>
+			<span id="ce-langFrom"></span> &raquo; <span id="ce-langTo"></span>
 		</div>	
 		<div id="ce-inpBlOk"></div>
 	</div>	

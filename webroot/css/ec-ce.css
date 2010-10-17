@@ -226,3 +226,12 @@ div.ce-cardEditorActive {
 	background-color:#eee;
 }
 
+#ce-langFrom{
+  color:brown;
+  font-weight:bold;
+}
+#ce-langTo{
+  color:green;
+  font-weight:bold;
+}
+

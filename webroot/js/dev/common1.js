@@ -17,10 +17,10 @@ $(document).ready( function(){
 		var $com1_inStr = $("#ce-inStr");
 		//this block slides down with button "translate"
 		var $com1_inBlTrWrap = $("#ce-inBlTrWrap");
-		/*
-		var $com1_langTo = "ru";
-		var $com1_langFrom = "en";
-		*/
+		//lang to and from in the sliding pad
+		var $com1_ceLangTo = $("#ce-langTo");
+		var $com1_ceLangFrom = $("#ce-langFrom");
+		
 		var $com1_insInAlert = $("#dic-insInAlert");
 		var $com1_dicWrapper = $("#dic-dicWrapper");
 		var $com1_dicIns = $("#ce-dicIns");
@@ -113,11 +113,13 @@ $(document).ready( function(){
           }
           switch(type){
             case 1:
-//              alert(type+": case");
+              $com1_ceLangFrom.text($com1_ltLangFrom.data("lang").toUpperCase());
+              $com1_ceLangTo.text($com1_ltLangTo.data("lang").toUpperCase());
               $com1_inBlTrWrap.slideDown();
               return;
             case 2:
-//              alert(type+": case");
+              $com1_ceLangTo.text($com1_ltLangFrom.data("lang").toUpperCase());
+              $com1_ceLangFrom.text($com1_ltLangTo.data("lang").toUpperCase());
               $com1_inBlTrWrap.slideDown();
               return;
             case 3:
@@ -450,7 +452,10 @@ $(document).ready( function(){
 		
 		$com1_inpBlTr.click(function(){
 		
-			alert("sides: "+$com1_cardEditor.data( "sides"));
+//			alert("sides: "+$com1_cardEditor.data( "sides"));
+
+            $com1_langFromOpt.val($com1_ceLangFrom.text().toLowerCase());
+            $com1_langToOpt.val($com1_ceLangTo.text().toLowerCase());
 		
 			$com1_dicWrapperCtrl.trigger("click");
 			
@@ -467,9 +472,6 @@ $(document).ready( function(){
 			
 		
 			var $userWord = $.trim($com1_word2Transl.val()).toLowerCase();
-
-		
-			$("#dic-translFor").text($userWord);
 			
 			//dictionary preparation
 			$(".dic-dicSwBase").hide();
@@ -486,7 +488,7 @@ $(document).ready( function(){
 							url: path+"/cards/getTransl",
 							//temp
 							//data: {"data[cardword]": $userWord, "data[langFrom]" : $com1_langFrom, "data[langTo]" : $com1_langTo },
-							data: {"data[cardword]": "get", "data[langFrom]" : "en", "data[langTo]" : "ru" },
+							data: {"data[cardword]": $userWord, "data[langFrom]" : $com1_langFromOpt.val(), "data[langTo]" : $com1_langToOpt.val()},
 							dataType: "json",					
 					    success: function(data){
 											
@@ -585,6 +587,12 @@ $(document).ready( function(){
 											
 											//sliding up translate button
 											$com1_inBlTrWrap.slideUp();
+
+                                 //setting the type of translated word( ex: form en to ru);
+                                 $com1_dicWrapper.data({"sides": $com1_cardEditor.data("sides") });
+
+
+
 					      },
 					    error: function(e, xhr, settings, exception){
 					      alert('Problem with the server. Try again later.');
@@ -600,71 +608,9 @@ $(document).ready( function(){
 			return false;
 		});
 
-//toDel!!!!!!!!!!!!
-		/*
-		var temp = 
-								{"The Red Violin"},{"yello"},{"red"}
-
-								;*/
-		var temp2 = [
-									["violin","yello","red"]
-								];
-
-//toDel!!!!!!!!!!!!!!!!!!
-		$("#testBut").click(function(){
-						
-						$("#translTempWrapper").empty();
-			
-						$.ajax({
-							type: "POST",
-							url: path+"/cards/getTransl",
-							data: {"data[cardword]": "get", "data[langFrom]" : "en", "data[langTo]" : "ru" },
-							dataType: "json",					
-					    success: function(data){
-											
-											if( data[0] ) {
-									  
-												if( data[1] ) {
-													
-													$( "#translTemplate" ).tmpl( temp2
-																											).appendTo("#translTempWrapper");
-													
-																							  
-												} else {
-																															/*	, { 
-																															    gt: function( separator ) {
-																															        return this.data.item.join( separator );
-																															    }	*/												
-												}
-												
-											}				
-											
-					      },
-					    error: function(e, xhr, settings, exception){
-					      alert('Problem with the server. Try again later.');
-					    }
-          	});			
-		})
 
 
 
-
-
-
-	
-		$com1_langFromOptItem.click(function(){
-			$com1_langFrom.text($(this).val()).animate(
-												{"background-color": "lightgreen"},
-												{duration: 1000}
-											).animate(
-												{"background-color": "#f5f5dc"},{
-													duration: 1000,
-													complete: function() {$(this).removeAttr("style")}
-												}
-											);
-			
-											
-		});
 		
 		$com1_langToOptItem.click(function(){
 			$com1_langTo.text($(this).val()).animate(
@@ -694,23 +640,27 @@ $(document).ready( function(){
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
 			
 			if(e) e.stopPropagation();
-			if(e) e.preventDefault();	
+			if(e) e.preventDefault();
+            
+
+            alert($com1_dicWrapper.data("sides"));
+
 			
 			$com1_inputBlock.hide();
-			$com1_overlay.show();
+//			$com1_overlay.show();
 			var $thisLine = $(this);
 			//$("#dic-dicWrapper").scrollTop(200);
-			//alert($thisLine.offset().top);
+
 			
 					 $("html:not(:animated),body:not(:animated)").animate(
-						{
+                          {
 							scrollTop: $("body","html").offset().top
-						},
-						 500,
-						 function() {
-						 	//alert('compl');
-    					// Animation complete.
-  					}
+                          },
+                          500,
+                          function() {
+                            //alert('compl');
+                            // Animation complete.
+                          }
 					);
 				
 
@@ -765,10 +715,11 @@ $(document).ready( function(){
 		});
 
 
-	 	$com1_insInAlert.bind("clickoutside", function(){	 		
+	 	$com1_insInAlert.bind("clickoutside", function(e){
+            console.log(e.target);
 	 		$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");	 		
-	 		$(this).hide();	 		
-	 		$com1_overlay.hide();	 		
+//	 		$(this).hide();
+//	 		$com1_overlay.hide();	 
 	 	});
 
 
@@ -838,8 +789,8 @@ $(document).ready( function(){
 
 
 
-			$com1_ltLangTo.thisLangSide('m').data("lang", $com1_ltLangTo.text().toLowerCase());
-			$com1_ltLangFrom.thisLangSide('m').data("lang", $com1_ltLangFrom.text().toLowerCase());;
+			$com1_ltLangTo.thisLangSide('m').data("lang", $com1_ltLangTo.text());
+			$com1_ltLangFrom.thisLangSide('m').data("lang", $com1_ltLangFrom.text());;
 
 
 
@@ -862,3 +813,42 @@ $(document).ready( function(){
 	
 				
 });
+
+//toDel!!!!!!!!!!!!!!!!!!
+
+//		var temp2 = [
+//									["violin","yello","red"]
+//								];
+//
+//
+//		$("#testBut").click(function(){
+//
+//						$("#translTempWrapper").empty();
+//
+//						$.ajax({
+//							type: "POST",
+//							url: path+"/cards/getTransl",
+//							data: {"data[cardword]": "get", "data[langFrom]" : "en", "data[langTo]" : "ru"},
+//							dataType: "json",
+//					    success: function(data){
+//
+//											if( data[0] ) {
+//
+//												if( data[1] ) {
+//
+//													$( "#translTemplate" ).tmpl( temp2
+//																											).appendTo("#translTempWrapper");
+//
+//
+//												} else {
+//
+//												}
+//
+//											}
+//
+//					      },
+//					    error: function(e, xhr, settings, exception){
+//					      alert('Problem with the server. Try again later.');
+//					    }
+//          	});
+//		})

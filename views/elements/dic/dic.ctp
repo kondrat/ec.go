@@ -107,7 +107,6 @@
 
 		  
 			<div id="dic-translForWrapper">
-				<span id="dic-translFor"></span>
 				<!--<span class="dic-sound" id="dic-playSound" ></span>-->
 			</div>
 			

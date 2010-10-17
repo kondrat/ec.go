@@ -39,18 +39,12 @@
 #dic-translForWrapper{
 	
 }
-#dic-translFor{
-	background-color:Beige;
-	color:DarkCyan;
-	font-size:larger;
-	font-style:italic;
-	margin:10px 10px 0;
-	padding:0 3px;
-}
 
 #dic-topResult{
 	font-size:large;
-	margin:10px 0 5px 10px;
+	margin:5px 10px;
+    width: 850px;
+    float: left;
 }
 .dic-res{
 	cursor:pointer;
@@ -238,6 +232,5 @@ span.dic-wordHis:hover{
 .dic-translLine{
 	background-color:#FAEBD7;
 	float:left;
-	margin-bottom:1em;
 	padding:5px 5px 5px 10px;
 }
