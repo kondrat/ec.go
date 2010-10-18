@@ -23,7 +23,11 @@ $(document).ready( function(){
 		
 		var $com1_insInAlert = $("#dic-insInAlert");
 		var $com1_dicWrapper = $("#dic-dicWrapper");
-		var $com1_dicIns = $("#ce-dicIns");
+		
+		// insert alert "ok" and "cancel" buttons
+		var $com1_dicWordIns = $("#dic-wordIns");
+		var $com1_dicWordInsCancel = $("#dic-wordInsCancel");
+		
 		var $com1_overlay = $("#ec-overlay");
 		var $com1_saveCardBtn = $("#ce-saveCardBtn");
 		var $com1_inpBlOk = $("#ce-inpBlOk");
@@ -37,6 +41,10 @@ $(document).ready( function(){
 		var $com1_langToFrom = $("#dic-langToFrom");
 		//up the dic if too many results
 		var $com1_bottomUp = $("#dic-bottomUp");
+		//suggestion where to insert translated word
+		var $com1_dicInsertTranslSug = $("#dic-insertTranslSug");
+		
+		
 		
 		//langPad
 		var $com1_langPad = $("#dic-langPad");
@@ -588,8 +596,8 @@ $(document).ready( function(){
 											//sliding up translate button
 											$com1_inBlTrWrap.slideUp();
 
-                                 //setting the type of translated word( ex: form en to ru);
-                                 $com1_dicWrapper.data({"sides": $com1_cardEditor.data("sides") });
+                      //setting the type of translated word( ex: form en to ru);
+                      $com1_dicWrapper.data({"sides": $com1_cardEditor.data("sides") });
 
 
 
@@ -639,58 +647,77 @@ $(document).ready( function(){
 		
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
 			
-			if(e) e.stopPropagation();
-			if(e) e.preventDefault();
-            
-
-            alert($com1_dicWrapper.data("sides"));
-
-			
-			$com1_inputBlock.hide();
-//			$com1_overlay.show();
-			var $thisLine = $(this);
-			//$("#dic-dicWrapper").scrollTop(200);
-
-			
-					 $("html:not(:animated),body:not(:animated)").animate(
-                          {
-							scrollTop: $("body","html").offset().top
-                          },
-                          500,
-                          function() {
-                            //alert('compl');
-                            // Animation complete.
-                          }
+					if(e) e.stopPropagation();
+					if(e) e.preventDefault();
+	
+		      //alert($com1_dicWrapper.data("sides"));
+					
+					$com1_inputBlock.hide();
+					
+		//			$com1_overlay.show();
+					var $thisLine = $(this);
+					
+					var $thisSugWord = $thisLine.text();
+					
+				 	$("html:not(:animated),body:not(:animated)").animate(
+			                  {
+						scrollTop: $("body","html").offset().top
+			                  },
+			                  500,
+			                  function() {
+			                    //alert('compl');
+			                    // Animation complete.
+			                  }
 					);
-				
-
-			
-			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
-			$thisLine.addClass("dic-resActive");
-			
-			//var dicPos = $com1_dicWrapper.offset();			
-			//var insInAlertPos = $thisLine.offset();
-			
-			//set input line next to current line;
+						
+					//marking the word we want to insert into the card.
+					$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
+					$thisLine.addClass("dic-resActive");
+					
+					
+					$com1_insInAlert.show().data({"sugWord":$thisSugWord});
+					
+					switch($com1_dicWrapper.data("sides")){
+						case 1:
+							$com1_dicInsertTranslSug.val("ce-ins-3").change();
+							//$com1_translWord.find("span.ce-insStrTip").hide().end().addClass("ce-currentLineSug").show().find(".ce-insStrSug").text($thisSugWord);
+						return;
+						case 2:
+							$com1_dicInsertTranslSug.val("ce-ins-1").change();
+							//$com1_mainWord.find("span.ce-insStrTip").hide().end().show().find(".ce-insStrSug").text($thisSugWord);
+						return;
+						default:
+						return;
+					}
+					
 		
-			//var setTop = (insInAlertPos.top - dicPos.top) + $thisLine.height() + 2; 
-			//var setLeft = (insInAlertPos.left - dicPos.left) - 50; 
-
-			
-			//var setTop = (insInAlertPos.top) + $thisLine.height() - 70; 
-			//var setLeft = (insInAlertPos.left) - 50; 			
-			//due to ie7
-			//$com1_insInAlert.appendTo("body");
-			//$com1_insInAlert.css({"top":setTop,"left":setLeft});
-			$com1_insInAlert.toggle();
-				
-
-			var $curLine = $com1_cardEditor.data("curLineId");
-			var $insInto = $("#ce-ins-"+$curLine).data("dicIns");
-
-			$($insInto).find("span.ce-insStrTip").hide().end().find("span.ce-insStrSug").html($thisLine.text());
+					var $curLine = $com1_cardEditor.data("curLineId");
+					var $insInto = $("#ce-ins-"+$curLine);//.data("dicIns");
+		
+					$($insInto).find("span.ce-insStrTip").hide().end().find("span.ce-insStrSug").html($thisLine.text());
 			
 		});
+
+		//manage the sagesstions: 
+		// insert
+		$com1_dicWordIns.click(function(){
+			$com1_insInAlert.hide();
+			$com1_inlineMiddleDiv.find();
+
+		});
+		$com1_dicWordInsCancel.click(function(){
+			$com1_insInAlert.hide().data({"sugWord":''});
+			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty();
+		});
+		
+		$("#dic-insertTranslSug").change(function(){
+			$lineToInsId = "#"+$(this).val();
+			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty();
+			$($lineToInsId).find("span.ce-insStrTip").hide().end().addClass("ce-currentLineSug").show().find(".ce-insStrSug").text($com1_insInAlert.data("sugWord"));
+			
+		});
+
+
 		
 		//up page from bottom of the dic
 		$com1_bottomUp.click(function(){
@@ -716,18 +743,14 @@ $(document).ready( function(){
 
 
 	 	$com1_insInAlert.bind("clickoutside", function(e){
-            console.log(e.target);
+     	//console.log(e.target);
 	 		$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");	 		
 //	 		$(this).hide();
 //	 		$com1_overlay.hide();	 
 	 	});
 
+		
 
-		$com1_dicIns.click(function(){
-			//temp.  toDel
-			$com1_insInAlert.hide();
-			$com1_overlay.hide();
-		});
 
 		$(".dic-toDel").click(function(){
 			var $i = 20;
