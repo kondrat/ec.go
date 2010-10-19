@@ -17,6 +17,7 @@
 							<span class="ce-insStrPerf">[info]</span>
 							<span class="ce-insStrTip">more test</span>
 							<span class="ce-insStrText"></span>
+							<span class="ce-insStrSug"></span>
 						</div>
 					</div>
 				</tr></td>
@@ -51,11 +52,13 @@
 							<span class="ce-insStrPerf">[def]</span>
 							<span class="ce-insStrTip">def test</span>
 							<span class="ce-insStrText"></span>
+							<span class="ce-insStrSug"></span>
 						</div>
 						<div id="ce-ins-6" class="ce-synWord hide" class="hide">
 							<span class="ce-insStrPerf">[syn]</span>
 							<span class="ce-insStrTip">syn test</span>
 							<span class="ce-insStrText"></span>
+							<span class="ce-insStrSug"></span>
 						</div>
 					</div>
 				</tr></td>

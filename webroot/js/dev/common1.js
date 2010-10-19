@@ -650,9 +650,10 @@ $(document).ready( function(){
 					if(e) e.stopPropagation();
 					if(e) e.preventDefault();
 	
-		      //alert($com1_dicWrapper.data("sides"));
+		      //console.log("sides: "+$com1_dicWrapper.data("sides"));
 					
-					$com1_inputBlock.hide();
+					//off input word block
+					$com1_inpBlOk.click();
 					
 		//			$com1_overlay.show();
 					var $thisLine = $(this);
@@ -680,11 +681,9 @@ $(document).ready( function(){
 					switch($com1_dicWrapper.data("sides")){
 						case 1:
 							$com1_dicInsertTranslSug.val("ce-ins-3").change();
-							//$com1_translWord.find("span.ce-insStrTip").hide().end().addClass("ce-currentLineSug").show().find(".ce-insStrSug").text($thisSugWord);
 						return;
 						case 2:
 							$com1_dicInsertTranslSug.val("ce-ins-1").change();
-							//$com1_mainWord.find("span.ce-insStrTip").hide().end().show().find(".ce-insStrSug").text($thisSugWord);
 						return;
 						default:
 						return;
@@ -694,29 +693,61 @@ $(document).ready( function(){
 					var $curLine = $com1_cardEditor.data("curLineId");
 					var $insInto = $("#ce-ins-"+$curLine);//.data("dicIns");
 		
-					$($insInto).find("span.ce-insStrTip").hide().end().find("span.ce-insStrSug").html($thisLine.text());
+					$($insInto).find("span.ce-insStrSug").html($thisLine.text());
 			
 		});
 
 		//manage the sagesstions: 
-		// insert
+		// insert (click "OK")
 		$com1_dicWordIns.click(function(){
 			$com1_insInAlert.hide();
-			$com1_inlineMiddleDiv.find();
-
+			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();
+			$lineToInsId = $com1_insInAlert.data("curLineId");
+			$($lineToInsId).find("span.ce-insStrText").text($com1_insInAlert.data("sugWord")).show().click();
+			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
+			
 		});
+		//cancel
 		$com1_dicWordInsCancel.click(function(){
 			$com1_insInAlert.hide().data({"sugWord":''});
-			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty();
+			
+			var $curLine = $($com1_insInAlert.data("curLineId"));		
+			var $curLineText = $curLine.find(".ce-insStrText").text();
+			if( $.trim($curLineText ) === '' ) {
+				$curLine.hide();
+			}		
+			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();
+			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
 		});
 		
-		$("#dic-insertTranslSug").change(function(){
-			$lineToInsId = "#"+$(this).val();
-			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty();
-			$($lineToInsId).find("span.ce-insStrTip").hide().end().addClass("ce-currentLineSug").show().find(".ce-insStrSug").text($com1_insInAlert.data("sugWord"));
+		$com1_dicInsertTranslSug.change(function(){
+
+			var $prevLine = $($com1_insInAlert.data("curLineId"));		
+			var $prevLineText = $prevLine.find(".ce-insStrText").text();
+			if( $.trim($prevLineText ) === '' ) {
+				$prevLine.hide();
+			}		
+
+			if( $com1_insInAlert.data("insInTo") !== 0 ){
+				$lineToInsId = "#"+$(this).val();
+			} else {
+				$lineToInsId = "#"+$com1_insInAlert.data("insInTo");
+			}
+			
+			$com1_insInAlert.data({"curLineId":$lineToInsId});
+				
+			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();
+			$($lineToInsId).find("span.ce-insStrTip").hide().end().show().find(".ce-insStrSug").text($com1_insInAlert.data("sugWord")).prev().hide();
 			
 		});
 
+//toDel
+	 	$com1_insInAlert.bind("clickoutside", function(e){
+     	//console.log(e.target);
+     	//$com1_dicWordInsCancel.click();
+//	 		//$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");	 		
+			//$com1_overlay.hide();	 
+	 	});
 
 		
 		//up page from bottom of the dic
@@ -733,6 +764,8 @@ $(document).ready( function(){
 			);		
 		});
 
+
+
 		$com1_wordHisList.delegate(".dic-wordHis","click",function(){
 			$com1_word2Transl.val($(this).text());
 			if($com1_dicWrapper.is(":hidden")){
@@ -741,15 +774,6 @@ $(document).ready( function(){
 			$com1_word2TranslBtn.click();
 		});
 
-
-	 	$com1_insInAlert.bind("clickoutside", function(e){
-     	//console.log(e.target);
-	 		$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");	 		
-//	 		$(this).hide();
-//	 		$com1_overlay.hide();	 
-	 	});
-
-		
 
 
 		$(".dic-toDel").click(function(){
