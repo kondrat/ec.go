@@ -598,7 +598,9 @@ $(document).ready( function(){
 
                       //setting the type of translated word( ex: form en to ru);
                       $com1_dicWrapper.data({"sides": $com1_cardEditor.data("sides") });
-
+											
+											//setting the insInto to 0. Just to reset it after first choce of input and allow "add" mode.
+											$com1_insInAlert.data({"insInTo":0});
 
 
 					      },
@@ -677,21 +679,27 @@ $(document).ready( function(){
 					
 					
 					$com1_insInAlert.show().data({"sugWord":$thisSugWord});
-					
-					switch($com1_dicWrapper.data("sides")){
-						case 1:
-							$com1_dicInsertTranslSug.val("ce-ins-3").change();
-						return;
-						case 2:
-							$com1_dicInsertTranslSug.val("ce-ins-1").change();
-						return;
-						default:
-						return;
+
+console.log("insInTo: "+$com1_insInAlert.data("insInTo"));
+
+
+					if( $com1_insInAlert.data("insInTo") === 0 ){
+						switch($com1_dicWrapper.data("sides")){
+							case 1:
+								$com1_dicInsertTranslSug.val("ce-ins-3").change();
+							return;
+							case 2:
+								$com1_dicInsertTranslSug.val("ce-ins-1").change();
+							return;
+							default:
+							return;
+						}
+					} else {
+						$com1_dicInsertTranslSug.change();
 					}
-					
 		
 					var $curLine = $com1_cardEditor.data("curLineId");
-					var $insInto = $("#ce-ins-"+$curLine);//.data("dicIns");
+					var $insInto = $("#ce-ins-"+$curLine);
 		
 					$($insInto).find("span.ce-insStrSug").html($thisLine.text());
 			
@@ -705,6 +713,9 @@ $(document).ready( function(){
 			$lineToInsId = $com1_insInAlert.data("curLineId");
 			$($lineToInsId).find("span.ce-insStrText").text($com1_insInAlert.data("sugWord")).show().click();
 			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
+			
+			//settin data insInto for adding mode ex: adding more syns in one field;
+				$com1_insInAlert.data({"insInTo":$lineToInsId});
 			
 		});
 		//cancel
@@ -727,12 +738,17 @@ $(document).ready( function(){
 			if( $.trim($prevLineText ) === '' ) {
 				$prevLine.hide();
 			}		
-
-			if( $com1_insInAlert.data("insInTo") !== 0 ){
+			
+			//we setting insinto 
+			//$lineToInsId = "#"+$(this).val();
+			console.log($com1_insInAlert.data("insInTo"));
+			
 				$lineToInsId = "#"+$(this).val();
+				/*
 			} else {
-				$lineToInsId = "#"+$com1_insInAlert.data("insInTo");
+				$lineToInsId = $com1_insInAlert.data("insInTo");
 			}
+				*/
 			
 			$com1_insInAlert.data({"curLineId":$lineToInsId});
 				
