@@ -233,3 +233,8 @@ span.dic-wordHis:hover{
 	float:left;
 	padding:5px 5px 5px 10px;
 }
+.dic-insMode{
+  border:1px dashed;
+  padding:1px 2px;
+  
+}

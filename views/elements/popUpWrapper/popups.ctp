@@ -15,7 +15,9 @@
 											);
 		?>
 		<div class="dic-insertInto">
-			<span style="background-color:BlanchedAlmond;border:1px dashed;color:green;padding:1px 2px;">insert into</span> <span>or</span><span style="color:brown;"> add to</span>:</span>&nbsp;<span><?php echo $form->select('transl', $options, null, array('id'=>'dic-insertTranslSug','escape'=>false));?></span>
+			<span class="dic-insMode" style="background-color:BlanchedAlmond;color:green;">insert into</span>
+            <span>or</span>
+            <span class="dic-insMode" style="color:brown;"> add to:</span>&nbsp;<span><?php echo $form->select('transl', $options, null, array('id'=>'dic-insertTranslSug','escape'=>false));?></span>
 			<span><a href="javascript:;" id="dic-wordIns" class="ec-but-minibutton"><span><?php __('Ok');?></span></a></span>
 			<span><a href="javascript:;" id="dic-wordInsCancel" class="ec-but-minibutton"><span><?php __('Cancel');?></span></a></span>
 		</div>
