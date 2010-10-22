@@ -675,8 +675,10 @@ $(document).ready( function(){
 					$thisLine.addClass("dic-resActive");
 					
 					
-					$com1_insInAlert.show().data({"sugWord":$thisSugWord});
-
+					
+					//here we show insAlert
+					//$com1_insInAlert.show().data({"sugWord":$thisSugWord});
+					$com1_insInAlert.data({"sugWord":$thisSugWord});
 
 					if( $com1_insInAlert.data("insInTo") === 0 ){
 
@@ -703,8 +705,20 @@ $(document).ready( function(){
 			$com1_insInAlert.hide();
 			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();
 			$lineToInsId = $com1_insInAlert.data("curLineId");
-//1. here we inputing the suggestion word.		
-			$($lineToInsId).find("span.ce-insStrText").text($com1_insInAlert.data("sugWord")).show().click();
+
+			var $curLine = $($lineToInsId).find("span.ce-insStrText");
+			
+			if($com1_insInAlert.data("insAddMode") === "add") {	
+				if($curLine.text() !== ''){
+					var $prevText = $curLine.text()+', ';
+				}else{
+					var $prevText = '';
+				}					
+				var $prevAndSugText = $prevText+$com1_insInAlert.data("sugWord");
+				$curLine.text($prevAndSugText).show().click();
+			}else{
+				$curLine.text($com1_insInAlert.data("sugWord")).show().click();
+			}
 			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
 			
 			//settin data insInto for adding mode ex: adding more syns in one field;
@@ -721,12 +735,6 @@ $(document).ready( function(){
 				$curLine.hide();
 			}		
 			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();
-			/*
-			//toDel
-			$com1_inlineMiddleDiv.find(".ce-insStrSug").each(function(){
-				alert( $(this).text() );
-			});
-			*/
 			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
 		});
 		
@@ -739,30 +747,51 @@ $(document).ready( function(){
 			}		
 			
 			//we setting insinto 		
-				$lineToInsId = "#"+$(this).val();
-
+			var $lineToInsId = "#"+$(this).val();
+			var $lineToIns = $($lineToInsId);
 			
 			$com1_insInAlert.data({"curLineId":$lineToInsId});
-				
-			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();
-//2. second point .prev().hide() - hiding the original word.
-			$($lineToInsId).find("span.ce-insStrTip").hide().end().show().find(".ce-insStrSug").text($com1_insInAlert.data("sugWord")).prev().hide();
 			
+			//cleaning from prev clicks.	
+			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();		
 			if( $com1_insInAlert.data("insAddMode") === "add" ){
-				alert("add");
+				$lineToIns.find("span.ce-insStrTip").hide().end().show().find(".ce-insStrSug").text($com1_insInAlert.data("sugWord"));
 			}else{
-				alert("ins");
-				
-			}
+				$lineToIns.find("span.ce-insStrTip").hide().end().show().find(".ce-insStrSug").text($com1_insInAlert.data("sugWord")).prev().hide();
+			}	
 			
+			//ins Alert popUp position;
+			var $lineToInsPos = $lineToIns.offset();
+			//var $insInAlertPos = $com1_insInAlert.offset();
+
+			var setTop = $lineToInsPos.top + $lineToIns.height() + 3;		
+			var setLeft = $lineToInsPos.left - 80;
+								
+			$com1_insInAlert.css({"left":setLeft,"top":setTop});
+
+			
+			
+			
+			$com1_insInAlert.show();
+			
+					
 		});
 
+		$(".dic-insMode").click(function(){
+			$(".dic-insMode").removeClass("dic-insModeActive");
+			$(this).addClass("dic-insModeActive");
+			$com1_insInAlert.data({"insAddMode":$(this).data("insMode")});
+			$com1_dicInsertTranslSug.change();
+		});
+
+		
 //toDel
 	 	$com1_insInAlert.bind("clickoutside", function(e){
      	//console.log(e.target);
      	//$com1_dicWordInsCancel.click();
 //	 		//$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");	 		
 			//$com1_overlay.hide();	 
+			//alert('out');
 	 	});
 
 		
