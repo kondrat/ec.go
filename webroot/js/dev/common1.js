@@ -136,7 +136,7 @@ $(document).ready( function(){
             default:
               return;
           }
-        };
+        }
 
 		
 		$com1_inlineMiddleDiv.hover(function(){
@@ -584,10 +584,11 @@ $(document).ready( function(){
 													$userWordCut = $userWord;
 												}
 
-												$com1_wordHisList.prepend('<span class="dic-wordHis dic-wordHisFirst"></span>').find("span:first").data("userWord",$userWord).text($userWordCut);												
-
+												//$com1_wordHisList.prepend('<span class="dic-wordHis dic-wordHisFirst"></span>').find("span:first").data("userWord",$userWord).text($userWordCut);
+                                                $("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord} ).prependTo($com1_wordHisList);
 												$com1_dicWrapper.show();
-												
+
+                                                
 												
 											} else {
 											  //alert('not');
@@ -708,11 +709,10 @@ $(document).ready( function(){
 
 			var $curLine = $($lineToInsId).find("span.ce-insStrText");
 			
-			if($com1_insInAlert.data("insAddMode") === "add") {	
+			if($com1_insInAlert.data("insAddMode") === "add") {
+                var $prevText = '';
 				if($curLine.text() !== ''){
-					var $prevText = $curLine.text()+', ';
-				}else{
-					var $prevText = '';
+					$prevText = $curLine.text()+', ';
 				}					
 				var $prevAndSugText = $prevText+$com1_insInAlert.data("sugWord");
 				$curLine.text($prevAndSugText).show().click();

@@ -129,7 +129,7 @@ li.dic-dicSwBase ul{
 .dic-wordHisList{
 	cursor:pointer;
 	float:left;
-	margin:5px;
+	margin:5px 5px 5px 15px;
 	overflow:hidden;
 	width:810px;	
 }
@@ -183,11 +183,21 @@ span.dic-wordHis:hover{
   top:0;
   right:20px;
 }
-.dic-wordHisMore{
+.dic-wordHisLess{
+  background:transparent url(../img/icons/round_left_arrow_16x16.png) no-repeat scroll 0 0;
   position:absolute;
-  height:100%;
-  top:5px;
-  right:20px;
+  height:16px;
+  width: 16px;
+  top:6px;
+  left: 90px;
+}
+.dic-wordHisMore{
+  background:transparent url(../img/icons/round_right_arrow_16x16.png) no-repeat scroll 0 0;
+  position:absolute;
+  height:16px;
+  width: 16px;
+  top:6px;
+  right:4px;
 }
 .dic-wordHisFirst{
 	color:tan;

@@ -64,12 +64,16 @@
   		);
   	?>  
 
+<script id="dic-wordHisTmpl" type="text/x-jquery-tmpl"> 
+    <span class="dic-wordHis dic-wordHisFirst" data-userword=${userWord}>${userWordCut}</span>
+</script>
 
 <div class="span-24 dic-dicBar" style="">
 	<div id="dic-dicWrapperCtrl" class="dic-dicWrapperCtrl">[transltions]:</div>
+	<span class="dic-wordHisLess"></span>
 	<div id="dic-wordHisList" class="dic-wordHisList"></div>
 	<span class="dic-fadeOutLine"></span>
-	<span class="dic-wordHisMore"><?php __('more');?></span>
+	<span class="dic-wordHisMore"></span>
 </div>
 
 <div id="dic-dicWrapper" class="dic-dicWrapper hide">
