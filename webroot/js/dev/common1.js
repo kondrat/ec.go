@@ -176,7 +176,7 @@ $(document).ready( function(){
 			
 			
 			if(e) e.stopPropagation();
-			if(e) e.preventDefault();
+			//if(e) e.preventDefault();
 			
 			
 			
@@ -265,8 +265,15 @@ $(document).ready( function(){
 
 		
 		//bind outside event
-		$com1_inputBlock.bind("clickoutside", function(){	 				 			
-	 			//$com1_inpBlOk.click();		
+		$com1_inputBlock.bind("clickoutside", function(event){	
+				//console.log(event.target);
+				var $target = $(event.target);
+				ceInpBlOk();
+				
+				//if( $target[0].id != "") {
+					//ceInpBlOk();
+				//}			 				 			
+	 					
 	 	});	
 	
 		$com1_plusMenu.click(function(e){
@@ -343,14 +350,13 @@ $(document).ready( function(){
 
 		});
 
-
-
-
-
-
 		
 		$com1_inpBlOk.click(function(){
 			
+			ceInpBlOk();
+		});
+
+		function ceInpBlOk(){
 			var $curLineId = $com1_cardEditor.data("curLineId");
 		  var $curLineTextBlockText = $("#ce-ins-"+$curLineId).find("span.ce-insStrText");
 		  
@@ -362,8 +368,10 @@ $(document).ready( function(){
 			$com1_inlineMiddleDiv.removeClass("ce-currentLine");
 			$com1_plusMenu.removeClass("ce-plusMenuActive");
 			
-			cardDataLookUp();
-		});
+			cardDataLookUp();			
+		}
+
+
 
 		
 		$('a.ec-but-minibutton').bind(
@@ -456,7 +464,7 @@ $(document).ready( function(){
       //catting off first aminamion
       clearTimeout($com1_timerInputStr);
     });
-	
+		$com1_dicWrapperCtrl.tipsy({gravity: 's',delayIn: 1000,offset: 10});
 		
 		$com1_inpBlTr.click(function(){
 		
@@ -486,17 +494,18 @@ $(document).ready( function(){
 			$(".dic-dicSwBase ul li").remove();
 			$("#dic-topResult").text('');
 			
-	// check uesr word;		
+			// check uesr word;		
 						
 			//com.song = "http://www.gstatic.com/dictionary/static/sounds/de/0/"+com.songWord+".mp3";
-			
+						var $tranFrom = $com1_langFromOpt.val();
+						var $tranTo = $com1_langToOpt.val();
 				
 						$.ajax({
 							type: "POST",
 							url: path+"/cards/getTransl",
 							//temp
 							//data: {"data[cardword]": $userWord, "data[langFrom]" : $com1_langFrom, "data[langTo]" : $com1_langTo },
-							data: {"data[cardword]": $userWord, "data[langFrom]" : $com1_langFromOpt.val(), "data[langTo]" : $com1_langToOpt.val()},
+							data: {"data[cardword]": $userWord, "data[langFrom]" : $tranFrom, "data[langTo]" : $tranTo},
 							dataType: "json",					
 					    success: function(data){
 											
@@ -585,10 +594,10 @@ $(document).ready( function(){
 												}
 
 												//$com1_wordHisList.prepend('<span class="dic-wordHis dic-wordHisFirst"></span>').find("span:first").data("userWord",$userWord).text($userWordCut);
-                                                $("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord} ).prependTo($com1_wordHisList);
+                        $("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord,"lfrom":$tranFrom, "lto":$tranTo } ).prependTo($com1_wordHisList).tipsy({gravity: 's',html: true});
 												$com1_dicWrapper.show();
 
-                                                
+                        //alert(  $com1_wordHisList.find("span:first").data("uw"));                     
 												
 											} else {
 											  //alert('not');
@@ -651,10 +660,10 @@ $(document).ready( function(){
 		$com1_dicWrapper.delegate(".dic-res","click",function(e){
 			
 					if(e) e.stopPropagation();
-					if(e) e.preventDefault();
+					//if(e) e.preventDefault();
 					
 					//off input word block. possobly replace with close all poup ups. 
-					$com1_inpBlOk.click();
+					//$com1_inpBlOk.click();
 					
 		//			$com1_overlay.show();
 					var $thisLine = $(this);
@@ -725,18 +734,28 @@ $(document).ready( function(){
 				$com1_insInAlert.data({"insInTo":$lineToInsId});
 			
 		});
-		//cancel
+		//cancel two ways:
 		$com1_dicWordInsCancel.click(function(){
-			$com1_insInAlert.hide().data({"sugWord":''});
+			dicWordInsCancel();			
+		});
+//toFix
+	 	$com1_insInAlert.bind("clickoutside", function(e){ 		
+	 		dicWordInsCancel();
+	 	});
+	 	
+		function 	dicWordInsCancel(){
 			
-			var $curLine = $($com1_insInAlert.data("curLineId"));		
+			$com1_insInAlert.hide().data({"sugWord":''});		
+			var $curLine = $($com1_insInAlert.data("curLineId"));	
+			//console.log("$curLine: "+$com1_insInAlert.data("curLineId"));	
 			var $curLineText = $curLine.find(".ce-insStrText").text();
 			if( $.trim($curLineText ) === '' ) {
 				$curLine.hide();
 			}		
 			$com1_inlineMiddleDiv.find(".ce-insStrSug").empty().end().find(".ce-insStrText").show();
-			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");
-		});
+			$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");			
+			
+		}
 		
 		$com1_dicInsertTranslSug.change(function(){
 
@@ -785,14 +804,7 @@ $(document).ready( function(){
 		});
 
 		
-//toDel
-	 	$com1_insInAlert.bind("clickoutside", function(e){
-     	//console.log(e.target);
-     	//$com1_dicWordInsCancel.click();
-//	 		//$com1_dicWrapper.find(".dic-resActive").removeClass("dic-resActive");	 		
-			//$com1_overlay.hide();	 
-			//alert('out');
-	 	});
+
 
 		
 		//up page from bottom of the dic
@@ -838,7 +850,11 @@ $(document).ready( function(){
 
 			
 			$com1_ltLangPad.bind("clickoutside", function(event){	
-				$com1_ltCloseLangPad.click();
+				//console.log(event.target);
+				var $target = $(event.target);
+				if( $target[0].id != "lt-langTo" && $target[0].id != "lt-langFrom") {
+					ltCloseLangPad();
+				}
 		 	});
 			
 			//lt lang pad functions
@@ -852,8 +868,8 @@ $(document).ready( function(){
 					
 					$(this).click(function(e){
 						
-							if(e) e.stopPropagation();
-							if(e) e.preventDefault();
+							//if(e) e.stopPropagation();
+							//if(e) e.preventDefault();
 						
 							$thisLang = $(this);
 														
@@ -899,9 +915,16 @@ $(document).ready( function(){
 		});	
 	
 		$com1_ltCloseLangPad.click(function(){
+			ltCloseLangPad();
+		});
+
+		function ltCloseLangPad(){
 				$com1_ltLangPad.fadeOut();
 				$com1_ltLangToFrom.removeClass("lt-langToFromActive");
-		});
+		}
+
+
+
 	
 				
 });

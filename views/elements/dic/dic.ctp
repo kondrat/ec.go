@@ -65,11 +65,11 @@
   	?>  
 
 <script id="dic-wordHisTmpl" type="text/x-jquery-tmpl"> 
-    <span class="dic-wordHis dic-wordHisFirst" data-userword=${userWord}>${userWordCut}</span>
+    <span class="dic-wordHis dic-wordHisFirst" title="<div style='color:red;'>${lfrom} &raquo; ${lto}:</div> ${userWord}" data-uw="${userWord}" data-lfr="${lfrom}" data-lto="${lto}">${userWordCut}</span>
 </script>
 
 <div class="span-24 dic-dicBar" style="">
-	<div id="dic-dicWrapperCtrl" class="dic-dicWrapperCtrl">[transltions]:</div>
+	<div id="dic-dicWrapperCtrl" class="dic-dicWrapperCtrl" title="<?php __('click to open/close dictionary');?>">[transltions]:</div>
 	<span class="dic-wordHisLess"></span>
 	<div id="dic-wordHisList" class="dic-wordHisList"></div>
 	<span class="dic-fadeOutLine"></span>

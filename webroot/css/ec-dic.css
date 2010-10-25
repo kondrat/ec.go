@@ -123,15 +123,16 @@ li.dic-dicSwBase ul{
 .dic-dicWrapperCtrl{
   margin:5px;
   float:left;
-  background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -35px transparent;
+  /*background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -35px transparent;*/
   padding:0 17px 0 0;
 }
 .dic-wordHisList{
 	cursor:pointer;
 	float:left;
-	margin:5px 5px 5px 15px;
+	margin:5px;
 	overflow:hidden;
 	width:810px;	
+	height:16px;
 }
 .dic-wordHis{
 	display:inline;
@@ -152,12 +153,14 @@ span.dic-wordHis:hover{
 
 .dic-dicBar div.ttm{
   color:yellow;
-  background-position: 100% -54px;
+  /*background-position: 100% -54px;*/
 }
 .dic-langToFrom{
-	/*background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -17px transparent;
+	/*
+	background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -17px transparent;
 	margin:7px 5px 0 0;
-	padding:0 17px 0 0;*/
+	padding:0 17px 0 0;
+	*/
 	float:left;
 	border-bottom:1px solid #fff;
 }
@@ -189,7 +192,7 @@ span.dic-wordHis:hover{
   height:16px;
   width: 16px;
   top:6px;
-  left: 90px;
+  left: 80px;
 }
 .dic-wordHisMore{
   background:transparent url(../img/icons/round_right_arrow_16x16.png) no-repeat scroll 0 0;

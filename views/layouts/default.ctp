@@ -17,6 +17,7 @@
 													'ec-lt',
 													'ec-u',
 													'screen',
+													'tipsy/stylesheets/tipsy'
 													//'jqcss/css/smoothness/jquery-ui-1.8.2.custom'
 													)
 										);
@@ -44,6 +45,7 @@
 															'dev/jquery.coloranim',
 															'dev/jquery.elastic',
 															'dev/jquery.tmpl.min',
+															'tipsy/javascripts/jquery.tipsy',
 															'dev/func',
 															'dev/common1',
 															'dev/common2',
