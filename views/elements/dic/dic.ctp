@@ -70,10 +70,12 @@
 
 <div class="span-24 dic-dicBar" style="">
 	<div id="dic-dicWrapperCtrl" class="dic-dicWrapperCtrl" title="<?php __('click to open/close dictionary');?>">[transltions]:</div>
-	<span class="dic-wordHisLess"></span>
-	<div id="dic-wordHisList" class="dic-wordHisList"></div>
-	<span class="dic-fadeOutLine"></span>
 	<span class="dic-wordHisMore"></span>
+	<div id="dic-wordHisList" class="dic-wordHisList" style="">
+		<div id="ttmm" data-mark=0 style="width:500;position:relative;left:0;"></div>
+	</div>
+	<span class="dic-fadeOutLine"></span>
+	<span class="dic-wordHisLess"></span>
 </div>
 
 <div id="dic-dicWrapper" class="dic-dicWrapper hide">

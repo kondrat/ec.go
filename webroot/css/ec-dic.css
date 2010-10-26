@@ -124,19 +124,19 @@ li.dic-dicSwBase ul{
   margin:5px;
   float:left;
   /*background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -35px transparent;*/
-  padding:0 17px 0 0;
+  padding:0 23px 0 0;
 }
 .dic-wordHisList{
 	cursor:pointer;
 	float:left;
-	margin:5px;
+	margin:5px 0;
 	overflow:hidden;
 	width:810px;	
 	height:16px;
 }
 .dic-wordHis{
 	display:inline;
-	margin-left:5px;
+	margin-right:5px;
 	color:#66AACC;
 }
 span.dic-wordHis:hover{
@@ -151,7 +151,7 @@ span.dic-wordHis:hover{
   position:relative;
 }
 
-.dic-dicBar div.ttm{
+.dic-dicBar div.dic-dicWrapperCtrlActive{
   color:yellow;
   /*background-position: 100% -54px;*/
 }

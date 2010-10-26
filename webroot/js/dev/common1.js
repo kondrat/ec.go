@@ -54,8 +54,9 @@ $(document).ready( function(){
 		var $com1_langFromOpt = $("#dic-langFromOpt");		
 		var $com1_langToOpt = $("#dic-langToOpt");
 		
-		var $com1_langToOptItem = $("#dic-langToOpt option");
-		var $com1_langFromOptItem = $("#dic-langFromOpt option");
+		// not use this		
+		//var $com1_langToOptItem = $("#dic-langToOpt option");
+		//var $com1_langFromOptItem = $("#dic-langFromOpt option");
 		
 		var $com1_langSwitch = $("#dic-langSwitch");
 		
@@ -460,7 +461,7 @@ $(document).ready( function(){
 	
     $com1_dicWrapperCtrl.click(function(){
       $com1_dicWrapper.toggle();
-      $(this).toggleClass('ttm');
+      $(this).toggleClass('dic-dicWrapperCtrlActive');
       //catting off first aminamion
       clearTimeout($com1_timerInputStr);
     });
@@ -468,7 +469,6 @@ $(document).ready( function(){
 		
 		$com1_inpBlTr.click(function(){
 		
-//			alert("sides: "+$com1_cardEditor.data( "sides"));
 
             $com1_langFromOpt.val($com1_ceLangFrom.text().toLowerCase());
             $com1_langToOpt.val($com1_ceLangTo.text().toLowerCase());
@@ -486,6 +486,7 @@ $(document).ready( function(){
 		//translation of the word				
 		$com1_word2TranslBtn.click( function() {
 			
+			console.log($com1_dicWrapper.data("fromHis"));
 		
 			var $userWord = $.trim($com1_word2Transl.val()).toLowerCase();
 			
@@ -580,11 +581,11 @@ $(document).ready( function(){
 											  $.each($joinedSentence, function(key, value) { 														
 														$translatedSentence += value[0];										
 												});	
-												
-												
+																							
 												$("#dic-topResult").text($translatedSentence);
+												
 												//history line prepending new word.
-												$com1_wordHisList.find("span.dic-wordHisFirst").removeClass("dic-wordHisFirst");
+												
 												
 												var $userWordCut = '';
 												if($userWord.length > 10 ){
@@ -592,12 +593,15 @@ $(document).ready( function(){
 												} else {
 													$userWordCut = $userWord;
 												}
-
-												//$com1_wordHisList.prepend('<span class="dic-wordHis dic-wordHisFirst"></span>').find("span:first").data("userWord",$userWord).text($userWordCut);
-                        $("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord,"lfrom":$tranFrom, "lto":$tranTo } ).prependTo($com1_wordHisList).tipsy({gravity: 's',html: true});
-												$com1_dicWrapper.show();
-
-                        //alert(  $com1_wordHisList.find("span:first").data("uw"));                     
+												
+												//checking if we take word from history list or from input field, then setting mark to false.
+												if( $com1_dicWrapper.data("fromHis") !== true){
+													$com1_wordHisList.find("span.dic-wordHisFirst").removeClass("dic-wordHisFirst");
+                        	$("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord,"lfrom":$tranFrom, "lto":$tranTo } ).prependTo($("#ttmm")).tipsy({gravity: 's',html: true});
+                        }
+                        $com1_dicWrapper.data({fromHis:false});
+                        
+												$com1_dicWrapper.show();                    
 												
 											} else {
 											  //alert('not');
@@ -630,8 +634,8 @@ $(document).ready( function(){
 
 
 
-
-		
+		//just for colorAnimation example
+		/*
 		$com1_langToOptItem.click(function(){
 			$com1_langTo.text($(this).val()).animate(
 												{"background-color": "lightgreen"},{duration: 1000}
@@ -643,7 +647,7 @@ $(document).ready( function(){
 											);
 			
 		});
-
+		*/
 		
 		$com1_langSwitch.click(function(){
 			
@@ -824,6 +828,8 @@ $(document).ready( function(){
 
 
 		$com1_wordHisList.delegate(".dic-wordHis","click",function(){
+			//mark if it is a first
+			$com1_dicWrapper.data({fromHis:true});
 			$com1_word2Transl.val($(this).text());
 			if($com1_dicWrapper.is(":hidden")){
 				$com1_dicWrapperCtrl.click();
@@ -832,13 +838,94 @@ $(document).ready( function(){
 		});
 
 
-
+//toDel. don't forget
 		$(".dic-toDel").click(function(){
-			var $i = 20;
-			for($i = 0; $i<= 20; $i++){
-				$com1_wordHisList.prepend('<span class="dic-wordHis">test Word '+$i+'</span>');
+			var widthI = 0;
+			var $i;
+			for($i = 0; $i<= 48; $i++){
+				var $toIns = '<span class="dic-wordHis">test Word '+$i+'</span>';
+				
+				widthI += $("#ttmm").append($toIns).find("span:last").width();
+				//console.log(widthI);
+				$("#ttmm").width(widthI+100);
 			}
 		});
+
+
+
+		//$("#ttmm").data({mark:0});
+		
+		$(".dic-wordHisMore").click(function(){
+			
+			var $spans = $("#ttmm").find("span");
+
+			
+			$spans.each(function(i){
+						
+						var $thisSpan = $(this);
+						//find the lenth to slide
+						
+						var $posSpan = $thisSpan.offset();
+						var $posWrap = $("#dic-wordHisList").offset();
+						var $widthSpan = $thisSpan.width();
+						
+						if( ( ($posSpan.left - $posWrap.left + $widthSpan) - 790) >= 0 ){
+							
+							console.log(i);							
+
+							$("#ttmm").animate(
+								{left: '-='+($posSpan.left - $posWrap.left)},
+								1500,
+								function() {
+		    				// Animation complete.
+		  					}
+		  				);
+		  			
+							return false;
+						}
+				
+
+				
+			});
+
+		});
+		
+		$(".dic-wordHisLess").click(function(){
+			
+					var $spans = $("#ttmm").find("span");
+
+			
+					$spans.each(function(i){
+								
+								var $thisSpan = $(this);
+								//find the lenth to slide
+								
+								var $posSpan = $thisSpan.offset();
+								var $posWrap = $("#dic-wordHisList").offset();
+								var $widthSpan = $thisSpan.width();
+								
+								if( (($posWrap.left- $posSpan.left) - 790) <= 0 ){
+									
+									console.log(i);							
+		
+									$("#ttmm").animate(
+										{left: '+='+($posWrap.left- $posSpan.left)},
+										1500,
+										function() {
+				    				// Animation complete.
+				  					}
+				  				);
+				  			
+									return false;
+								}
+						
+		
+						
+					});
+					
+					
+		});
+
 
 
 
