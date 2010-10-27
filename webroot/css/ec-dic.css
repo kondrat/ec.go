@@ -121,18 +121,17 @@ li.dic-dicSwBase ul{
 }
 /* line with history of translated words */
 .dic-dicWrapperCtrl{
-  margin:5px;
-  float:left;
-  /*background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -35px transparent;*/
-  padding:0 23px 0 0;
+	color:black;
+	margin:5px;
+	padding:0 17px 0 0;
+	position:absolute;
+	top:-25px;
+  background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% 3px transparent;
 }
 .dic-wordHisList{
-	cursor:pointer;
-	float:left;
-	margin:5px 0;
+	margin:5px;
 	overflow:hidden;
-	width:810px;	
-	height:16px;
+	width:920px;	
 }
 .dic-wordHis{
 	display:inline;
@@ -152,8 +151,8 @@ span.dic-wordHis:hover{
 }
 
 .dic-dicBar div.dic-dicWrapperCtrlActive{
-  color:yellow;
-  /*background-position: 100% -54px;*/
+  color:red;
+  background-position: 100% -16px;
 }
 .dic-langToFrom{
 	/*
@@ -178,13 +177,21 @@ span.dic-wordHis:hover{
 	font-weight:bold;
 	padding:0 3px;
 }
-.dic-fadeOutLine{
-  position:absolute;
-  background:url("../img/pic/ec-fade-out.png") repeat-y scroll -80px 0 transparent;
+.dic-fadeOutLineRight, .dic-fadeOutLineLeft{
+	background:url("../img/pic/ec-fade-out.png") repeat-y scroll  transparent;
   width:60px;
-  height:100%;
+  height:100%;	
+  position:absolute;
   top:0;
-  right:20px;
+}
+.dic-fadeOutLineRight{
+ 
+  background-position:-80px 0;
+  right:0px;
+}
+.dic-fadeOutLineLeft{
+  background-position:0 0;
+  left:5px;
 }
 .dic-wordHisLess{
   background:transparent url(../img/icons/round_left_arrow_16x16.png) no-repeat scroll 0 0;
@@ -192,7 +199,7 @@ span.dic-wordHis:hover{
   height:16px;
   width: 16px;
   top:6px;
-  left: 80px;
+  left: 7px;
 }
 .dic-wordHisMore{
   background:transparent url(../img/icons/round_right_arrow_16x16.png) no-repeat scroll 0 0;
@@ -205,7 +212,12 @@ span.dic-wordHis:hover{
 .dic-wordHisFirst{
 	color:tan;
 }
-
+#dic-wordHisScroll{
+	width:200px;
+	position:relative;
+	left:0;
+	margin-left:55px;	
+}
 
 
 .tetete{

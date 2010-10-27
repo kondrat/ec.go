@@ -21,19 +21,25 @@ $(document).ready( function(){
 		var $com1_ceLangTo = $("#ce-langTo");
 		var $com1_ceLangFrom = $("#ce-langFrom");
 		
-		var $com1_insInAlert = $("#dic-insInAlert");
-		var $com1_dicWrapper = $("#dic-dicWrapper");
-		
-		// insert alert "ok" and "cancel" buttons
-		var $com1_dicWordIns = $("#dic-wordIns");
-		var $com1_dicWordInsCancel = $("#dic-wordInsCancel");
+
 		
 		var $com1_overlay = $("#ec-overlay");
 		var $com1_saveCardBtn = $("#ce-saveCardBtn");
 		var $com1_inpBlOk = $("#ce-inpBlOk");
 		var $com1_inpBlTr = $("#ce-inpBlTr");
+
+		var $com1_insInAlert = $("#dic-insInAlert");
+		var $com1_dicWrapper = $("#dic-dicWrapper");		
 		var $com1_dicWrapperCtrl = $("#dic-dicWrapperCtrl");
-		var $com1_wordHisList = $("#dic-wordHisList");
+		
+
+		var $com1_dicWordHisScroll = $("#dic-wordHisScroll");
+		var $com1_dicWordHisList = $("#dic-wordHisList");
+
+		// insert alert "ok" and "cancel" buttons
+		var $com1_dicWordIns = $("#dic-wordIns");
+		var $com1_dicWordInsCancel = $("#dic-wordInsCancel");		
+		
 		//input line in translation block.
 		var $com1_word2Transl = $("#dic-word2Transl");
 		var $com1_word2TranslBtn = $("#dic-word2TranslBtn");
@@ -465,6 +471,7 @@ $(document).ready( function(){
       //catting off first aminamion
       clearTimeout($com1_timerInputStr);
     });
+    
 		$com1_dicWrapperCtrl.tipsy({gravity: 's',delayIn: 1000,offset: 10});
 		
 		$com1_inpBlTr.click(function(){
@@ -486,7 +493,7 @@ $(document).ready( function(){
 		//translation of the word				
 		$com1_word2TranslBtn.click( function() {
 			
-			console.log($com1_dicWrapper.data("fromHis"));
+			//console.log($com1_dicWrapper.data("fromHis"));
 		
 			var $userWord = $.trim($com1_word2Transl.val()).toLowerCase();
 			
@@ -596,8 +603,36 @@ $(document).ready( function(){
 												
 												//checking if we take word from history list or from input field, then setting mark to false.
 												if( $com1_dicWrapper.data("fromHis") !== true){
-													$com1_wordHisList.find("span.dic-wordHisFirst").removeClass("dic-wordHisFirst");
-                        	$("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord,"lfrom":$tranFrom, "lto":$tranTo } ).prependTo($("#ttmm")).tipsy({gravity: 's',html: true});
+													$com1_dicWordHisList.find("span.dic-wordHisFirst").removeClass("dic-wordHisFirst");
+                        	var $justInsSpan = $("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord,"lfrom":$tranFrom, "lto":$tranTo } );                      	
+                        	$justInsSpan.prependTo($com1_dicWordHisScroll).tipsy({gravity: 's',html: true});
+                        	
+                        	//setting new width of the container.                        	
+                        	var $oldWrapperWidth = $("#dic-wordHisScroll").outerWidth(true);
+                        	alert($oldWrapperWidth+$justInsSpan.outerWidth(true));
+                        	$com1_dicWordHisScroll.width($oldWrapperWidth+$justInsSpan.outerWidth(true));
+                        	
+                        	//scrolling wrapper to right. 55 - left magin of wordHisScrolling's
+                        	var $offsetOfWarpper = $com1_dicWordHisScroll.offset().left - $com1_dicWordHisList.offset().left - 55;
+                        	if( $offsetOfWarpper < 0 ){
+                        					$com1_dicWordHisScroll.animate(
+																		{left: '-='+$offsetOfWarpper},
+																		1500,
+																		function() {
+												    					//Animation complete.											    					
+												    					$(".dic-wordHisMore").show();
+												    					$(".dic-wordHisLess").hide();
+												  					}
+												  				);
+                        	} else {
+                        	
+		                        	//checking the position of the last span.
+		                        	var $lastSpan = $com1_dicWordHisScroll.find("span").filter(":last");
+			                        if( ( ($lastSpan.position().left + $lastSpan.outerWidth(true)) - 790 ) >= 0 ){
+			                        	$(".dic-wordHisMore").show();
+			                        }
+			                    }
+                        	
                         }
                         $com1_dicWrapper.data({fromHis:false});
                         
@@ -827,10 +862,10 @@ $(document).ready( function(){
 
 
 
-		$com1_wordHisList.delegate(".dic-wordHis","click",function(){
+		$com1_dicWordHisList.delegate(".dic-wordHis","click",function(){
 			//mark if it is a first
 			$com1_dicWrapper.data({fromHis:true});
-			$com1_word2Transl.val($(this).text());
+			$com1_word2Transl.val($(this).data("uw"));
 			if($com1_dicWrapper.is(":hidden")){
 				$com1_dicWrapperCtrl.click();
 			}
@@ -845,54 +880,64 @@ $(document).ready( function(){
 			for($i = 0; $i<= 48; $i++){
 				var $toIns = '<span class="dic-wordHis">test Word '+$i+'</span>';
 				
-				widthI += $("#ttmm").append($toIns).find("span:last").width();
+				widthI += $com1_dicWordHisScroll.append($toIns).find("span:last").outerWidth(true);
 				//console.log(widthI);
-				$("#ttmm").width(widthI+100);
+				$com1_dicWordHisScroll.width(widthI);
 			}
+			$(".dic-wordHisMore").show();
 		});
 
 
-
-		//$("#ttmm").data({mark:0});
+		//dic transl history scrolling module:
+			
+			// 55 - margin of the wordHisScroll.
+		var $dicWordHisAnimationMark = 1;
 		
-		$(".dic-wordHisMore").click(function(){
-			
-			var $spans = $("#ttmm").find("span");
-
-			
-			$spans.each(function(i){
-						
-						var $thisSpan = $(this);
-						//find the lenth to slide
-						
-						var $posSpan = $thisSpan.offset();
-						var $posWrap = $("#dic-wordHisList").offset();
-						var $widthSpan = $thisSpan.width();
-						
-						if( ( ($posSpan.left - $posWrap.left + $widthSpan) - 790) >= 0 ){
-							
-							console.log(i);							
-
-							$("#ttmm").animate(
-								{left: '-='+($posSpan.left - $posWrap.left)},
-								1500,
-								function() {
-		    				// Animation complete.
-		  					}
-		  				);
-		  			
-							return false;
-						}
-				
-
-				
-			});
-
-		});
+		var dicWordHisMore = function(){
+			//alert($dicWordHisAnimationMark);
+			if( $dicWordHisAnimationMark === 1) {
+					$dicWordHisAnimationMark = 0;
+					var $spans = $com1_dicWordHisScroll.find("span");
+					//console.log($spans);
+					$spans.each(function(i){
+								
+								var $thisSpan = $(this);
+								//find the lenth to slide
+								
+								var $posSpan = $thisSpan.offset();
+								var $posWrap = $com1_dicWordHisList.offset();
+								var $widthSpan = $thisSpan.outerWidth(true);
+								
+								if( ( ($posSpan.left - $posWrap.left + $widthSpan) - 900 ) >= 0 ){						
 		
-		$(".dic-wordHisLess").click(function(){
-			
-					var $spans = $("#ttmm").find("span");
+									$com1_dicWordHisScroll.animate(
+										{left: '-='+($posSpan.left - $posWrap.left - 55)},
+										1500,
+										function() {
+				    					// Animation complete.
+				    					
+				    					var $lastSpan = $spans.filter(":last");
+				    					var $lastSpanEnd = $lastSpan.position().left + $lastSpan.outerWidth(true);
+				    					if( (($lastSpanEnd - $thisSpan.position().left) - 900) <= 0 ) {
+				    						//alert("disable");
+				    						$(".dic-wordHisMore").hide();
+				    					}
+				    					$(".dic-wordHisLess").show();
+				    					$dicWordHisAnimationMark = 1;
+				  					}
+				  				);
+				  			
+									return false;
+								}
+						
+					});	
+			}	
+		}
+
+		var dicWordHisLess = function(){
+			if( $dicWordHisAnimationMark === 1) {
+					$dicWordHisAnimationMark = 0;
+					var $spans = $com1_dicWordHisScroll.find("span");
 
 			
 					$spans.each(function(i){
@@ -901,18 +946,25 @@ $(document).ready( function(){
 								//find the lenth to slide
 								
 								var $posSpan = $thisSpan.offset();
-								var $posWrap = $("#dic-wordHisList").offset();
-								var $widthSpan = $thisSpan.width();
+								var $posWordHis = $com1_dicWordHisList.offset();
 								
-								if( (($posWrap.left- $posSpan.left) - 790) <= 0 ){
+								if( (($posWordHis.left- $posSpan.left) - 900) <= 0 ){
 									
-									console.log(i);							
+									//console.log(i);							
 		
-									$("#ttmm").animate(
-										{left: '+='+($posWrap.left- $posSpan.left)},
+									$com1_dicWordHisScroll.animate(
+										{left: '+='+($posWordHis.left- $posSpan.left + 55)},
 										1500,
 										function() {
-				    				// Animation complete.
+				    					//Animation complete.
+				    					if( ($com1_dicWordHisScroll.offset().left - $posWordHis.left) >= 0 ){
+				    						$(".dic-wordHisLess").hide();
+				    					}
+				    					
+				    					
+				    					$(".dic-wordHisMore").show();
+				    					
+				    					$dicWordHisAnimationMark = 1;
 				  					}
 				  				);
 				  			
@@ -921,13 +973,17 @@ $(document).ready( function(){
 						
 		
 						
-					});
-					
-					
-		});
+					});								
+				
+			}
+		}
 
+		
+		$(".dic-wordHisMore").click(dicWordHisMore);
+		
+		$(".dic-wordHisLess").click(dicWordHisLess);
 
-
+		//end of transl history scrolling module
 
 
 		//lt lang pad play
