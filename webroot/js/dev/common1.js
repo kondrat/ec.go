@@ -24,7 +24,10 @@ $(document).ready( function(){
 
 		
 		var $com1_overlay = $("#ec-overlay");
-		var $com1_saveCardBtn = $("#ce-saveCardBtn");
+		//save button wrapper and button.
+		var $com1_ceSaveCardWrapper = $("#ce-saveCardWrapper");
+		var $com1_saveCardBtn = $("#ce-saveCardBtn");//not in use yet.
+		
 		var $com1_inpBlOk = $("#ce-inpBlOk");
 		var $com1_inpBlTr = $("#ce-inpBlTr");
 
@@ -34,7 +37,11 @@ $(document).ready( function(){
 		
 
 		var $com1_dicWordHisScroll = $("#dic-wordHisScroll");
+		var $com1_dicWordHisScrollWidth = 870;
+		var $com1_dicWordHisScrollLeftMargin = 55;
 		var $com1_dicWordHisList = $("#dic-wordHisList");
+		
+		
 
 		// insert alert "ok" and "cancel" buttons
 		var $com1_dicWordIns = $("#dic-wordIns");
@@ -76,6 +83,14 @@ $(document).ready( function(){
 		var $com1_ltLangFromOpt = $("#lt-langFromOpt");
 
 
+		//tipsy
+
+		//"save card" button tipsy
+		$com1_ceSaveCardWrapper.tipsy({gravity: 's',delayIn: 1000,offset: 2});
+		//"show and close dictionry pad tipsy
+		$com1_dicWrapperCtrl.tipsy({gravity: 's',delayIn: 1000,offset: 2});
+
+
 
 
 
@@ -99,9 +114,11 @@ $(document).ready( function(){
 			});
 			
 			if($res !== ''){
-				$com1_saveCardBtn.attr("disabled",false);
+				$com1_ceSaveCardWrapper.show();
+				//$com1_saveCardBtn.attr("disabled",false);
 			}else{
-				$com1_saveCardBtn.attr("disabled","disabled");
+				$com1_ceSaveCardWrapper.hide();
+				//$com1_saveCardBtn.attr("disabled","disabled");
 			}
 		
 		}
@@ -187,8 +204,9 @@ $(document).ready( function(){
 			
 			
 			
-			//disable save button
-			$com1_saveCardBtn.attr("disabled","disabled");
+			//hiding save button
+			$com1_ceSaveCardWrapper.hide();
+			//$com1_saveCardBtn.attr("disabled","disabled");
 						
 			//treatment of the line which we has left.
 			
@@ -406,18 +424,18 @@ $(document).ready( function(){
 
 
 		//saving of the card
-    $("#saveCardMain").click(function(){
+    $com1_saveCardBtn.click(function(){
 
     	
 	    var cardObj = {
 	    								//"data[Theme][id]": themeName.data('id'),
 	    								//"data[Theme][theme]": themeName.data('theme'),
-	    								"data[Card][word]": com1.mainWord.text(),
-	    								"data[Card][more]": com1.mainMore.text(),
-	    								"data[Card][tr]": com1.wordTran.text(),
-	    								"data[Card][ex]": com1.exTran.text(),
-	    								"data[Card][def]": com1.defTran.text(),
-	    								"data[Card][syn]": com1.synTran.text() 
+	    								"data[Card][word]": $com1_mainWord.text(),
+	    								"data[Card][more]": $com1_moreWord.text(),
+	    								"data[Card][tr]": $com1_translWord.text(),
+	    								"data[Card][ex]": $com1_exWord.text(),
+	    								"data[Card][def]": $com1_defWord.text(),
+	    								"data[Card][syn]": $com1_synWord.text() 
 	    							};
     							
       $.ajax({
@@ -430,7 +448,7 @@ $(document).ready( function(){
 					
 					
         	if ( data.stat === 1 ) {        		
-          	$('.newCards').prepend('<li></li>').find('li:first').text(data.word).data(cardObj).css({'color':'red'}).next().css({'color':'blue'});
+          	$('#ce-savedCardsWrapper').prepend('<span></span>').find('span:first').text(data.word).data(cardObj).css({'color':'red'}).next().css({'color':'blue'});
           	
           	$('#mainWord,#wordTran,#exTran span:last,#defTran span:last,#synTran span:last').empty();
           	com1.cardExt.val('');
@@ -455,7 +473,9 @@ $(document).ready( function(){
           
         },
         error: function(){
-            alert('Problem with the server. Try again later.');
+        	//temp
+        		$('#ce-savedCardsWrapper').prepend('<span></span>').find('span:first').text("word").css({'color':'red'}).next().css({'color':'blue'});
+            //alert('Problem with the server. Try again later.');
         }
       });
     });		
@@ -472,7 +492,7 @@ $(document).ready( function(){
       clearTimeout($com1_timerInputStr);
     });
     
-		$com1_dicWrapperCtrl.tipsy({gravity: 's',delayIn: 1000,offset: 10});
+		
 		
 		$com1_inpBlTr.click(function(){
 		
@@ -608,12 +628,11 @@ $(document).ready( function(){
                         	$justInsSpan.prependTo($com1_dicWordHisScroll).tipsy({gravity: 's',html: true});
                         	
                         	//setting new width of the container.                        	
-                        	var $oldWrapperWidth = $("#dic-wordHisScroll").outerWidth(true);
-                        	alert($oldWrapperWidth+$justInsSpan.outerWidth(true));
+                        	var $oldWrapperWidth = $com1_dicWordHisScroll.width();
                         	$com1_dicWordHisScroll.width($oldWrapperWidth+$justInsSpan.outerWidth(true));
                         	
-                        	//scrolling wrapper to right. 55 - left magin of wordHisScrolling's
-                        	var $offsetOfWarpper = $com1_dicWordHisScroll.offset().left - $com1_dicWordHisList.offset().left - 55;
+                        	//scrolling wrapper to right. $com1_dicWordHisScrollLeftMargin - left magin of wordHisScrolling's
+                        	var $offsetOfWarpper = $com1_dicWordHisScroll.offset().left - $com1_dicWordHisList.offset().left - $com1_dicWordHisScrollLeftMargin;
                         	if( $offsetOfWarpper < 0 ){
                         					$com1_dicWordHisScroll.animate(
 																		{left: '-='+$offsetOfWarpper},
@@ -628,7 +647,7 @@ $(document).ready( function(){
                         	
 		                        	//checking the position of the last span.
 		                        	var $lastSpan = $com1_dicWordHisScroll.find("span").filter(":last");
-			                        if( ( ($lastSpan.position().left + $lastSpan.outerWidth(true)) - 790 ) >= 0 ){
+			                        if( ( ($lastSpan.position().left + $lastSpan.outerWidth(true)) - $com1_dicWordHisScrollWidth ) >= 0 ){
 			                        	$(".dic-wordHisMore").show();
 			                        }
 			                    }
@@ -890,11 +909,11 @@ $(document).ready( function(){
 
 		//dic transl history scrolling module:
 			
-			// 55 - margin of the wordHisScroll.
+			// $com1_dicWordHisScrollLeftMargin - margin of the wordHisScroll.
 		var $dicWordHisAnimationMark = 1;
 		
 		var dicWordHisMore = function(){
-			//alert($dicWordHisAnimationMark);
+			//console.log($dicWordHisAnimationMark);
 			if( $dicWordHisAnimationMark === 1) {
 					$dicWordHisAnimationMark = 0;
 					var $spans = $com1_dicWordHisScroll.find("span");
@@ -908,17 +927,17 @@ $(document).ready( function(){
 								var $posWrap = $com1_dicWordHisList.offset();
 								var $widthSpan = $thisSpan.outerWidth(true);
 								
-								if( ( ($posSpan.left - $posWrap.left + $widthSpan) - 900 ) >= 0 ){						
-		
+								if( ( ($posSpan.left - $posWrap.left + $widthSpan) - $com1_dicWordHisScrollWidth ) >= 0 ){						
+									//console.log(($posSpan.left - $posWrap.left + $widthSpan) - $com1_dicWordHisScrollWidth );
 									$com1_dicWordHisScroll.animate(
-										{left: '-='+($posSpan.left - $posWrap.left - 55)},
+										{left: '-='+($posSpan.left - $posWrap.left - $com1_dicWordHisScrollLeftMargin)},
 										1500,
 										function() {
 				    					// Animation complete.
 				    					
 				    					var $lastSpan = $spans.filter(":last");
 				    					var $lastSpanEnd = $lastSpan.position().left + $lastSpan.outerWidth(true);
-				    					if( (($lastSpanEnd - $thisSpan.position().left) - 900) <= 0 ) {
+				    					if( (($lastSpanEnd - $thisSpan.position().left) - $com1_dicWordHisScrollWidth) <= 0 ) {
 				    						//alert("disable");
 				    						$(".dic-wordHisMore").hide();
 				    					}
@@ -928,6 +947,9 @@ $(document).ready( function(){
 				  				);
 				  			
 									return false;
+								} else {
+									//console.log('nn: '+(($posSpan.left - $posWrap.left + $widthSpan) - $com1_dicWordHisScrollWidth) );
+									
 								}
 						
 					});	
@@ -948,12 +970,12 @@ $(document).ready( function(){
 								var $posSpan = $thisSpan.offset();
 								var $posWordHis = $com1_dicWordHisList.offset();
 								
-								if( (($posWordHis.left- $posSpan.left) - 900) <= 0 ){
+								if( (($posWordHis.left- $posSpan.left) - $com1_dicWordHisScrollWidth) <= 0 ){
 									
 									//console.log(i);							
 		
 									$com1_dicWordHisScroll.animate(
-										{left: '+='+($posWordHis.left- $posSpan.left + 55)},
+										{left: '+='+($posWordHis.left- $posSpan.left + $com1_dicWordHisScrollLeftMargin)},
 										1500,
 										function() {
 				    					//Animation complete.

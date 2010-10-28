@@ -92,21 +92,13 @@
 	</div>	
 	
 	
-	<div id="ce-saveCardWrapper">
+	<div id="ce-saveCardWrapper" class="hide" title="<?php __("Press to save card or continue to edit");?>">
 		<div class="ce-saveCard">
-			<?php echo $form->button(__('Save',true), array('id'=>'ce-saveCardBtn','disabled'=>'disabled') );?>
+			<?php echo $form->button(__('Save',true), array('id'=>'ce-saveCardBtn') );?>
 		</div>
 	</div>
 </div>
 
-
-<script id="translTemplate" type="text/x-jquery-tmpl"> 
-    <li><b>${$item}  </b></li>
-</script>
-
-<div style="position:absolute;top:20px;left:0;background-color:#eee;padding:3px;">
-	transl will be here
-	<button id="testBut">transl</button>
-	<div id="translTempWrapper">transl...</div>
+<div id="ce-savedCardsWrapper" class="span-24">
 </div>
 
