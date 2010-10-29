@@ -70,3 +70,8 @@
 	right:-3px;
 	top:-3px;
 }
+
+#lt-ceToggle{
+	display:block;
+	float:right;
+}

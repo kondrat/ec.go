@@ -1,6 +1,7 @@
 $(document).ready( function(){
 	
-		//test comment
+		//main container between header and footer. it contains data to show if user reg or not (1 or 0).
+		var $com1_ecMainContainer = $("#ec-mainContainer");
 		var $com1_cardEditor =  $("#ce-cardEditor").data({curLineId:"1"});
 		
 		var $com1_mainWord =  $("#ce-ins-1").data({"side":1});
@@ -40,6 +41,7 @@ $(document).ready( function(){
 		var $com1_dicWordHisScrollWidth = 870;
 		var $com1_dicWordHisScrollLeftMargin = 55;
 		var $com1_dicWordHisList = $("#dic-wordHisList");
+		var $com1_dicWordHisTmpl = $("#dic-wordHisTmpl");
 		
 		
 
@@ -206,7 +208,6 @@ $(document).ready( function(){
 			
 			//hiding save button
 			$com1_ceSaveCardWrapper.hide();
-			//$com1_saveCardBtn.attr("disabled","disabled");
 						
 			//treatment of the line which we has left.
 			
@@ -437,47 +438,49 @@ $(document).ready( function(){
 	    								"data[Card][def]": $com1_defWord.text(),
 	    								"data[Card][syn]": $com1_synWord.text() 
 	    							};
-    							
-      $.ajax({
-        type: "POST",
-        url: path+"/cards/saveCard",
-        dataType: "json",
-        data: cardObj,
-        success: function(data) {
-        	
-					
-					
-        	if ( data.stat === 1 ) {        		
-          	$('#ce-savedCardsWrapper').prepend('<span></span>').find('span:first').text(data.word).data(cardObj).css({'color':'red'}).next().css({'color':'blue'});
-          	
-          	$('#mainWord,#wordTran,#exTran span:last,#defTran span:last,#synTran span:last').empty();
-          	com1.cardExt.val('');
-          	
-			 			$(".additionalRes").hide();
-						$(".dicTerms ul").empty().addClass("hide");
-						$("ul.rSugTabs li").removeClass("dicSwitcherM dicActive"); 
+    	
+    	//"4" - temp, must be " === 1 " !!! currently we save both reg and not reg
+    	if( $com1_ecMainContainer.data("sec") !== 4 ) {						
+	      $.ajax({
+	        type: "POST",
+	        url: path+"/cards/saveCard",
+	        dataType: "json",
+	        data: cardObj,
+	        success: function(data) {
+	        	
 						
-					
-						com1.hideArrow.hide().removeClass("hideArrowL hideArrowR");	
-							
-						if (data.theme){
-							themeName.data('id',data.themeId);
-							themeName.data('theme',data.themeName);
-						}												        	
-          	flash_message('saved','flok');
-          	
-          } else {
-          	
-          }
-          
-          
-        },
-        error: function(){
-        	//temp
-        		$('#ce-savedCardsWrapper').prepend('<span></span>').find('span:first').text("word").css({'color':'red'}).next().css({'color':'blue'});
-            //alert('Problem with the server. Try again later.');
-        }
-      });
+						
+	        	if ( data.stat === 1 ) { 
+	        		//showing just inserted card       		
+	        		var $justSavedCard = $("#uc-savedCardsTmpl").tmpl( {"savedCard":"test" } ).tipsy();
+	        		$justSavedCard.prependTo($('#uc-savedCardsWrapper')).delay(1500).fadeIn("slow").next().removeClass("uc-savedCardFirst");
+	          	
+	          	$('#mainWord,#wordTran,#exTran span:last,#defTran span:last,#synTran span:last').empty();
+	          	com1.cardExt.val('');
+	       
+								
+							if (data.theme){
+								themeName.data('id',data.themeId);
+								themeName.data('theme',data.themeName);
+							}												        	
+	          	flash_message('saved','flok');
+	          	
+	          } else {
+	          	alert("not");
+	          	flash_message('not saved','fler');
+	          }
+	          
+	          
+	        },
+	        error: function(){
+	        	//temp
+	            alert('Problem with the server. Try again later.');
+	        }
+	      });
+      } else {
+      	//user not reg, save in cookie. 12 max
+      }
+      
     });		
 
 
@@ -623,9 +626,8 @@ $(document).ready( function(){
 												
 												//checking if we take word from history list or from input field, then setting mark to false.
 												if( $com1_dicWrapper.data("fromHis") !== true){
-													$com1_dicWordHisList.find("span.dic-wordHisFirst").removeClass("dic-wordHisFirst");
-                        	var $justInsSpan = $("#dic-wordHisTmpl").tmpl( {"userWordCut":$userWordCut,"userWord":$userWord,"lfrom":$tranFrom, "lto":$tranTo } );                      	
-                        	$justInsSpan.prependTo($com1_dicWordHisScroll).tipsy({gravity: 's',html: true});
+                        	var $justInsSpan = $com1_dicWordHisTmpl.tmpl( {"userWordCut":$userWordCut,"userWord":$userWord,"lfrom":$tranFrom, "lto":$tranTo } );                      	
+                        	$justInsSpan.prependTo($com1_dicWordHisScroll).tipsy({gravity: 's',html: true}).next().removeClass("dic-wordHisFirst");
                         	
                         	//setting new width of the container.                        	
                         	var $oldWrapperWidth = $com1_dicWordHisScroll.width();
@@ -1089,7 +1091,10 @@ $(document).ready( function(){
 		}
 
 
-
+		//card editor toggle
+		$("#lt-ceToggle").click(function(){
+			$com1_cardEditor.toggle();
+		});
 	
 				
 });

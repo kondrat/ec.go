@@ -208,10 +208,12 @@ div.ce-cardEditorActive {
 	border-radius: 6px;
 	/*behavior: url(./css/border-radius.htc);*/	
 }
-/*chech ie.css file*/
+
+/*check ie.css file*/
 .ce-saveCard button{
 	top:0;
 }
+
 
 /*
  * decoration classes from JS only.

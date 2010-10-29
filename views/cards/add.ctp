@@ -5,6 +5,12 @@
 	<?php
 		echo $this->Form->input('user_id');
 	?>
+	<?php 
+		echo $this->Form->input('word');
+	?>
+	<?php 
+		echo $this->Form->input('tags', array('type' => 'text'));
+	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>

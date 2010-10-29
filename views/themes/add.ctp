@@ -6,6 +6,9 @@
 		echo $this->Form->input('user_id');
 		echo $this->Form->input('theme');
 	?>
+	<?php 
+		echo $this->Form->input('tags', array('type' => 'text'));
+	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>

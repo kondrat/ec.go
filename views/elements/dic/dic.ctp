@@ -79,68 +79,71 @@
 	<span class="dic-fadeOutLineRight"></span>
 	<span class="dic-wordHisMore hide"></span>
 	<span class="dic-wordHisLess hide"></span>
-</div>
-
-<div id="dic-dicWrapper" class="dic-dicWrapper hide">
 	
-	<div class="dic-dicInner">
-		  <div>
-		  	
-		  	<div id="dic-langToFrom" class="dic-langToFrom">
-
-		  		
-		    	<span><?php __('From');?>: 
-		    		
-		    		<?php echo $form->input('from', array('id'=>'dic-langFromOpt','selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
-		    	</span>
-		    	<span id="dic-langSwitch"></span>
-		    	<span>
-		    		<?php __('To');?>:
-		    			    	<?php echo $form->input('to', array('id'=>'dic-langToOpt','selected'=>'ru','label'=>false,'div'=>false,'options' => $sideA)); ?>
-		    	</span> 
-		    	
-		    	
-		    	
-		    </div>
-		    
-		    <div id="dic-branding"></div>
-		    
-		    <div class="dic-translLine">
-			    <?php echo $form->input('word2transl',array('id'=>'dic-word2Transl','label'=>false,'div'=>false ) );?>
-			    <?php echo $form->button(__('Translate',true),array('id'=>'dic-word2TranslBtn') );?>
+	<div id="dic-dicWrapper" class="dic-dicWrapper hide">
+		
+		<div class="dic-dicInner">
+			  <div>
+			  	
+			  	<div id="dic-langToFrom" class="dic-langToFrom">
+	
+			  		
+			    	<span><?php __('From');?>: 
+			    		
+			    		<?php echo $form->input('from', array('id'=>'dic-langFromOpt','selected'=>'en','label'=>false,'div'=>false,'options' => $sideA)); ?>
+			    	</span>
+			    	<span id="dic-langSwitch"></span>
+			    	<span>
+			    		<?php __('To');?>:
+			    			    	<?php echo $form->input('to', array('id'=>'dic-langToOpt','selected'=>'ru','label'=>false,'div'=>false,'options' => $sideA)); ?>
+			    	</span> 
+			    	
+			    	
+			    	
+			    </div>
+			    
+			    <div id="dic-branding"></div>
+			    
+			    <div class="dic-translLine">
+				    <?php echo $form->input('word2transl',array('id'=>'dic-word2Transl','label'=>false,'div'=>false ) );?>
+				    <?php echo $form->button(__('Translate',true),array('id'=>'dic-word2TranslBtn') );?>
+				  </div>
+			    
+			    <?php // echo $this->element('cardEditor/langSwitcher/lang_switcher');?>
+			    
 			  </div>
-		    
-		    <?php // echo $this->element('cardEditor/langSwitcher/lang_switcher');?>
-		    
-		  </div>
-
-		  
-			<div id="dic-translForWrapper">
-				<!--<span class="dic-sound" id="dic-playSound" ></span>-->
-			</div>
-			
-
-			
-			<div id="dic-topResult" class="dic-res"></div>
-			
-			<div>
-				<ul id="dic-resTabs">
-					<li class="dic-none dic-dicSwBase hide"><span class="dic-partOfSpeech"></span><ul></ul></li>		
-					<li class="dic-noun dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Noun');?></span><ul></ul></li>
-					<li class="dic-verb dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Verb');?></span><ul></ul></li>
-					<li class="dic-adjective dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Adjec');?></span><ul></ul></li>			
-					<li class="dic-adverb dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Adverb');?></span><ul></ul></li>	
-					<li class="dic-pronoun dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Pronoun');?></span><ul></ul></li>
-					<li class="dic-conjunction dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Conjunction');?></span><ul></ul></li>
-					<li class="dic-preposition dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Preposition');?></span><ul></ul></li>
-					<li class="dic-article dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Article');?></span><ul></ul></li>
-					<li class="dic-numeral dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Numeral');?></span><ul></ul></li>	
-					<li class="dic-suffix dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Suffix');?></span><ul></ul></li>
-				</ul>
-			</div>
-			<div class="dic-bottom"><span id="dic-bottomUp"><?php __('Up');?></span></div>
-	</div>
+	
+			  
+				<div id="dic-translForWrapper">
+					<!--<span class="dic-sound" id="dic-playSound" ></span>-->
+				</div>
+				
+	
+				
+				<div id="dic-topResult" class="dic-res"></div>
+				
+				<div>
+					<ul id="dic-resTabs">
+						<li class="dic-none dic-dicSwBase hide"><span class="dic-partOfSpeech"></span><ul></ul></li>		
+						<li class="dic-noun dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Noun');?></span><ul></ul></li>
+						<li class="dic-verb dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Verb');?></span><ul></ul></li>
+						<li class="dic-adjective dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Adjec');?></span><ul></ul></li>			
+						<li class="dic-adverb dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Adverb');?></span><ul></ul></li>	
+						<li class="dic-pronoun dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Pronoun');?></span><ul></ul></li>
+						<li class="dic-conjunction dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Conjunction');?></span><ul></ul></li>
+						<li class="dic-preposition dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Preposition');?></span><ul></ul></li>
+						<li class="dic-article dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Article');?></span><ul></ul></li>
+						<li class="dic-numeral dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Numeral');?></span><ul></ul></li>	
+						<li class="dic-suffix dic-dicSwBase hide"><span class="dic-partOfSpeech"><?php __('Suffix');?></span><ul></ul></li>
+					</ul>
+				</div>
+				<div class="dic-bottom"><span id="dic-bottomUp"><?php __('Up');?></span></div>
+		</div>
+	</div>	
+	
 </div>
+
+
 
 <div class="dic-toDel" style="position:absolute;top:0;left:0;">
 	click toDel

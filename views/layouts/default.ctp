@@ -13,6 +13,7 @@
 		echo $html->css(array(
 													'ec',
 													'ec-ce',
+													'ec-uc',
 													'ec-dic',
 													'ec-lt',
 													'ec-u',
@@ -80,31 +81,27 @@
 						</div>
 						<div class="span-8 last" style="position:relative;" >
 							<div style="margin-top:0px;">
-									<div class="ur-signUpNow">
-										<?php if(!$this->Session->read('Auth.User.id')|| $this->Session->read('Auth.User.group_id') == 2 ): ?>
-											<?php echo $html->link(__('SignUp',true), array('controller'=>'users','action'=>'reg') );?>
-										<?php endif ?>
-									</div>
-									<div class="ur-signUpNow">
-										<?php if(!$this->Session->read('Auth.User.id')|| $this->Session->read('Auth.User.group_id') == 2 ): ?>
-											<?php echo $html->link(__('LogIn',true), array('controller'=>'users','action'=>'login') );?>
-										<?php else: ?>
-											<?php echo $html->link(__('LogOut',true), array('controller'=>'users','action'=>'logout') );?>
-										<?php endif ?>
-									</div>	
+								
+								<?php if(!$this->Session->read('Auth.User.id')): ?>
+									<?php $userReg = 0;?>								
+									<div class="ur-signUpNow"><?php echo $html->link(__('SignUp',true), array('controller'=>'users','action'=>'reg') );?></div>
+									<div class="ur-signUpNow"><?php echo $html->link(__('LogIn',true), array('controller'=>'users','action'=>'login') );?></div>
+									
+								<?php else: ?>
+									<?php $userReg = 1;?>
+									<div class="ur-signUpNow"><?php echo $html->link(__('LogOut',true), array('controller'=>'users','action'=>'logout') );?></div>		
+								
+								<?php endif ?>
+				
 							</div>
 						</div>
-					</div>
-
-
-	
-		</div>					
-			
+				</div>	
+			</div>								
 	</div>
 
 
 		
-	<div class="container showgrid.">    
+	<div data-sec="<?php echo $userReg;?>" id="ec-mainContainer" class="container showgrid.">    
 			  <div class="ur-fl">
 				  <?php echo $session->flash();?>
 			  </div>

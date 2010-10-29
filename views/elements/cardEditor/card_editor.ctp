@@ -99,6 +99,3 @@
 	</div>
 </div>
 
-<div id="ce-savedCardsWrapper" class="span-24">
-</div>
-

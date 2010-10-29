@@ -179,6 +179,8 @@ class ThemesController extends AppController {
 	function index() {
 		$this->Theme->recursive = 0;
 		$this->set('themes', $this->paginate());
+		$tags = $this->Theme->Tag->Tagged->find('cloud',array());
+		$this->set( 'tags1', $tags );
 	}
 
 	function view($id = null) {

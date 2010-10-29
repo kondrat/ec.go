@@ -1,0 +1,17 @@
+#uc-savedCardsWrapper{
+	margin-top:10px;
+}
+.uc-savedCard{
+	border:1px dashed black;
+	display:block;
+	float:left;
+	margin-bottom:5px;
+	margin-right:5px;
+	padding:3px 7px;
+	
+	-moz-box-shadow:0 0 2px black;
+}
+.uc-savedCardFirst{
+	border:1px dashed red;
+	display:none;
+}

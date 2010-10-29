@@ -656,32 +656,6 @@ div.fancy_bg_nw {
 
 
 
-
-
-
-
-
-
-/* left Side Bar */
-.wordCard{
-	
-}
-.newCards{
-	color:green;
-	list-style:none;
-	margin-left:0;
-	text-align:center;
-}
-.newCards li{
-	background-color:#eee;
-	margin:.2em .5em;
-	border:1px solid gray;
-	overflow:hidden;
-	padding:1em 0;
-	height:20px;
-	-moz-border-radius:5px;
-}
-
 /* Print Set */
 .printSet{
 	background: -moz-linear-gradient(top, #3C3C6D, white 140%);

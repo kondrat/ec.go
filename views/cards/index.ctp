@@ -17,3 +17,5 @@
 		    
 <?php echo $this->element('cardEditor/card_editor');?>
 
+<?php echo $this->element('userCards/user_cards');?>
+

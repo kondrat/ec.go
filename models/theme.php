@@ -1,7 +1,7 @@
 <?php
 class Theme extends AppModel {
 	var $name = 'Theme';
-	var $actsAs = array('Containable');
+	var $actsAs = array('Containable','Tags.Taggable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
