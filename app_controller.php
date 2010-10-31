@@ -5,7 +5,7 @@ class AppController extends Controller {
 				'Cookie',
 				'Session',
 				'Auth',
-				'AutoLogin',
+				//'AutoLogin',
 				'RequestHandler',
 				'Email',
 				'DebugKit.Toolbar'
