@@ -2,7 +2,14 @@
 
 class User extends AppModel {
 	var $name = 'User';
-	var $actsAs = array('Containable');
+	var $actsAs = array('Containable',
+
+									    'SuperAuth.Acl' => array(
+									        'type' => 'requester',
+									        'parentClass'=> 'Group',
+									        'foreignKey' => 'group_id'
+									    )
+	);
 //--------------------------------------------------------------------
 	var $validate = array(
 							

@@ -35,7 +35,7 @@
 
 		<div class="inputFormWrap">
 			<div class="autoLogin" style="float:left;margin:0 0 0 175px;">
-				<?php echo $form->input('auto_login', array('type' => 'checkbox', 
+				<?php echo $form->input('remember_me', array('type' => 'checkbox', 
 																										'label' =>  __('Remember Me',true) ,
 																										'div'=>false ) 
 																); ?>

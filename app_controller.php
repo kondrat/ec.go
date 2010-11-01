@@ -5,7 +5,16 @@ class AppController extends Controller {
 				'Cookie',
 				'Session',
 				'Auth',
+				
 				//'AutoLogin',
+				/*
+        'SuperAuth.Auth' => array(
+            'authorize' => 'actions',
+            'actionPath' => 'controllers/',
+            'allowedActions' => array('display')
+        ),
+        'SuperAuth.Acl',
+				*/
 				'RequestHandler',
 				'Email',
 				'DebugKit.Toolbar'
@@ -32,11 +41,17 @@ class AppController extends Controller {
 		*/
 
 
+	    function beforeFilter() {
+	        // only initialize row-level acl on view/edit/delete actions, and only in controllers that have models with ACL attached
+	        if (in_array($this->action, array('view', 'edit', 'delete')) && isset($this->{$this->modelClass}) && $this->{$this->modelClass}->Behaviors->attached('Acl')) {
+	            $this->Auth->authorize = 'acl';
+	        }
+	    }
 
 
 
-
-
+				//this is before superAuth
+				/*
 		
         if( isset($this->Auth) ) {
 								
@@ -52,6 +67,7 @@ class AppController extends Controller {
             $this->Auth->loginAction = array('admin' => false, 'controller' => 'users', 'action' => 'login');
 
         } 
+        */
 				
 	}
 	
