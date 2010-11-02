@@ -4,9 +4,20 @@ class AppController extends Controller {
 				'Security',
 				'Cookie',
 				'Session',
+				/*
+				'Auth' => array(
+            'loginAction' => array(
+                'controller' => 'app_users',
+                'action' => 'login',
+                'plugin' => false,
+               	'admin' => false,
+                ),
+             ),
+				*/
 				'Auth',
 				
 				//'AutoLogin',
+
 				/*
         'SuperAuth.Auth' => array(
             'authorize' => 'actions',
@@ -23,6 +34,7 @@ class AppController extends Controller {
 	var $publicControllers = array('pages', 'test');
 //--------------------------------------------------------------------
 	function beforeFilter() {
+
 	
 		Configure::load('vars');
 		/*
@@ -46,6 +58,14 @@ class AppController extends Controller {
 	        if (in_array($this->action, array('view', 'edit', 'delete')) && isset($this->{$this->modelClass}) && $this->{$this->modelClass}->Behaviors->attached('Acl')) {
 	            $this->Auth->authorize = 'acl';
 	        }
+	        
+	        
+	        
+	        $this->Auth->loginRedirect = array('controller' => 'members', 'action' => 'home');
+					
+					echo 'nu i?';
+					debug($this->Auth->loginRedirect);
+					exit;
 	    }
 
 

@@ -76,20 +76,20 @@
 																										'pic/ez-logo-24-dev.png'
 																										//'pic/ez-logo-50-w.png'
 																										//'pic/ez-logo-50-3.png'
-																										), array('controller'=>'cards','action'=>'index'),array('escape'=>false) );?> 
+																										), array('plugin'=>false,'controller'=>'cards','action'=>'index'),array('escape'=>false) );?> 
 							</div>
 						</div>
 						<div class="span-8 last" style="position:relative;" >
 							<div style="margin-top:0px;">
 								
-								<?php if(!$this->Session->read('Auth.User.id')): ?>
+								<?php if(!$this->Session->read('Auth.AppUser.id')): ?>
 									<?php $userReg = 0;?>								
-									<div class="ur-signUpNow"><?php echo $html->link(__('SignUp',true), array('controller'=>'users','action'=>'reg') );?></div>
-									<div class="ur-signUpNow"><?php echo $html->link(__('LogIn',true), array('controller'=>'users','action'=>'login') );?></div>
+									<div class="ur-signUpNow"><?php echo $html->link(__('SignUp',true), array('plugin'=>'users','controller'=>'users','action'=>'register') );?></div>
+									<div class="ur-signUpNow"><?php echo $html->link(__('LogIn',true), array(false,'controller'=>'app_users','action'=>'login') );?></div>
 									
 								<?php else: ?>
 									<?php $userReg = 1;?>
-									<div class="ur-signUpNow"><?php echo $html->link(__('LogOut',true), array('controller'=>'users','action'=>'logout') );?></div>		
+									<div class="ur-signUpNow"><?php echo $html->link(__('LogOut',true), array('controller'=>'app_users','action'=>'logout') );?></div>		
 								
 								<?php endif ?>
 				

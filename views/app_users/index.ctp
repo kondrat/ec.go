@@ -1,5 +1,5 @@
 <div class="users index">
-	<h2><?php __('Users');?></h2>
+	<h2><?php __('Users');?>11</h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -24,7 +24,7 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $user['User']['id']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['username']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['password']; ?>&nbsp;</td>
+		<td><?php echo $user['User']['passwd']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['key']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['type']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['timezone']; ?>&nbsp;</td>
@@ -54,7 +54,7 @@
 	</div>
 </div>
 <div class="actions">
-	<h3><?php __('Actions'); ?></h3>
+	<h3><?php __('Actions'); ?>22</h3>
 	<ul>
 		<li><?php echo $this->Html->link(sprintf(__('New %s', true), __('User', true)), array('action' => 'add')); ?></li>
 	</ul>

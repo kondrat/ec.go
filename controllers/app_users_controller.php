@@ -1,9 +1,10 @@
 <?php
-class UsersController extends AppController {
+App::import('Controller', 'Users.Users');
+class AppUsersController extends UsersController {
 
-	var $name = 'Users';
+	var $name = 'AppUsers';
 	var $helpers = array();
-	var $components = array( 'userReg','kcaptcha');
+	//var $components = array( 'Auth','userReg','kcaptcha');
 
 	var $paginate = array('limit' => 5);
 	
@@ -14,22 +15,39 @@ class UsersController extends AppController {
   			$this->set('title_for_layout', __('Users data',true) );
   			//allowed actions
   			
-        $this->Auth->allow(  'reg','kcaptcha', 'reset', 'userNameCheck'
-        										//'index','view'
+        $this->Auth->allow( 'reg','kcaptcha', 'reset', 'userNameCheck',
+        										'index','view'
         										//'acoset','aroset','permset','buildAcl'
         										);
 
         parent::beforeFilter(); 
+        $this->User = ClassRegistry::init('AppUser');
+
+				$this->Auth->userModel = 'AppUser';
+				$this->Auth->loginAction = array(
+                'controller' => 'app_users',
+                'action' => 'login',
+                'plugin' => false,
+               	'admin' => false,
+                );
+
         $this->Auth->autoRedirect = false;
+	      $this->Auth->fields = array(
+	            'username' => 'username', 
+	            'password' => 'passwd'
+	            );
 
 			
  
 		 		if( $this->action == 'login' && !empty($this->data) ) {
-		 				$data = $this->data;	
-		       	if( isset($data['User']['username']) && strpos($data['User']['username'],'@')!== false ){	       		
-		       		$user = $this->User->find('first',array( 'conditions'=> array('User.email' => $data['User']['username']), 'contain' => false ) );
+		 				$data = $this->data;
+	
+		       	if( isset($data[$this->modelClass]['username']) && strpos($data[$this->modelClass]['username'],'@')!== false ){	       		
+		       		$user = $this->User->find('first',array( 'conditions'=> array('User.email' => $data[$this->modelClass]['username']), 'contain' => false ) );
 		       		if($user != array() ){
-		       			$this->data['User']['username'] = $user['User']['username'];
+		       			$this->data[$this->modelClass]['username'] = $user[$this->modelClass]['username'];
+		       			debug($user[$this->modelClass]['username']);
+		       			exit;
 		       		}
 						}
 						
@@ -80,22 +98,24 @@ class UsersController extends AppController {
 		
 		if ( !empty($this->data) ) {
 						
-			$this->data['User']['captcha2'] = $this->Session->read('captcha');
-
-			if ( $this->User->save( $this->data) ) {											
-				$a = $this->User->read();
+			$this->data[$this->modelClass]['captcha2'] = $this->Session->read('captcha');
+			
+			debug($this->data);
+			
+			if ( $this->AppUser->save( $this->data) ) {											
+				$a = $this->AppUser->read();
 				$this->Auth->login($a);
 				$this->Session->setFlash(__('New user\'s accout has been created',true), 'default', array('class' => 'flok'));
 				$this->redirect(array('controller' => 'items','action'=>'todo'),null,true);
       } else {
       	
-      	$errors = $this->User->invalidFields();
+      	$errors = $this->AppUser->invalidFields();
 				if( isset( $errors['username']['stopWords'] ) ) {
-					$stopWord = $this->_stopWordsCheck( $this->data['User']['username'] );
+					$stopWord = $this->_stopWordsCheck( $this->data[$this->modelClass]['username'] );
 					$this->set( 'stopWord', $stopWord );
 				}
 				
-				$this->data['User']['captcha'] = null;
+				$this->data[$this->modelClass]['captcha'] = null;
 				$this->Session->setFlash(__('New user\'s accout hasn\'t been created',true) , 'default', array('class' => 'fler') );
 			}
 		}
@@ -132,9 +152,9 @@ class UsersController extends AppController {
 				
 			
 				//don't foreget about santization and trimm
-				if( isset($this->data['User']['username']) && $this->data['User']['username'] != null ) {
+				if( isset($this->data[$this->modelClass]['username']) && $this->data[$this->modelClass]['username'] != null ) {
 					$type = 'username';
-				} else if( isset($this->data['User']['email']) && $this->data['User']['email'] != null ) {
+				} else if( isset($this->data[$this->modelClass]['email']) && $this->data[$this->modelClass]['email'] != null ) {
 					$type = 'email';
 				} else {
 					$this->Security->blackHole($this, 'Invalid referrer detected for this request!');
@@ -156,7 +176,7 @@ class UsersController extends AppController {
 							$contents['error'] = $errors[$type];
 
 							if( $type === 'username' && isset($errors[$type]['stopWords']) ) {
-								$contents['stW'] = $this->_stopWordsCheck( $this->data['User']['username'] );
+								$contents['stW'] = $this->_stopWordsCheck( $this->data[$this->modelClass]['username'] );
 							} 
 						}
 
@@ -202,7 +222,13 @@ class UsersController extends AppController {
     } 
 
 //--------------------------------------------------------------------
-	function login() {		
+
+	function login() {	
+		parent::login();
+		
+		
+		//debug($this->data);
+			
 		$user = array();
 		$this->set('title_for_layout', __('Login',true) );
 		$this->set('menuType', 'login');
@@ -211,10 +237,12 @@ class UsersController extends AppController {
 		if( !empty($this->data) ) {
 										
 			if( $this->Auth->login($this->data) ) {
-						$this->redirect( $this->Auth->redirect() );			
+						$this->redirect( $this->Auth->redirect() );
+						echo 'try';		
 			} else {
-				$this->data['User']['password'] = null;
+				//$this->data[$this->modelClass]['passwd'] = null;
 				$this->Session->setFlash(__('Check your login and password',true),'default', array('class' => 'fler'));
+				echo 'bad';
 			}
 			
 		} else {
@@ -260,7 +288,7 @@ mail($to, $subject, $message, $headers);
     	}
 
 		// Check email is correct
-		$user = $this->User->find( 'first', array( 'conditions' => array('User.email' => $this->data['User']['email'] ), 'fields' => array('id', 'username', 'email'), 'contain' => false ) ) ;
+		$user = $this->User->find( 'first', array( 'conditions' => array('User.email' => $this->data[$this->modelClass]['email'] ), 'fields' => array('id', 'username', 'email'), 'contain' => false ) ) ;
 
 		if(!$user) {
 			$this->User->invalidate('email', 'Этот E-mail не зарегистрирован' );
@@ -270,8 +298,8 @@ mail($to, $subject, $message, $headers);
 		// Generate new password
 		$password = $this->userReg->createPassword();
 		//debug ($user);
-		$data['User']['password'] = $this->Auth->password($password);
-		$this->User->id = $user['User']['id'];
+		$data[$this->modelClass]['password'] = $this->Auth->password($password);
+		$this->User->id = $user[$this->modelClass]['id'];
 		if(!$this->User->saveField('password', $this->Auth->password($password) ) ) {
 			return;
 		}
@@ -281,7 +309,7 @@ mail($to, $subject, $message, $headers);
 				$this->Session->setFlash('Ошибка при отправке Email','default', array('class'=>'fler'));
 			}
 			else {
-				$this->flash('Новый пароль выслан на  '.$user['User']['email'].'. Please login', '/users/login', 10);
+				$this->flash('Новый пароль выслан на  '.$user[$this->modelClass]['email'].'. Please login', '/users/login', 10);
 			}
 			
 					      
@@ -298,11 +326,11 @@ mail($to, $subject, $message, $headers);
 
         // Set data for the "view" of the Email
         $this->set('password', $password );
-        $this->set( 'username', $user['User']['username'] );
+        $this->set( 'username', $user[$this->modelClass]['username'] );
       
-        //$this->Email->to = $user['User']['username'].'<'.$user['User']['email'].'>';
-        //$this->Email->to = $user['User']['username'].' <akv@tehnoavia.ru>';
-        $this->Email->to = $user['User']['username'].' <pom01@mail.ru>';
+        //$this->Email->to = $user[$this->modelClass]['username'].'<'.$user[$this->modelClass]['email'].'>';
+        //$this->Email->to = $user[$this->modelClass]['username'].' <akv@tehnoavia.ru>';
+        $this->Email->to = $user[$this->modelClass]['username'].' <pom01@mail.ru>';
         //$this->Email->to = 'Alexey Kondratyev <alexey.kondratyev@gmail.com>';
         $this->Email->subject = env('SERVER_NAME') . ' - New password';
         //$this->Email->from = 'Best preson <noreply@'. env('SERVER_NAME').'>';
@@ -338,18 +366,19 @@ mail($to, $subject, $message, $headers);
 	}     
 //--------------------------------------------------------------------	
 
-
+/*
 	function index() {
 		$this->User->recursive = 0;
+		$this->set("tt","tt");
 		$this->set('users', $this->paginate());
 	}
-
+*/
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('user', $this->User->read(null, $id));
+		$this->set($this->modelClass, $this->User->read(null, $id));
 	}
 
 	function add() {

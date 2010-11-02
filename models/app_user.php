@@ -1,14 +1,19 @@
 <?php
+App::import('Model', 'Users.User');
+class AppUser extends User {
+	
+  public $useTable = 'users';
+  public $name = 'AppUser';
 
-class User extends AppModel {
-	var $name = 'User';
 	var $actsAs = array('Containable',
-
+											/*
 									    'SuperAuth.Acl' => array(
 									        'type' => 'requester',
 									        'parentClass'=> 'Group',
 									        'foreignKey' => 'group_id'
+									     
 									    )
+									    */
 	);
 //--------------------------------------------------------------------
 	var $validate = array(
@@ -84,6 +89,7 @@ class User extends AppModel {
 																								),
 																								
 															),
+							/*								
 							'captcha' => array( 'notEmpty' => array(
 																										'rule' => 'notEmpty',
 																										//'message' => 'This field cannot be left blank',
@@ -98,7 +104,7 @@ class User extends AppModel {
         																						//'message' => 'Please, correct the code'
     															),
 
-											),
+											),*/
 
 																										 
 						  );
@@ -197,7 +203,7 @@ class User extends AppModel {
 //--------------------------------------------------------------------	
 	function beforeSave() {
         if ( !empty($this->data['User']['password1']) ) {
-        	$this->data['User']['password'] = sha1( Configure::read('Security.salt').$this->data['User']['password1'] ); 
+        	$this->data['User']['passwd'] = sha1( Configure::read('Security.salt').$this->data['User']['password1'] ); 
         }  
         return true;    
     }

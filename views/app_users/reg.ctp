@@ -5,7 +5,7 @@
 		<h3 style="color:#db605d;margin:0 0 1em 2.5em;"><span style="color:gray;font-size:small;"><?php __('Join');?></span> englishcards.ru</h3>
 		
 		<?php 
-		      echo $form->create('User', array(
+		      echo $form->create('AppUser', array(
 																						'action' => 'reg',        
 																					 	'inputDefaults' => array(
             																												'label' => false,
