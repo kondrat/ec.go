@@ -52,7 +52,7 @@
 															'dev/common2',
 															'dev/common3',
 															'dev/print',
-															'dev/reg',
+															//'/users/js/dev/reg',
 															'dev/tempToDel',
 															//'sound/soundmanager2',
 															'sound/soundmanager2-nodebug-jsmin',
