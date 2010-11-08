@@ -82,14 +82,14 @@
 						<div class="span-8 last" style="position:relative;" >
 							<div style="margin-top:0px;">
 								
-								<?php if(!$this->Session->read('Auth.AppUser.id')): ?>
+								<?php if(!$this->Session->read('Auth.User.id')): ?>
 									<?php $userReg = 0;?>								
-									<div class="ur-signUpNow"><?php echo $html->link(__('SignUp',true), array('plugin'=>'users','controller'=>'users','action'=>'register') );?></div>
-									<div class="ur-signUpNow"><?php echo $html->link(__('LogIn',true), array(false,'controller'=>'app_users','action'=>'login') );?></div>
+									<div class="ur-signUpNow"><?php echo $html->link(__('SignUp',true), array('plugin'=>'users','controller'=>'users','action'=>'reg') );?></div>
+									<div class="ur-signUpNow"><?php echo $html->link(__('LogIn',true), array('plugin'=>'users','controller'=>'users','action'=>'login') );?></div>
 									
 								<?php else: ?>
 									<?php $userReg = 1;?>
-									<div class="ur-signUpNow"><?php echo $html->link(__('LogOut',true), array('controller'=>'app_users','action'=>'logout') );?></div>		
+									<div class="ur-signUpNow"><?php echo $html->link(__('LogOut',true), array('plugin'=>'users','controller'=>'users','action'=>'logout') );?></div>		
 								
 								<?php endif ?>
 				
