@@ -126,7 +126,7 @@ li.dic-dicSwBase ul{
 	padding:0 17px 0 0;
 	position:absolute;
 	top:-25px;
-  background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% 3px transparent;
+  background:url("../img/icons/up_down_arrow_small.png") no-repeat scroll 100% -16px transparent;
 }
 .dic-wordHisList{
 	margin:5px;
@@ -152,7 +152,7 @@ span.dic-wordHis:hover{
 
 .dic-dicBar div.dic-dicWrapperCtrlActive{
   color:red;
-  background-position: 100% -16px;
+  background-position: 100% 3px;
 }
 .dic-langToFrom{
 	/*

@@ -89,7 +89,9 @@
 									
 								<?php else: ?>
 									<?php $userReg = 1;?>
-									<div class="ur-signUpNow"><?php echo $html->link(__('LogOut',true), array('plugin'=>'users','controller'=>'users','action'=>'logout') );?></div>		
+									
+										<div style="float:left;margin:.9em .5em 0 0;"><?php echo $html->link(__('Profile',true), array('plugin'=>'users','controller'=>'users','action'=>'dashboard') );?></div>
+										<div class="ur-signUpNow"><?php echo $html->link(__('LogOut',true), array('plugin'=>'users','controller'=>'users','action'=>'logout') );?></div>		
 								
 								<?php endif ?>
 				
@@ -103,6 +105,9 @@
 		
 	<div data-sec="<?php echo $userReg;?>" id="ec-mainContainer" class="container showgrid.">    
 			  <div class="ur-fl">
+			  	<script id="ur-flMesTmpl" type="text/x-jquery-tmpl"> 
+    				<div id="flashMessage" class="${classs}" >${message}</div>
+					</script>
 				  <?php echo $session->flash();?>
 			  </div>
 		

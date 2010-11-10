@@ -92,6 +92,8 @@ $(document).ready( function(){
 		//"show and close dictionry pad tipsy
 		$com1_dicWrapperCtrl.tipsy({gravity: 's',delayIn: 1000,offset: 2});
 
+		//thowing flash message from html if exists.
+		flash_message();
 
 
 
