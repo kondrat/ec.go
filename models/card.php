@@ -1,7 +1,12 @@
 <?php
 class Card extends AppModel {
 	var $name = 'Card';
-	var $actsAs = array('Containable','Tags.Taggable');
+	var $actsAs = array('Containable',
+											'Tags.Taggable'=> array(
+												'taggedCounter' => true
+											}
+	
+	);
 	//var $displayField = 'id';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
