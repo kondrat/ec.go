@@ -34,7 +34,7 @@
 													);
 		echo $html->script(array(	
 															'dev/vars',
-															'jquery/jquery-1.4.3.min'
+															'jquery/jquery-1.4.4.min'
 															));
 
 		echo $scripts_for_layout;

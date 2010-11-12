@@ -4,7 +4,7 @@ class Card extends AppModel {
 	var $actsAs = array('Containable',
 											'Tags.Taggable'=> array(
 												'taggedCounter' => true
-											}
+											)
 	
 	);
 	//var $displayField = 'id';
