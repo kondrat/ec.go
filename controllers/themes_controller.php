@@ -8,12 +8,15 @@ class ThemesController extends AppController {
   function beforeFilter() {
 
   			//default title
-  			$this->set('title_for_layout', __('Cards',true) );
+  			$this->set('title_for_layout', __('Themes',true) );
   			//allowed actions
         $this->Auth->allow(
+        									'*'
+        									/*
                           'updateTheme',
                           'selTheme',
                           'test'
+                          */
                           );
 
         parent::beforeFilter(); 
